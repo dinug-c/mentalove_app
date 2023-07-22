@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'ui/pages/SplashScreen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +11,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Mentalove App'),
-        ),
-      ),
+    return MultiBlocProvider(
+      providers: [],
+      child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
+        '/': (context) => const SplashScreen(),
+      }),
     );
   }
 }
