@@ -62,13 +62,14 @@ class _MyWidgetState extends State<LandingPage> {
                             textColor: kWhiteColor,
                             startColor: kPrimaryColor,
                             endColor: kPrimary2Color,
-                            onPressed: () {}),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/counseling');
+                            }),
                         gapH(21),
                         ButtonOutline(
                             text: "Daftar",
-                            textColor: kWhiteColor,
-                            startColor: kPrimaryColor,
-                            endColor: kPrimary2Color,
+                            textColor: kPrimary2Color,
+                            borderColor: kPrimaryColor,
                             onPressed: () {}),
                       ],
                     ),

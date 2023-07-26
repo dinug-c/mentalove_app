@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mentalove_app/shared/theme.dart';
 
 class ButtonOutline extends StatelessWidget {
   final String text;
   final double width;
   final Color textColor;
-  final Color startColor;
-  final Color endColor;
+  final Color borderColor;
   final EdgeInsets margin;
   final Function() onPressed;
 
@@ -14,8 +14,7 @@ class ButtonOutline extends StatelessWidget {
       required this.text,
       this.width = double.infinity,
       required this.textColor,
-      required this.startColor,
-      required this.endColor,
+      required this.borderColor,
       required this.onPressed,
       this.margin = EdgeInsets.zero})
       : super(key: key);
@@ -30,11 +29,8 @@ class ButtonOutline extends StatelessWidget {
           width: width,
           height: 55,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [startColor, endColor],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
+            color: kWhiteColor,
+            border: Border.all(color: borderColor),
             borderRadius: BorderRadius.circular(13),
             boxShadow: [
               BoxShadow(

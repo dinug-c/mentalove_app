@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/landing_page.dart';
 import 'ui/pages/splash_screen.dart';
 
@@ -15,6 +16,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(debugShowCheckedModeBanner: false, routes: {
       '/': (context) => const SplashScreen(),
       '/landing-page': (context) => const LandingPage(),
+      '/counseling': (context) => const Counseling(),
     });
 
     // MultiBlocProvider(
