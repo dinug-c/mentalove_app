@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-double defaultMargin = 24.0;
-double defaultRadius = 17.0;
+double defaultMargin = 20.0;
+double defaultRadius = 10.0;
 
-Color kPrimaryColor = Color(0xff5C40CC);
-Color kBlackColor = Color(0xff1F1449);
-Color kWhiteColor = Color(0xffFFFFFF);
-Color kGreyColor = Color(0xff9698A9);
-Color kGreenColor = Color(0xff0EC3AE);
-Color kRedColor = Color(0xffEB70A5);
-Color kOrangeColor = Color(0xffFFA235);
-Color kBackgroundColor = Color(0xffFAFAFA);
-Color kInactiveColor = Color(0xffDBD7EC);
-Color kTransparentColor = Colors.transparent;
-Color kUnavailableColor = Color(0xffEBECF1);
-Color kAvailableColor = Color(0xffE0D9FF);
+Color kPrimaryColor = const Color(0xff738AE6);
+Color kPrimary2Color = const Color(0xffB46BE9);
+Color kSecondaryColor = const Color(0xffFF6D99);
+Color kSecondary2Color = const Color(0xffFFC0D3);
+Color kWhiteColor = const Color(0xffFFFFFF);
+Color kBlackColor = const Color(0xff000000);
+Color kGreyColor = const Color(0xff7E7E7E);
+Color kGreenColor = const Color(0xff29CB9E);
+Color kRedColor = const Color.fromARGB(255, 243, 57, 113);
+Color kTextColor = const Color(0xff524A4E);
 
 TextStyle blackTextStyle = GoogleFonts.poppins(
   color: kBlackColor,
@@ -48,6 +46,3 @@ FontWeight semiBold = FontWeight.w600;
 FontWeight bold = FontWeight.w700;
 FontWeight extraBold = FontWeight.w800;
 FontWeight black = FontWeight.w900;
-
-
-

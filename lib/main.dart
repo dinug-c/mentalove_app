@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'ui/pages/SplashScreen.dart';
+import 'package:mentalove_app/ui/pages/landing_page.dart';
+import 'ui/pages/splash_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -11,11 +12,17 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [],
-      child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
-        '/': (context) => const SplashScreen(),
-      }),
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, routes: {
+      '/': (context) => const SplashScreen(),
+      '/landing-page': (context) => const LandingPage(),
+    });
+
+    // MultiBlocProvider(
+    //   providers: [],
+    //   child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
+    //     '/': (context) => const SplashScreen(),
+    //     '/landing-page': (context) => const LandingPage(),
+    //   }),
+    // );
   }
 }
