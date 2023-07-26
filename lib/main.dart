@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/landing_page.dart';
+import 'package:mentalove_app/ui/widgets/card.dart';
 import 'ui/pages/splash_screen.dart';
 
 void main() {

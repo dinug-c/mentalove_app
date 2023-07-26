@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mentalove_app/shared/gaps.dart';
-import 'package:mentalove_app/shared/theme.dart';
+import 'package:mentalove_app/ui/shared/gaps.dart';
+import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
-import 'package:mentalove_app/ui/widgets/button_outline.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -23,9 +22,6 @@ class _MyWidgetState extends State<LandingPage> {
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     );
-
-    dynamic parentWidth = MediaQuery.of(context).size.width;
-    dynamic parentHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: kWhiteColor,

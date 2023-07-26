@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mentalove_app/shared/theme.dart';
+import 'package:mentalove_app/ui/shared/theme.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
