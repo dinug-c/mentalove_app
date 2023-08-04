@@ -34,6 +34,7 @@ class _MyWidgetState extends State<LandingPage> {
                     'assets/bg.png',
                   ),
                   fit: BoxFit.cover)),
+
           child: Flex(
             direction: Axis.vertical,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +60,7 @@ class _MyWidgetState extends State<LandingPage> {
                             startColor: kPrimaryColor,
                             endColor: kPrimary2Color,
                             onPressed: () {
-                              Navigator.pushNamed(context, '/counseling');
+                              Navigator.pushNamed(context, '/login-page');
                             }),
                         gapH(21),
                         ButtonOutline(
