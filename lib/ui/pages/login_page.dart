@@ -38,41 +38,75 @@ class _LoginPage extends State<LoginPage> {
                 direction: Axis.vertical,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(flex: 1, child: SizedBox()),
-                  Expanded(
-                      flex: 1,
+                  const Expanded(flex: 1, child: SizedBox()),
+
+                  //Logo
+                  const Expanded(
+                      flex: 0,
                       child: Image(
                         image: AssetImage('assets/logo_text_small.png'),
                       )),
 
-                  Expanded(flex: 1, child: Container(
-                    child: Column(
-                      children: [
-                        Text("Email"),
-                        Text("Password")
-                      ],
-                    ),
-                  )),
-                  Expanded(
-                    flex: 1, 
-                    child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 30),
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Button(
-                                    text: "Masuk",
-                                    textColor: kWhiteColor,
-                                    startColor: kPrimaryColor,
-                                    endColor: kPrimary2Color,
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, '/counseling');
-                                    })
-                                ],
+                  //TextField Email
+                  const Expanded(
+                      flex: 0,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            TextField(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.black)),
+                              ),
                             ),
-                          ))
+                          ],
+                        ),
+                      )),
+
+                  // //TextField Password
+                  // Expanded(flex: 0, child: Container(
+                  //   child: const Column(
+                  //     children: [
+                  //       Text("Password"),
+                  //           TextField(
+                  //             decoration: InputDecoration(
+                  //               enabledBorder: OutlineInputBorder(
+                  //                   borderSide:
+                  //                       BorderSide(color: Colors.black)),
+                  //               focusedBorder: OutlineInputBorder(
+                  //                   borderSide:
+                  //                       BorderSide(color: Colors.black)),
+                  //             ),
+                  //           ),
+                  //     ],
+                  //   )
+                  // )),
+                  
+                  Expanded(
+                      flex: 1,
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 30),
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Button(
+                                text: "Masuk",
+                                textColor: kWhiteColor,
+                                startColor: kPrimaryColor,
+                                endColor: kPrimary2Color,
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/counseling');
+                                })
+                          ],
+                        ),
+                      ))
                 ])));
   }
 }
