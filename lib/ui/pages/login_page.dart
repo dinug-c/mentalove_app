@@ -96,12 +96,12 @@ class _LoginPage extends State<LoginPage> {
                   Container(
                       child: RichText(
                           text: TextSpan(
-                              style: TextStyle(color: Colors.black),
+                              style: blackTextStyle.copyWith(color: Colors.black),
                               children: <TextSpan>[
                             const TextSpan(text: "Belum punya akun? "),
                             TextSpan(
                                 text: "Daftar di sini",
-                                style: TextStyle(color: kPrimary2Color),
+                                style: blackTextStyle.copyWith(color: kPrimary2Color),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Navigator.pushReplacementNamed(context, '/signup-page');

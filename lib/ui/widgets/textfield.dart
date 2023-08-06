@@ -29,7 +29,7 @@ class NewForm extends StatelessWidget {
         children: [
           Text(
             nama,
-            style: const TextStyle(fontSize: 16),
+            style: blackTextStyle.copyWith(fontSize: 16),
           ),
 
           const SizedBox(
@@ -49,7 +49,7 @@ class NewForm extends StatelessWidget {
                     borderSide: BorderSide(color: Color(0xffB46BE9)),
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 hintText: hintText,
-                hintStyle: const TextStyle(color: Colors.grey)),
+                hintStyle: blackTextStyle.copyWith(color: Colors.grey)),
           ),
         ],
       ),
