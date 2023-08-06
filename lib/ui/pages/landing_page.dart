@@ -67,7 +67,7 @@ class _MyWidgetState extends State<LandingPage> {
                             text: "Daftar",
                             textColor: kPrimary2Color,
                             borderColor: kPrimaryColor,
-                            onPressed: () {}),
+                            onPressed: () {Navigator.pushNamed(context, '/signup-page');}),
                       ],
                     ),
                   ))

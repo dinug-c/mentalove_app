@@ -6,14 +6,14 @@ import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/textfield.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPage();
+  State<SignupPage> createState() => _SignupPage();
 }
 
-class _LoginPage extends State<LoginPage> {
+class _SignupPage extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -73,6 +73,18 @@ class _LoginPage extends State<LoginPage> {
                         horizontalPadding: 25),
                   ),
 
+                  //TextField Konfirmasi Password
+                  const Expanded(
+                    flex: 0,
+                    child: NewForm(
+                        nama: "Konfirmasi Password",
+                        hintText: "Masukkan konfirmasi password",
+                        obscureText: true,
+                        topPadding: 5,
+                        bottomPadding: 10,
+                        horizontalPadding: 25),
+                  ),
+
                   Expanded(
                       flex: 1,
                       child: Container(
@@ -82,7 +94,7 @@ class _LoginPage extends State<LoginPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Button(
-                                text: "Masuk",
+                                text: "Daftar",
                                 textColor: kWhiteColor,
                                 startColor: kPrimaryColor,
                                 endColor: kPrimary2Color,
@@ -98,13 +110,13 @@ class _LoginPage extends State<LoginPage> {
                           text: TextSpan(
                               style: TextStyle(color: Colors.black),
                               children: <TextSpan>[
-                            const TextSpan(text: "Belum punya akun? "),
+                            TextSpan(text: "Sudah punya akun? "),
                             TextSpan(
-                                text: "Daftar di sini",
+                                text: "Masuk di sini",
                                 style: TextStyle(color: kPrimary2Color),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.pushReplacementNamed(context, '/signup-page');
+                                    Navigator.pushReplacementNamed(context, '/login-page');
                                   })
                           ])),
                   ),
