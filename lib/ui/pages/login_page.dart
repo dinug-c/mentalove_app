@@ -93,21 +93,19 @@ class _LoginPage extends State<LoginPage> {
                         ),
                       )),
 
-                  Container(
-                      child: RichText(
-                          text: TextSpan(
-                              style: blackTextStyle.copyWith(color: Colors.black),
-                              children: <TextSpan>[
-                            const TextSpan(text: "Belum punya akun? "),
-                            TextSpan(
-                                text: "Daftar di sini",
-                                style: blackTextStyle.copyWith(color: kPrimary2Color),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushReplacementNamed(context, '/signup-page');
-                                  })
-                          ])),
-                  ),
+                  RichText(
+                      text: TextSpan(
+                          style: blackTextStyle.copyWith(color: Colors.black),
+                          children: <TextSpan>[
+                        const TextSpan(text: "Belum punya akun? "),
+                        TextSpan(
+                            text: "Daftar di sini",
+                            style: blackTextStyle.copyWith(color: kPrimary2Color),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushReplacementNamed(context, '/signup-page');
+                              })
+                      ])),
                 ])));
   }
 }
