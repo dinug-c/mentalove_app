@@ -128,3 +128,89 @@ class CardAhli extends StatelessWidget {
     );
   }
 }
+
+class CategoryCard extends StatelessWidget {
+  final String text;
+
+  const CategoryCard({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+              backgroundColor: kPrimaryLightColor,
+              foregroundColor: kPrimaryColor,
+              shape: const StadiumBorder(),
+              elevation: 0),
+          child: Text(
+            text,
+            style: purpleTextStyle.copyWith(fontWeight: light),
+          )),
+    );
+  }
+}
+
+class MediaCard extends StatelessWidget {
+  final String title;
+  final String desc;
+  final Function() onTap;
+
+  const MediaCard({
+    Key? key,
+    required this.title,
+    required this.desc,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    dynamic parentWidth = MediaQuery.of(context).size.width;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 90,
+        decoration: BoxDecoration(
+          color: kPrimaryLightColor,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 70,
+              height: 70,
+              decoration: BoxDecoration(
+              ),
+            ),
+            SizedBox(
+              width: parentWidth * 0.6,
+              height: 70,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: blackTextStyle.copyWith(
+                        fontSize: 14, fontWeight: extraBold),
+                  ),
+                  Text(
+                    desc,
+                    style: blackTextStyle.copyWith(
+                        fontSize: 14, fontWeight: regular),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

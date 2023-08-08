@@ -20,6 +20,7 @@ class _DetailState extends State<Detail> {
       backgroundColor: kWhiteColor,
       body: CustomScrollView(
         slivers: <Widget>[
+          //AppBar
           AppBarTransparent(
             img: 'assets/detail_pfp.png',
             leftAction: () {
@@ -29,6 +30,8 @@ class _DetailState extends State<Detail> {
             rightAction: () {},
             rightIcon: Icons.share,
           ),
+
+          //Body
           SliverList(
             delegate: SliverChildListDelegate(
               [
@@ -38,6 +41,8 @@ class _DetailState extends State<Detail> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+
+                          //Nama Psikolog
                           Text(
                             'Aris Prabowo Wijayanto',
                             style: blackTextStyle.copyWith(
@@ -46,6 +51,8 @@ class _DetailState extends State<Detail> {
                           Text('Psikologi Klinis',
                               style: blackTextStyle.copyWith(fontSize: 16)),
                           gapH12,
+
+                          //Rating + lama 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -81,7 +88,26 @@ class _DetailState extends State<Detail> {
                                 ],
                               )
                             ],
-                          )
+                          ),
+                          gapH32,
+
+                          //Kategori
+                          Text('Bidang Keahlian', style: blackTextStyle.copyWith(fontWeight: extraBold, fontSize: 14),),
+                          gapH4,
+                          const Wrap(
+                            spacing: 20,
+                              children: [
+                              CategoryCard(text: 'Depresi'),
+                              CategoryCard(text: 'Trauma'),
+                              CategoryCard(text: 'Pekerjaan')
+                            ],
+                          ),
+                          gapH32,
+
+                          //Select Chat/Video
+                          Text('Pilih Sarana', style: blackTextStyle.copyWith(fontWeight: extraBold, fontSize: 14),),
+                          MediaCard(title: 'Chat', desc: 'desc', onTap: (){})
+
                         ]))
               ],
             ),
