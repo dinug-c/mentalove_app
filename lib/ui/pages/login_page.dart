@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/textfield.dart';
@@ -87,7 +86,7 @@ class _LoginPage extends State<LoginPage> {
                                 startColor: kPrimaryColor,
                                 endColor: kPrimary2Color,
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/counseling');
+                                  Navigator.pushNamed(context, '/detail');
                                 })
                           ],
                         ),

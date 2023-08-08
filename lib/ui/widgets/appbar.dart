@@ -58,6 +58,48 @@ class AppBarCustom extends StatelessWidget {
   }
 }
 
+class AppBarTransparent extends StatelessWidget {
+  final String img;
+  final Function() leftAction;
+  final Function()? rightAction;
+  final IconData leftIcon;
+  final IconData? rightIcon;
+
+  const AppBarTransparent({
+    Key? key,
+    required this.leftAction,
+    required this.leftIcon,
+    this.rightAction,
+    this.rightIcon, required this.img,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      pinned: true,
+      floating: true,
+      expandedHeight: 200,
+      //backgroundColor: Colors.red,
+      elevation: 0.0,
+
+      flexibleSpace: FlexibleSpaceBar(
+        background: Image.asset(img, fit: BoxFit.cover, color: kBlackColor.withOpacity(0.4), colorBlendMode: BlendMode.darken),
+      ),
+
+      leading: IconButton(
+        onPressed: leftAction,
+        icon: Icon(leftIcon, color: kWhiteColor),
+      ),
+      actions: [
+        IconButton(
+          onPressed: rightAction,
+          icon: Icon(rightIcon, color: kWhiteColor),
+        ),
+      ],
+    );
+  }
+}
+
 class AppBarSearch extends StatelessWidget {
   const AppBarSearch({super.key});
 
