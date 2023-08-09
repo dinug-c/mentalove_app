@@ -14,6 +14,8 @@ class Detail extends StatefulWidget {
 }
 
 class _DetailState extends State<Detail> {
+  List<bool> isSelected = [false, false];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +43,6 @@ class _DetailState extends State<Detail> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-
                           //Nama Psikolog
                           Text(
                             'Aris Prabowo Wijayanto',
@@ -52,7 +53,7 @@ class _DetailState extends State<Detail> {
                               style: blackTextStyle.copyWith(fontSize: 16)),
                           gapH12,
 
-                          //Rating + lama 
+                          //Rating + lama
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -92,11 +93,15 @@ class _DetailState extends State<Detail> {
                           gapH32,
 
                           //Kategori
-                          Text('Bidang Keahlian', style: blackTextStyle.copyWith(fontWeight: extraBold, fontSize: 14),),
+                          Text(
+                            'Bidang Keahlian',
+                            style: blackTextStyle.copyWith(
+                                fontWeight: extraBold, fontSize: 14),
+                          ),
                           gapH4,
                           const Wrap(
                             spacing: 20,
-                              children: [
+                            children: [
                               CategoryCard(text: 'Depresi'),
                               CategoryCard(text: 'Trauma'),
                               CategoryCard(text: 'Pekerjaan')
@@ -105,41 +110,65 @@ class _DetailState extends State<Detail> {
                           gapH32,
 
                           //Select Chat/Video
-                          Text('Pilih Sarana', style: blackTextStyle.copyWith(fontWeight: extraBold, fontSize: 14),),
-                          MediaCard(title: 'Chat', desc: 'desc', onTap: (){})
-
+                          Text(
+                            'Pilih Sarana',
+                            style: blackTextStyle.copyWith(
+                                fontWeight: extraBold, fontSize: 14),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ToggleButtons(
+                                onPressed: (int index) {
+                                  setState(() {
+                                    for (int i = 0; i < isSelected.length; i++) {
+                                      isSelected[i] = i == index;
+                                    }
+                                  });
+                                },
+                                isSelected: isSelected,
+                                children: const [
+                                  Row(children: [Icon(Icons.chat), Text('Chat')]),
+                                  Row(children: [
+                                    Icon(Icons.videocam_rounded),
+                                    Text('Video Call')
+                                  ])
+                                ],
+                              ),
+                            ],
+                          )
                         ]))
               ],
             ),
           ),
         ],
       ),
-
       bottomNavigationBar: Container(
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
             border: Border(top: BorderSide(color: kPurpleColor, width: 1.0))),
         height: 80,
         child: Column(
           children: <Widget>[
             Expanded(
-                      flex: 1,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                        //padding: const EdgeInsets.only(top: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Button(
-                                text: "Konfirmasi Penjadwalan",
-                                textColor: kWhiteColor,
-                                startColor: kPurpleColor,
-                                endColor: kPurpleColor,
-                                onPressed: () {
-                                  //Navigator.pushNamed(context, '/detail');
-                                })
-                          ],
-                        ),
-                      )),
+                flex: 1,
+                child: Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  //padding: const EdgeInsets.only(top: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Button(
+                          text: "Konfirmasi Penjadwalan",
+                          textColor: kWhiteColor,
+                          startColor: kPurpleColor,
+                          endColor: kPurpleColor,
+                          onPressed: () {
+                            //Navigator.pushNamed(context, '/detail');
+                          })
+                    ],
+                  ),
+                )),
           ],
         ),
       ),

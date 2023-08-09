@@ -154,13 +154,11 @@ class CategoryCard extends StatelessWidget {
 
 class MediaCard extends StatelessWidget {
   final String title;
-  final String desc;
   final Function() onTap;
 
   const MediaCard({
     Key? key,
     required this.title,
-    required this.desc,
     required this.onTap,
   }) : super(key: key);
 
@@ -178,7 +176,7 @@ class MediaCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
@@ -197,13 +195,6 @@ class MediaCard extends StatelessWidget {
                     title,
                     style: blackTextStyle.copyWith(
                         fontSize: 14, fontWeight: extraBold),
-                  ),
-                  Text(
-                    desc,
-                    style: blackTextStyle.copyWith(
-                        fontSize: 14, fontWeight: regular),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
                   ),
                 ],
               ),
