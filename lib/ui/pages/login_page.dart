@@ -86,7 +86,7 @@ class _LoginPage extends State<LoginPage> {
                                 startColor: kPrimaryColor,
                                 endColor: kPrimary2Color,
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/detail');
+                                  Navigator.pushNamed(context, '/history');
                                 })
                           ],
                         ),

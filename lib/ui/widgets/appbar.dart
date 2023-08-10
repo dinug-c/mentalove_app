@@ -5,9 +5,9 @@ class AppBarCustom extends StatelessWidget {
   final String title;
   final Color startColor;
   final Color endColor;
-  final Function() leftAction;
+  final Function()? leftAction;
   final Function()? rightAction;
-  final IconData leftIcon;
+  final IconData? leftIcon;
   final IconData? rightIcon;
 
   const AppBarCustom({
@@ -15,8 +15,8 @@ class AppBarCustom extends StatelessWidget {
     required this.title,
     required this.startColor,
     required this.endColor,
-    required this.leftAction,
-    required this.leftIcon,
+    this.leftAction,
+    this.leftIcon,
     this.rightAction,
     this.rightIcon,
   }) : super(key: key);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/detail.dart';
+import 'package:mentalove_app/ui/pages/history.dart';
 import 'package:mentalove_app/ui/pages/landing_page.dart';
 import 'package:mentalove_app/ui/pages/login_page.dart';
 import 'package:mentalove_app/ui/pages/signup_page.dart';
@@ -24,6 +25,7 @@ class MainApp extends StatelessWidget {
       '/login-page': (context) => const LoginPage(),
       '/signup-page': (context) => const SignupPage(),
       '/detail': (context) => const Detail(),
+      '/history': (context) => const HistoryPage(),
     });
 
     // MultiBlocProvider(
