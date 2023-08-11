@@ -16,7 +16,6 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        
         slivers: <Widget>[
           AppBarCustom(
             title: 'History',

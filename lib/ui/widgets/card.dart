@@ -283,3 +283,63 @@ class HistoryCard extends StatelessWidget {
     );
   }
 }
+
+class DailyCard extends StatelessWidget {
+  final AssetImage image;
+  final String title;
+  final String desc;
+  final Function() onTap;
+
+  const DailyCard({
+    Key? key,
+    required this.image,
+    required this.title,
+    required this.desc,
+    required this.onTap,
+  }) : super(key: key);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          gapH12,
+          Container(
+            width: 110,
+            height: 130,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: image, fit: BoxFit.cover),
+              color: kGreyColor.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          gapH8,
+          SizedBox(
+            width: 110,
+            child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: blackTextStyle.copyWith(
+                    fontSize: 16, fontWeight: semiBold),
+              ),
+              Text(
+                desc,
+                style: blackTextStyle.copyWith(
+                    fontSize: 14, fontWeight: regular),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              )
+            ],
+            )
+          )
+          
+        ],
+      ),
+    );
+  }
+}
