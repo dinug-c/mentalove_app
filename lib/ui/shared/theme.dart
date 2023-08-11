@@ -13,6 +13,7 @@ Color kSecondary2Color = const Color(0xffFFC0D3);
 Color kWhiteColor = const Color(0xffFFFFFF);
 Color kBlackColor = const Color(0xff000000);
 Color kGreyColor = const Color(0xff7E7E7E);
+Color kLightGreyColor = const Color(0xffEBEBEB);
 Color kGreenColor = const Color(0xff29CB9E);
 Color kRedColor = const Color.fromARGB(255, 243, 57, 113);
 Color kTextColor = const Color(0xff524A4E);

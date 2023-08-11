@@ -7,6 +7,7 @@ import 'package:mentalove_app/ui/pages/history.dart';
 import 'package:mentalove_app/ui/pages/landing_page.dart';
 import 'package:mentalove_app/ui/pages/login_page.dart';
 import 'package:mentalove_app/ui/pages/signup_page.dart';
+import 'package:mentalove_app/ui/pages/tell_us.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
 import 'ui/pages/splash_screen.dart';
 
@@ -27,7 +28,8 @@ class MainApp extends StatelessWidget {
       '/signup-page': (context) => const SignupPage(),
       '/detail': (context) => const Detail(),
       '/history': (context) => const HistoryPage(),
-      '/daily': (content) => const DailyContentPage(),
+      '/daily': (context) => const DailyContentPage(),
+      '/tellus': (context) => const TellUsPage(),
     });
 
     // MultiBlocProvider(

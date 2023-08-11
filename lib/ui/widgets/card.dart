@@ -343,3 +343,129 @@ class DailyCard extends StatelessWidget {
     );
   }
 }
+
+class TellUsCard extends StatelessWidget {
+  final AssetImage profil;
+  final String name;
+  final String date;
+  final String desc;
+  final AssetImage? image;
+  final Function() onTap;
+
+  const TellUsCard({
+    Key? key,
+    this.image,
+    required this.name,
+    required this.date,
+    required this.desc,
+    required this.profil,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    dynamic parentWidth = MediaQuery.of(context).size.width;
+    return GestureDetector(
+      onTap: onTap,
+      
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        decoration: BoxDecoration(
+          color: kWhiteColor, 
+          
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          Container(
+            width: parentWidth,
+            height: 50,
+            decoration: BoxDecoration(
+              color: kWhiteColor,
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: profil, fit: BoxFit.cover),
+                    borderRadius: BorderRadius.circular(20)
+                  ),
+                ),
+                Container(
+                  width: 110,
+                  height: 40,
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        name,
+                        style: blackTextStyle.copyWith(
+                          fontSize: 16, fontWeight: extraBold),
+                      ),
+                      Text(
+                        date,
+                        style: greyTextStyle.copyWith(
+                          fontSize: 14, fontWeight: regular
+                        ),
+                      )
+                  ])
+                )
+              ]),
+          ),
+          gapH8,
+          RichText(
+          text: TextSpan(
+            text: desc,
+            style: blackTextStyle.copyWith(
+              fontSize: 14, fontWeight: regular
+            ),
+            children: <TextSpan>[
+              TextSpan(text: ' Baca Selengkapnya', 
+              style: greyTextStyle.copyWith(fontSize: 14),
+              ),
+            ])
+          ),
+          gapH8,
+          Container(
+            height: image != null ? 250 : 0,
+            decoration: BoxDecoration(
+              image: image != null ? DecorationImage(image: image!, fit: BoxFit.cover) : null,
+              borderRadius: BorderRadius.circular(20)
+            ),
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.favorite_border,
+                    size: 24.0,
+                  ),
+                  gapW12,
+                  Icon(
+                    Icons.chat_bubble_outline,
+                    size: 24.0
+                  ),
+                  gapW12,
+                  Icon(
+                    Icons.share_outlined,
+                    size: 24.0
+                  )
+                  ]
+              ),
+              const Icon(
+                Icons.bookmark_outline,
+                size: 24.0,
+              )
+            ],
+          )
+        ])
+      ),
+    );
+  }
+}
