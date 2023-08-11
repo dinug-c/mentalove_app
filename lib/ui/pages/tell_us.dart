@@ -32,7 +32,7 @@ class _TellUsPageState extends State<TellUsPage> {
                   name: 'Susanto', 
                   date: '28 Juni 2023',
                   desc: 'Tadi pacarku marah sama aku gara-gara aku ga beliin cilok, mau tanya dong guys solusinya aku harus gimana ya, soalnya', 
-                  profil: AssetImage('assets/detail_pfp.png'), 
+                  profil: const AssetImage('assets/detail_pfp.png'), 
                   onTap: () {},
                   
                 ),
@@ -41,16 +41,16 @@ class _TellUsPageState extends State<TellUsPage> {
                   name: 'Susanti', 
                   date: '28 Juni 2023',
                   desc: 'Akhirnya  setelah 5 taun berjuang sendirian cari duit buat lunasin utang suami, aku bisa lunasin utangnyaa hari iniii. Jadi', 
-                  profil: AssetImage('assets/detail_pfp.png'), 
+                  profil: const AssetImage('assets/detail_pfp.png'), 
                   onTap: () {},
-                  image: AssetImage('assets/kons-tapmuk.png'),
+                  image: const AssetImage('assets/kons-tapmuk.png'),
                 ),
                 gapH12,
                 TellUsCard(
                   name: 'Evelyn', 
                   date: '28 Juni 2023',
                   desc: 'doiku ga peka, padal udah kukodein berkali kali tapi masih aja tarik ulur gimana ya caranya', 
-                  profil: AssetImage('assets/detail_pfp.png'), 
+                  profil: const AssetImage('assets/detail_pfp.png'), 
                   onTap: () {},
                   
                 )
