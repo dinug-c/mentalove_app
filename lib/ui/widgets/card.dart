@@ -437,6 +437,7 @@ class TellUsCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20)
             ),
           ),
+          gapH8,
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
