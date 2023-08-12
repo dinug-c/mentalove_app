@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:group_button/group_button.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
@@ -17,6 +18,7 @@ class _DetailState extends State<Detail> {
 
   @override
   Widget build(BuildContext context) {
+    dynamic parentWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: kWhiteColor,
       body: CustomScrollView(
@@ -124,8 +126,10 @@ class _DetailState extends State<Detail> {
                                       });
                                     },
                                     style: OutlinedButton.styleFrom(
-                                        side: BorderSide(width: 1.0, color: kPurpleColor),
-                                        padding: const EdgeInsets.symmetric(vertical: 13.0),
+                                        side: BorderSide(
+                                            width: 1.0, color: kPurpleColor),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 13.0),
                                         backgroundColor:
                                             mode ? kWhiteColor : kPurpleColor,
                                         shape: const RoundedRectangleBorder(
@@ -138,9 +142,8 @@ class _DetailState extends State<Detail> {
                                       children: [
                                         Icon(
                                           Icons.chat,
-                                          color: mode
-                                              ? kPurpleColor
-                                              : kWhiteColor,
+                                          color:
+                                              mode ? kPurpleColor : kWhiteColor,
                                         ),
                                         gapW12,
                                         Text(
@@ -163,8 +166,10 @@ class _DetailState extends State<Detail> {
                                       });
                                     },
                                     style: OutlinedButton.styleFrom(
-                                        side: BorderSide(width: 1.0, color: kPurpleColor),
-                                        padding: const EdgeInsets.symmetric(vertical: 13.0),
+                                        side: BorderSide(
+                                            width: 1.0, color: kPurpleColor),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 13.0),
                                         backgroundColor:
                                             mode ? kPurpleColor : kWhiteColor,
                                         shape: const RoundedRectangleBorder(
@@ -193,9 +198,26 @@ class _DetailState extends State<Detail> {
                           ),
 
                           gapH32,
-                          Text('Pilih Tanggal',
-                              style: blackTextStyle.copyWith(
-                                  fontWeight: extraBold, fontSize: 14)),
+                          //Pilih Jadwal
+                          Container(
+                            decoration:
+                                BoxDecoration(color: kPrimaryLightColor),
+                            height: 70,
+                            width: parentWidth,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Pilih Tanggal',
+                                    style: blackTextStyle.copyWith(
+                                        fontWeight: extraBold, fontSize: 14)),
+                                
+                                gapH(16),
+                                Text('Pilih Waktu',
+                                    style: blackTextStyle.copyWith(
+                                        fontWeight: extraBold, fontSize: 14)),
+                              ],
+                            ),
+                          )
                         ]))
               ],
             ),
