@@ -152,59 +152,7 @@ class CategoryCard extends StatelessWidget {
   }
 }
 
-class MediaCard extends StatelessWidget {
-  final String title;
-  final Function() onTap;
 
-  const MediaCard({
-    Key? key,
-    required this.title,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    dynamic parentWidth = MediaQuery.of(context).size.width;
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: double.infinity,
-        height: 90,
-        decoration: BoxDecoration(
-          color: kPrimaryLightColor,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-              ),
-            ),
-            SizedBox(
-              width: parentWidth * 0.6,
-              height: 70,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    style: blackTextStyle.copyWith(
-                        fontSize: 14, fontWeight: extraBold),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class HistoryCard extends StatelessWidget {
   final AssetImage faceEmoji;

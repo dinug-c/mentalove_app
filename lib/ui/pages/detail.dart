@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
@@ -14,7 +13,7 @@ class Detail extends StatefulWidget {
 }
 
 class _DetailState extends State<Detail> {
-  List<bool> isSelected = [false, false];
+  bool mode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -109,34 +108,95 @@ class _DetailState extends State<Detail> {
                           ),
                           gapH32,
 
-                          //Select Chat/Video
-                          Text(
-                            'Pilih Sarana',
-                            style: blackTextStyle.copyWith(
-                                fontWeight: extraBold, fontSize: 14),
-                          ),
+                          //Pilih Chat/VideoCall
+                          Text('Pilih Sarana',
+                              style: blackTextStyle.copyWith(
+                                  fontWeight: extraBold, fontSize: 14)),
+                          gapH4,
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              ToggleButtons(
-                                onPressed: (int index) {
-                                  setState(() {
-                                    for (int i = 0; i < isSelected.length; i++) {
-                                      isSelected[i] = i == index;
-                                    }
-                                  });
-                                },
-                                isSelected: isSelected,
-                                children: const [
-                                  Row(children: [Icon(Icons.chat), Text('Chat')]),
-                                  Row(children: [
-                                    Icon(Icons.videocam_rounded),
-                                    Text('Video Call')
-                                  ])
-                                ],
+                              Expanded(
+                                child: OutlinedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        mode = false;
+                                      });
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                        side: BorderSide(width: 1.0, color: kPrimaryColor),
+                                        padding: const EdgeInsets.symmetric(vertical: 13.0),
+                                        backgroundColor:
+                                            mode ? kWhiteColor : kPrimaryColor,
+                                        foregroundColor: kPrimaryColor,
+                                        shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+                                        elevation: 0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.chat,
+                                          color: mode
+                                              ? kPrimaryColor
+                                              : kWhiteColor,
+                                        ),
+                                        gapW12,
+                                        Text(
+                                          'Chat',
+                                          style: blackTextStyle.copyWith(
+                                              color: mode
+                                                  ? kPrimaryColor
+                                                  : kWhiteColor,
+                                              fontWeight: bold),
+                                        ),
+                                      ],
+                                    )),
                               ),
+                              gapW12,
+                              Expanded(
+                                child: OutlinedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        mode = true;
+                                      });
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                        side: BorderSide(width: 1.0, color: kPrimaryColor),
+                                        padding: const EdgeInsets.symmetric(vertical: 13.0),
+                                        backgroundColor:
+                                            mode ? kPrimaryColor : kWhiteColor,
+                                        shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+                                        elevation: 0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.video_call,
+                                            color: mode
+                                                ? kWhiteColor
+                                                : kPrimaryColor),
+                                        gapW12,
+                                        Text('Video Call',
+                                            style: blackTextStyle.copyWith(
+                                                color: mode
+                                                    ? kWhiteColor
+                                                    : kPrimaryColor,
+                                                fontWeight: bold)),
+                                      ],
+                                    )),
+                              )
                             ],
-                          )
+                          ),
+
+                          gapH32,
+                          Text('Pilih Jadwal',
+                              style: blackTextStyle.copyWith(
+                                  fontWeight: extraBold, fontSize: 14)),
                         ]))
               ],
             ),
