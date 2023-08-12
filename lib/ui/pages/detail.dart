@@ -124,11 +124,10 @@ class _DetailState extends State<Detail> {
                                       });
                                     },
                                     style: OutlinedButton.styleFrom(
-                                        side: BorderSide(width: 1.0, color: kPrimaryColor),
+                                        side: BorderSide(width: 1.0, color: kPurpleColor),
                                         padding: const EdgeInsets.symmetric(vertical: 13.0),
                                         backgroundColor:
-                                            mode ? kWhiteColor : kPrimaryColor,
-                                        foregroundColor: kPrimaryColor,
+                                            mode ? kWhiteColor : kPurpleColor,
                                         shape: const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10))),
@@ -140,7 +139,7 @@ class _DetailState extends State<Detail> {
                                         Icon(
                                           Icons.chat,
                                           color: mode
-                                              ? kPrimaryColor
+                                              ? kPurpleColor
                                               : kWhiteColor,
                                         ),
                                         gapW12,
@@ -148,7 +147,7 @@ class _DetailState extends State<Detail> {
                                           'Chat',
                                           style: blackTextStyle.copyWith(
                                               color: mode
-                                                  ? kPrimaryColor
+                                                  ? kPurpleColor
                                                   : kWhiteColor,
                                               fontWeight: bold),
                                         ),
@@ -164,10 +163,10 @@ class _DetailState extends State<Detail> {
                                       });
                                     },
                                     style: OutlinedButton.styleFrom(
-                                        side: BorderSide(width: 1.0, color: kPrimaryColor),
+                                        side: BorderSide(width: 1.0, color: kPurpleColor),
                                         padding: const EdgeInsets.symmetric(vertical: 13.0),
                                         backgroundColor:
-                                            mode ? kPrimaryColor : kWhiteColor,
+                                            mode ? kPurpleColor : kWhiteColor,
                                         shape: const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10))),
@@ -179,13 +178,13 @@ class _DetailState extends State<Detail> {
                                         Icon(Icons.video_call,
                                             color: mode
                                                 ? kWhiteColor
-                                                : kPrimaryColor),
+                                                : kPurpleColor),
                                         gapW12,
                                         Text('Video Call',
                                             style: blackTextStyle.copyWith(
                                                 color: mode
                                                     ? kWhiteColor
-                                                    : kPrimaryColor,
+                                                    : kPurpleColor,
                                                 fontWeight: bold)),
                                       ],
                                     )),
@@ -194,7 +193,7 @@ class _DetailState extends State<Detail> {
                           ),
 
                           gapH32,
-                          Text('Pilih Jadwal',
+                          Text('Pilih Tanggal',
                               style: blackTextStyle.copyWith(
                                   fontWeight: extraBold, fontSize: 14)),
                         ]))
