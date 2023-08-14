@@ -7,8 +7,6 @@ class NewForm extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final double horizontalPadding;
-  final double topPadding;
-  final double bottomPadding;
 
   const NewForm(
       {super.key,
@@ -17,13 +15,12 @@ class NewForm extends StatelessWidget {
       required this.hintText,
       required this.obscureText,
       required this.horizontalPadding,
-      required this.topPadding,
-      required this.bottomPadding});
+      });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: topPadding, bottom: bottomPadding, left: horizontalPadding, right: horizontalPadding),
+      padding: EdgeInsets.only(left: horizontalPadding, right: horizontalPadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
