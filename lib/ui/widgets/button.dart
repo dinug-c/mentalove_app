@@ -1,6 +1,5 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:mentalove_app/ui/shared/gaps.dart';
-
 import '../shared/theme.dart';
 
 class Button extends StatelessWidget {
@@ -113,3 +112,58 @@ class ButtonOutline extends StatelessWidget {
   }
 }
 
+class SelectionButton extends StatelessWidget {
+  final Color bgColor;
+  final Color color;
+  final String text;
+  final bool? isIcon;
+  final Function() onPressed;
+
+  const SelectionButton({
+    super.key,
+    required this.onPressed,
+    required this.bgColor,
+    required this.color,
+    required this.text,
+    this.isIcon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 55,
+      height: 65,
+      decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: const BorderRadius.all(Radius.circular(10))),
+      child: InkWell(
+          child: isIcon == false
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: AutoSizeText(
+                        text,
+                        style: blackTextStyle.copyWith(
+                            color: color, fontWeight: bold, fontSize: 11),
+                        //minFontSize: 8,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(
+                        child: Icon(Icons.calendar_month_sharp, color: color)),
+                  ],
+                )),
+    );
+    ;
+  }
+}
