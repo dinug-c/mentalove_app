@@ -164,6 +164,5 @@ class SelectionButton extends StatelessWidget {
                   ],
                 )),
     );
-    ;
   }
 }
