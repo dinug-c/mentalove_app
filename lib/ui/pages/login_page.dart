@@ -65,7 +65,7 @@ class _LoginPage extends State<LoginPage> {
                     gapH8,
 
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30),
+                      margin: const EdgeInsets.symmetric(horizontal: 30),
                       padding: const EdgeInsets.only(top: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,7 +76,7 @@ class _LoginPage extends State<LoginPage> {
                               startColor: kPrimaryColor,
                               endColor: kPrimary2Color,
                               onPressed: () {
-                                Navigator.pushNamed(context, '/detail');
+                                Navigator.pushNamed(context, '/tellus');
                               })
                         ],
                       ),
