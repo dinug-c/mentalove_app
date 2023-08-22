@@ -1,14 +1,11 @@
-import 'package:appwrite/appwrite.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mentalove_app/services/auth.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/textfield.dart';
-import 'package:mentalove_app/ui/widgets/toast.dart';
-
-import '../../services/appwrite_client.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -94,25 +91,9 @@ class _SignupPage extends State<SignupPage> {
                               textColor: kWhiteColor,
                               startColor: kPrimaryColor,
                               endColor: kPrimary2Color,
-                              onPressed: () async {
-                                try {
-                                  final user = await account.create(
-                                    userId: ID.unique(),
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                  );
-                                  user.status
-                                      ? Navigator.pushReplacementNamed(
-                                          context, '/main-page')
-                                      : ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                          content: const Text(
-                                              'Terjadi kesalahan, silahkan coba lagi'),
-                                          backgroundColor: kPrimaryColor,
-                                        ));
-                                } catch (e) {
-                                  showToast(context, e.toString());
-                                }
+                              onPressed: () {
+                                register(emailController, passwordController,
+                                    context);
                               })
                         ],
                       ),
