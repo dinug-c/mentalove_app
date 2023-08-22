@@ -14,6 +14,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -49,17 +52,19 @@ class _LoginPage extends State<LoginPage> {
                     ),
 
                     //TextField Email
-                    const NewForm(
+                    NewForm(
                         nama: "Email",
                         hintText: "Masukkan Email",
+                        controller: emailController,
                         obscureText: false,
                         horizontalPadding: 25),
                     gapH8,
 
                     //TextField Password,
-                    const NewForm(
+                    NewForm(
                         nama: "Password",
                         hintText: "Masukkan Password",
+                        controller: passwordController,
                         obscureText: true,
                         horizontalPadding: 25),
                     gapH8,

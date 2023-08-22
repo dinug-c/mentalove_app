@@ -9,7 +9,7 @@ import 'package:mentalove_app/ui/pages/login_page.dart';
 import 'package:mentalove_app/ui/pages/main_page.dart';
 import 'package:mentalove_app/ui/pages/signup_page.dart';
 import 'package:mentalove_app/ui/pages/tell_us.dart';
-import 'package:mentalove_app/ui/widgets/card.dart';
+
 import 'cubit/page_cubit.dart';
 import 'ui/pages/splash_screen.dart';
 

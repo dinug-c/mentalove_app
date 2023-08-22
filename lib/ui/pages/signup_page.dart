@@ -1,3 +1,4 @@
+import 'package:appwrite/appwrite.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +6,9 @@ import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/textfield.dart';
+import 'package:mentalove_app/ui/widgets/toast.dart';
+
+import '../../services/appwrite_client.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -14,6 +18,11 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPage extends State<SignupPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmationController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -49,23 +58,26 @@ class _SignupPage extends State<SignupPage> {
                     ),
 
                     //TextField Email
-                    const NewForm(
+                    NewForm(
                         nama: "Email",
+                        controller: emailController,
                         hintText: "Masukkan Email",
                         obscureText: false,
                         horizontalPadding: 25),
                     gapH8,
 
                     //TextField Password,
-                    const NewForm(
+                    NewForm(
                         nama: "Password",
+                        controller: passwordController,
                         hintText: "Masukkan Password",
                         obscureText: true,
                         horizontalPadding: 25),
                     gapH8,
 
-                    const NewForm(
+                    NewForm(
                         nama: "Konfirmasi Password",
+                        controller: passwordConfirmationController,
                         hintText: "Masukkan Konfirmasi Password",
                         obscureText: true,
                         horizontalPadding: 25),
@@ -82,8 +94,25 @@ class _SignupPage extends State<SignupPage> {
                               textColor: kWhiteColor,
                               startColor: kPrimaryColor,
                               endColor: kPrimary2Color,
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/counseling');
+                              onPressed: () async {
+                                try {
+                                  final user = await account.create(
+                                    userId: ID.unique(),
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  );
+                                  user.status
+                                      ? Navigator.pushReplacementNamed(
+                                          context, '/main-page')
+                                      : ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                          content: const Text(
+                                              'Terjadi kesalahan, silahkan coba lagi'),
+                                          backgroundColor: kPrimaryColor,
+                                        ));
+                                } catch (e) {
+                                  showToast(context, e.toString());
+                                }
                               })
                         ],
                       ),

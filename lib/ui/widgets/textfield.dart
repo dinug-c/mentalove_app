@@ -2,25 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 
 class NewForm extends StatelessWidget {
-  final controller;
+  final TextEditingController controller;
   final String nama;
   final String hintText;
   final bool obscureText;
   final double horizontalPadding;
 
-  const NewForm(
-      {super.key,
-      this.controller,
-      required this.nama,
-      required this.hintText,
-      required this.obscureText,
-      required this.horizontalPadding,
-      });
+  const NewForm({
+    super.key,
+    required this.controller,
+    required this.nama,
+    required this.hintText,
+    required this.obscureText,
+    required this.horizontalPadding,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: horizontalPadding, right: horizontalPadding),
+      padding:
+          EdgeInsets.only(left: horizontalPadding, right: horizontalPadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
