@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentalove_app/ui/shared/theme.dart';
+
+import '../../cubit/page_cubit.dart';
+import '../shared/gaps.dart';
+
+class CustomButtonNavigationItem extends StatelessWidget {
+  final int index;
+  final String imageUrl;
+
+  CustomButtonNavigationItem({
+    Key? key,
+    required this.imageUrl,
+    required this.index,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        context.read<PageCubit>().setPage(index);
+      },
+      child: Container(
+          width: MediaQuery.of(context).size.width / 5,
+          height: 50,
+          decoration: BoxDecoration(
+            color: (context.read<PageCubit>().state == index)
+                ? kPrimaryLightColor
+                : Colors.transparent,
+          ),
+          child: Center(
+            child: Image.asset(
+              imageUrl,
+              width: 24,
+              height: 24,
+              color: kPrimary2Color,
+            ),
+          )),
+    );
+  }
+}

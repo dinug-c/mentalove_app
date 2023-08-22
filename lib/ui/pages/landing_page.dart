@@ -34,7 +34,6 @@ class _MyWidgetState extends State<LandingPage> {
                     'assets/bg.png',
                   ),
                   fit: BoxFit.cover)),
-
           child: Flex(
             direction: Axis.vertical,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -60,14 +59,16 @@ class _MyWidgetState extends State<LandingPage> {
                             startColor: kPrimaryColor,
                             endColor: kPrimary2Color,
                             onPressed: () {
-                              Navigator.pushNamed(context, '/login-page');
+                              Navigator.pushNamed(context, '/main-page');
                             }),
                         gapH(21),
                         ButtonOutline(
                             text: "Daftar",
                             textColor: kPrimary2Color,
                             borderColor: kPrimaryColor,
-                            onPressed: () {Navigator.pushNamed(context, '/signup-page');}),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/signup-page');
+                            }),
                       ],
                     ),
                   ))
