@@ -59,7 +59,7 @@ class _MyWidgetState extends State<LandingPage> {
                             startColor: kPrimaryColor,
                             endColor: kPrimary2Color,
                             onPressed: () {
-                              Navigator.pushNamed(context, '/main-page');
+                              Navigator.pushNamed(context, '/login-page');
                             }),
                         gapH(21),
                         ButtonOutline(

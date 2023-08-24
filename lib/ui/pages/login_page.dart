@@ -6,6 +6,8 @@ import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/textfield.dart';
 
+import '../../services/auth.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -81,7 +83,9 @@ class _LoginPage extends State<LoginPage> {
                               startColor: kPrimaryColor,
                               endColor: kPrimary2Color,
                               onPressed: () {
-                                Navigator.pushNamed(context, '/tellus');
+                                login(emailController, passwordController,
+                                    context);
+                                //Navigator.pushNamed(context, '/tellus');
                               })
                         ],
                       ),

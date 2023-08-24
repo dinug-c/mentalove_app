@@ -23,3 +23,21 @@ register(TextEditingController emailController,
     showToast(context, e.toString());
   }
 }
+
+login(TextEditingController emailController,
+    TextEditingController passwordController, BuildContext context) async {
+  try {
+    final user = await account.createEmailSession(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+    user.current
+        ? Navigator.pushReplacementNamed(context, '/main-page')
+        : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: const Text('Terjadi kesalahan, silahkan coba lagi'),
+            backgroundColor: kPrimaryColor,
+          ));
+  } catch (e) {
+    showToast(context, e.toString());
+  }
+}
