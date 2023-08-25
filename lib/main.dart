@@ -7,6 +7,7 @@ import 'package:mentalove_app/ui/pages/history.dart';
 import 'package:mentalove_app/ui/pages/landing_page.dart';
 import 'package:mentalove_app/ui/pages/login_page.dart';
 import 'package:mentalove_app/ui/pages/main_page.dart';
+import 'package:mentalove_app/ui/pages/psikolog_page.dart';
 import 'package:mentalove_app/ui/pages/signup_page.dart';
 import 'package:mentalove_app/ui/pages/tell_us.dart';
 
@@ -39,6 +40,7 @@ class MainApp extends StatelessWidget {
         '/history': (context) => const HistoryPage(),
         '/daily': (context) => const DailyContentPage(),
         '/tellus': (context) => const TellUsPage(),
+        '/psikolog-page': (context) => const PsikologPage()
       }),
     );
   }

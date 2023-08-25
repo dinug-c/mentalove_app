@@ -91,7 +91,9 @@ class _CounselingState extends State<Counseling> {
                           desc:
                               'Membantumu dalam melakukan asesmen kesehatan mental dan konsultasi.',
                           image: const AssetImage('assets/icon_psiko.png'),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(context, '/psikolog-page');
+                          },
                         ),
                         gapH12,
                         CardAhli(
