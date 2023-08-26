@@ -324,7 +324,7 @@ class _DetailState extends State<Detail> {
                           startColor: kPurpleColor,
                           endColor: kPurpleColor,
                           onPressed: () {
-                            //Navigator.pushNamed(context, '/detail');
+                            Navigator.pushNamed(context, '/pembayaran');
                           })
                     ],
                   ),

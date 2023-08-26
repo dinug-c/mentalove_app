@@ -85,7 +85,7 @@ class _LoginPage extends State<LoginPage> {
                               onPressed: () {
                                 login(emailController, passwordController,
                                     context);
-                                //Navigator.pushNamed(context, '/tellus');
+                                // Navigator.pushNamed(context, '/main-page');
                               })
                         ],
                       ),

@@ -129,6 +129,125 @@ class CardAhli extends StatelessWidget {
   }
 }
 
+class PsikologCard extends StatelessWidget {
+  final AssetImage image;
+  final String name;
+  final String position;
+  final String expertise;
+  final String price;
+  final String workPeriod;
+  final String rating;
+
+  const PsikologCard(
+      {super.key,
+      required this.image,
+      required this.name,
+      required this.position,
+      required this.expertise,
+      required this.price,
+      required this.workPeriod,
+      required this.rating});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            width: 100,
+            height: 150,
+            decoration: BoxDecoration(
+                color: kPrimary2Color,
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                image: DecorationImage(image: image, fit: BoxFit.cover)),
+          ),
+          gapW12,
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(
+              name,
+              style:
+                  blackTextStyle.copyWith(fontSize: 15, fontWeight: extraBold),
+            ),
+            Text(
+              position,
+              style:
+                  blackTextStyle.copyWith(fontSize: 12, fontWeight: extraBold),
+            ),
+            Text(
+              expertise,
+              style: blackTextStyle.copyWith(fontSize: 12),
+            ),
+            gapH24,
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(price,
+                        style: blackTextStyle.copyWith(
+                            fontSize: 12, fontWeight: extraBold)),
+                    Container(
+                      width: 190,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/detail');
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: kPurpleColor,
+                            elevation: 0.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12.0))),
+                        child: Text('Jadwalkan',
+                            style: whiteTextStyle.copyWith(
+                                fontSize: 12, fontWeight: extraBold)),
+                      ),
+                    ),
+                  ],
+                ),
+                gapW8,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(workPeriod,
+                        style: blackTextStyle.copyWith(
+                            fontSize: 12, fontWeight: extraBold)),
+                    gapH4,
+                    Container(
+                      width: 60,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        color: kPrimaryLightColor,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.thumb_up,
+                            size: 15,
+                            color: kPurpleColor,
+                          ),
+                          gapW(2),
+                          Text(rating,
+                              style: purpleTextStyle.copyWith(
+                                  fontSize: 12, fontWeight: extraBold)),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            )
+          ]),
+        ],
+      ),
+    );
+  }
+}
+
 class CategoryCard extends StatelessWidget {
   final String text;
 
