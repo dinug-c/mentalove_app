@@ -4,7 +4,6 @@ import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
-import 'package:mentalove_app/ui/widgets/card.dart';
 
 class Pembayaran extends StatefulWidget {
   const Pembayaran({super.key});
@@ -83,20 +82,12 @@ class _PembayaranState extends State<Pembayaran> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: OutlinedButton(
-                                onPressed: () {
-                                  setState(() {});
-                                },
-                                style: OutlinedButton.styleFrom(
-                                    side: BorderSide(
-                                        width: 1.0, color: kPurpleColor),
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 13.0),
-                                    backgroundColor: kPurpleColor,
-                                    shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    elevation: 0),
+                            child: Container(
+                                height: 60,
+                                decoration: BoxDecoration(
+                                    color: kPurpleColor,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -115,6 +106,89 @@ class _PembayaranState extends State<Pembayaran> {
                           ),
                           gapW12,
                           Expanded(
+                            child: Container(
+                                height: 60,
+                                decoration: BoxDecoration(
+                                    color: kWhiteColor,
+                                    border: Border.all(
+                                        color: kPurpleColor, width: 1.5),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.calendar_month,
+                                      color: kPurpleColor,
+                                    ),
+                                    gapW12,
+                                    Text(
+                                      '03 Juli 2023',
+                                      style: purpleTextStyle.copyWith(
+                                          fontWeight: bold),
+                                    ),
+                                  ],
+                                )),
+                          ),
+                        ],
+                      ),
+                      gapH12,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Biaya Sesi 1 Jam',
+                            style: blackTextStyle.copyWith(fontWeight: medium),
+                          ),
+                          Text(
+                            'Rp40.000',
+                            style: blackTextStyle.copyWith(fontWeight: medium),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Biaya Admin',
+                            style: blackTextStyle.copyWith(fontWeight: medium),
+                          ),
+                          Text(
+                            'Rp1.000',
+                            style: blackTextStyle.copyWith(fontWeight: medium),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Potongan Harga',
+                            style: blackTextStyle.copyWith(fontWeight: medium),
+                          ),
+                          Text(
+                            '-Rp1.000,00',
+                            style: blackTextStyle.copyWith(fontWeight: medium),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Total Pembayaran',
+                            style: blackTextStyle.copyWith(fontWeight: bold),
+                          ),
+                          Text(
+                            'Rp40.000,00',
+                            style: blackTextStyle.copyWith(fontWeight: bold),
+                          ),
+                        ],
+                      ),
+                      gapH12,
+                      Row(
+                        children: [
+                          Expanded(
                             child: OutlinedButton(
                                 onPressed: () {
                                   setState(() {});
@@ -130,18 +204,22 @@ class _PembayaranState extends State<Pembayaran> {
                                             Radius.circular(10))),
                                     elevation: 0),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Icon(Icons.person_pin_rounded,
-                                        color: kPurpleColor),
+                                    gapW24,
+                                    Icon(
+                                      Icons.shopping_cart,
+                                      color: kPurpleColor,
+                                    ),
                                     gapW12,
-                                    Text('Video Call',
-                                        style: blackTextStyle.copyWith(
-                                            color: kPurpleColor,
-                                            fontWeight: bold)),
+                                    Text(
+                                      'Pilih Metode Pembayaran',
+                                      style: purpleTextStyle.copyWith(
+                                          fontWeight: bold),
+                                    ),
                                   ],
                                 )),
-                          )
+                          ),
                         ],
                       ),
                     ],
@@ -165,7 +243,7 @@ class _PembayaranState extends State<Pembayaran> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Rp. 40.000,00',
+                  Text('Rp40.000',
                       style: blackTextStyle.copyWith(fontWeight: extraBold))
                 ],
               ),

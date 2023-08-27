@@ -101,7 +101,9 @@ class _CounselingState extends State<Counseling> {
                           desc:
                               'Membantumu dalam melakukan penanganan lebih lanjut dan memberikan terapi pengobatan.',
                           image: const AssetImage('assets/icon_psiki.png'),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(context, '/psikiater-page');
+                          },
                         )
                       ]),
                 )
