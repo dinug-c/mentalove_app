@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/daily_content.dart';
-import 'package:mentalove_app/ui/pages/detail.dart';
 import 'package:mentalove_app/ui/pages/history.dart';
-import 'package:mentalove_app/ui/pages/psikolog_page.dart';
 import 'package:mentalove_app/ui/pages/tell_us.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 
@@ -40,8 +38,16 @@ class MainPage extends StatelessWidget {
           width: double.infinity,
           height: 60,
           decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border(top: BorderSide(color: kPurpleColor, width: 1))),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 24,
+                spreadRadius: 10,
+                offset: const Offset(0, 0),
+              ),
+            ],
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

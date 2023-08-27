@@ -4,71 +4,67 @@ import 'appwrite_client.dart';
 
 Databases databases = Databases(client);
 
-Future<void> createData() async {
+Future<dynamic> createData(String idDoc, Map<String, dynamic> dataList) async {
   try {
     final response = await databases.createDocument(
         databaseId: '64e7ea9ee9e2a25b8303',
-        documentId: '[DOCUMENT_ID]',
-        collectionId: 'your_collection_id',
-        data: {'key': 'value'});
-    print('Data created: ${response.data}');
+        documentId: ID.unique(),
+        collectionId: '64e9f1ed459fee6bacd8',
+        data: dataList);
+    return response;
   } catch (e) {
-    print('Error creating data: $e');
+    return e;
   }
 }
 
-Future<void> listData() async {
+Future<dynamic> listDocuments() async {
   try {
     final response = await databases.listDocuments(
       databaseId: '64e7ea9ee9e2a25b8303',
-      collectionId: '[COLLECTION_ID]',
+      collectionId: '64e9f1ed459fee6bacd8',
     );
-    var result;
-    result.then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-    });
+    return response.documents;
   } catch (e) {
-    print('Error reading data: $e');
+    return e;
   }
 }
 
-Future<void> readData() async {
+Future<dynamic> readData(String docId) async {
   try {
     final response = await databases.getDocument(
       databaseId: '64e7ea9ee9e2a25b8303',
-      collectionId: '[COLLECTION_ID]',
-      documentId: '[DOCUMENT_ID]',
+      collectionId: '64e9f1ed459fee6bacd8',
+      documentId: docId,
     );
-    print('Data read: ${response.data}');
+    return response.data;
   } catch (e) {
-    print('Error reading data: $e');
+    return e;
   }
 }
 
-Future<void> updateData(String documentId) async {
+Future<dynamic> updateData(
+    String docId, Map<String, dynamic> dataUpdate) async {
   try {
     final response = await databases.updateDocument(
         databaseId: '64e7ea9ee9e2a25b8303',
-        collectionId: '[COLLECTION_ID]',
-        documentId: '[DOCUMENT_ID]',
-        data: {'key': 'new_value'});
-    print('Data updated: ${response.data}');
+        collectionId: '64e9f1ed459fee6bacd8',
+        documentId: docId,
+        data: dataUpdate);
+    return response.data;
   } catch (e) {
-    print('Error updating data: $e');
+    return e;
   }
 }
 
-Future<void> deleteData(String documentId) async {
+Future<dynamic> deleteData(String documentId) async {
   try {
     final response = await databases.deleteDocument(
       databaseId: '64e7ea9ee9e2a25b8303',
-      collectionId: '[COLLECTION_ID]',
-      documentId: '[DOCUMENT_ID]',
+      collectionId: '64e9f1ed459fee6bacd8',
+      documentId: documentId,
     );
-    print('Data deleted: ${response.data}');
+    return response.data;
   } catch (e) {
-    print('Error deleting data: $e');
+    return e;
   }
 }

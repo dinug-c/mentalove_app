@@ -8,7 +8,7 @@ class CustomButtonNavigationItem extends StatelessWidget {
   final int index;
   final String imageUrl;
 
-  CustomButtonNavigationItem({
+  const CustomButtonNavigationItem({
     Key? key,
     required this.imageUrl,
     required this.index,
@@ -22,7 +22,6 @@ class CustomButtonNavigationItem extends StatelessWidget {
       },
       child: Container(
           width: MediaQuery.of(context).size.width / 5,
-          height: 50,
           decoration: BoxDecoration(
             color: (context.read<PageCubit>().state == index)
                 ? kPrimaryLightColor
