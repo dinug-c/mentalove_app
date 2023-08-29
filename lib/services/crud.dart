@@ -4,12 +4,12 @@ import 'appwrite_client.dart';
 
 Databases databases = Databases(client);
 
-Future<dynamic> createData(String idDoc, Map<String, dynamic> dataList) async {
+Future<dynamic> createData(Map<String, dynamic> dataList) async {
   try {
     final response = await databases.createDocument(
         databaseId: '64e7ea9ee9e2a25b8303',
         documentId: ID.unique(),
-        collectionId: '64e9f1ed459fee6bacd8',
+        collectionId: '64e9f0e458ec03f09447',
         data: dataList);
     return response;
   } catch (e) {
@@ -21,7 +21,7 @@ Future<dynamic> listDocuments() async {
   try {
     final response = await databases.listDocuments(
       databaseId: '64e7ea9ee9e2a25b8303',
-      collectionId: '64e9f1ed459fee6bacd8',
+      collectionId: '64e9f0e458ec03f09447',
     );
     return response.documents;
   } catch (e) {
@@ -33,7 +33,7 @@ Future<dynamic> readData(String docId) async {
   try {
     final response = await databases.getDocument(
       databaseId: '64e7ea9ee9e2a25b8303',
-      collectionId: '64e9f1ed459fee6bacd8',
+      collectionId: '64e9f0e458ec03f09447',
       documentId: docId,
     );
     return response.data;
@@ -47,7 +47,7 @@ Future<dynamic> updateData(
   try {
     final response = await databases.updateDocument(
         databaseId: '64e7ea9ee9e2a25b8303',
-        collectionId: '64e9f1ed459fee6bacd8',
+        collectionId: '64e9f0e458ec03f09447',
         documentId: docId,
         data: dataUpdate);
     return response.data;
@@ -60,7 +60,7 @@ Future<dynamic> deleteData(String documentId) async {
   try {
     final response = await databases.deleteDocument(
       databaseId: '64e7ea9ee9e2a25b8303',
-      collectionId: '64e9f1ed459fee6bacd8',
+      collectionId: '64e9f0e458ec03f09447',
       documentId: documentId,
     );
     return response.data;

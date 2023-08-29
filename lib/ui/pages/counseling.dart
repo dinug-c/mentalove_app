@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mentalove_app/services/crud.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
+import 'package:mentalove_app/ui/widgets/toast.dart';
 
 class Counseling extends StatefulWidget {
   const Counseling({super.key});
@@ -59,7 +61,14 @@ class _CounselingState extends State<Counseling> {
                             CardKonseling(
                               title: 'Chat',
                               image: const AssetImage('assets/kons-chat.png'),
-                              onTap: () {},
+                              onTap: () {
+                                Map<String, dynamic> datacontoh = {
+                                  "nama": "Contoh",
+                                };
+                                final res = createData(datacontoh);
+                                res.then((value) =>
+                                    showToast(context, value.toString()));
+                              },
                             ),
                             CardKonseling(
                               title: 'Video Call',
