@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
 
 import 'appwrite_client.dart';
 
@@ -18,28 +21,30 @@ Future<dynamic> createData(
   }
 }
 
-Future<dynamic> listDocuments(String collectionID) async {
+Future<List<Document>> listDocuments(String collectionID) async {
   try {
     final response = await databases.listDocuments(
       databaseId: '64e7ea9ee9e2a25b8303',
       collectionId: collectionID,
     );
-    return response.documents;
+    return response.documents; // Mengambil daftar dokumen dari respons
   } catch (e) {
-    return e;
+    print('Error listing documents: $e');
+    return []; // Mengembalikan daftar kosong jika terjadi kesalahan
   }
 }
 
-Future<dynamic> readData(String docId, String collectionID) async {
+Future<Map<String, dynamic>> readData(String docId, String collectionID) async {
   try {
     final response = await databases.getDocument(
       databaseId: '64e7ea9ee9e2a25b8303',
       collectionId: collectionID,
       documentId: docId,
     );
+
     return response.data;
   } catch (e) {
-    return e;
+    return {};
   }
 }
 

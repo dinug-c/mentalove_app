@@ -189,7 +189,7 @@ class PsikologCard extends StatelessWidget {
                         style: blackTextStyle.copyWith(
                             fontSize: 12, fontWeight: extraBold)),
                     Container(
-                      width: 190,
+                      width: MediaQuery.of(context).size.width / 2 - 30,
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/detail');

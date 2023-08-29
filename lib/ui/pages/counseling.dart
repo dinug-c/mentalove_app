@@ -66,7 +66,8 @@ class _CounselingState extends State<Counseling> {
                                 Map<String, dynamic> datacontoh = {
                                   "nama": "Contoh",
                                 };
-                                final res = createData(datacontoh, orderId);
+                                final res =
+                                    createData(datacontoh, counselingId);
                                 res.then((value) =>
                                     showToast(context, value.toString()));
                               },
