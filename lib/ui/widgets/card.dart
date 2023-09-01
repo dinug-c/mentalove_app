@@ -288,8 +288,8 @@ class HistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     dynamic parentWidth = MediaQuery.of(context).size.width;
-    return Expanded(
-      child: Container(
+    return
+      Container(
           width: parentWidth,
           height: 130,
           decoration: BoxDecoration(
@@ -340,7 +340,7 @@ class HistoryCard extends StatelessWidget {
                     ],
                   ),
                 )
-              ])),
+              ]),
     );
   }
 }
