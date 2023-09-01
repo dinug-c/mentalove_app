@@ -446,24 +446,26 @@ class TellUsCard extends StatelessWidget {
                       image: DecorationImage(image: profil, fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(20)),
                 ),
-                Container(
-                    width: 110,
-                    height: 40,
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            name,
-                            style: blackTextStyle.copyWith(
-                                fontSize: 16, fontWeight: extraBold),
-                          ),
-                          Text(
-                            date,
-                            style: greyTextStyle.copyWith(
-                                fontSize: 14, fontWeight: regular),
-                          )
-                        ]))
+                Expanded(
+                  child: Container(
+                      width: 110,
+                      height: 40,
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              name,
+                              style: blackTextStyle.copyWith(
+                                  fontSize: 16, fontWeight: extraBold),
+                            ),
+                            Text(
+                              date,
+                              style: greyTextStyle.copyWith(
+                                  fontSize: 14, fontWeight: regular),
+                            )
+                          ])),
+                )
               ]),
             ),
             gapH8,
