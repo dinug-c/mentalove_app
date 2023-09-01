@@ -63,6 +63,7 @@ class _CounselingState extends State<Counseling> {
                               title: 'Chat',
                               image: const AssetImage('assets/kons-chat.png'),
                               onTap: () {
+                                Navigator.pushNamed(context, '/chat-page');
                                 Map<String, dynamic> datacontoh = {
                                   "nama": "Contoh",
                                 };

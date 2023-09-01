@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentalove_app/ui/pages/chat_page.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/daily_content.dart';
 import 'package:mentalove_app/ui/pages/detail.dart';
@@ -45,6 +46,7 @@ class MainApp extends StatelessWidget {
         '/psikolog-page': (context) => const PsikologPage(),
         '/pembayaran': (context) => const Pembayaran(),
         '/psikiater-page': (context) => const PsikiaterPage(),
+        '/chat-page': (context) => const ChatPage(),
       }),
     );
   }
