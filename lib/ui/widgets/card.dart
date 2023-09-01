@@ -290,8 +290,8 @@ class HistoryCard extends StatelessWidget {
     dynamic parentWidth = MediaQuery.of(context).size.width;
     return Expanded(
       child: Container(
-          width: double.infinity,
-          height: 120,
+          width: parentWidth,
+          height: 130,
           decoration: BoxDecoration(
             color: kPrimaryColor.withOpacity(0.8),
             borderRadius: BorderRadius.circular(10),
