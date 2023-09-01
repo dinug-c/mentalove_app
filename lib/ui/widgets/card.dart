@@ -288,59 +288,53 @@ class HistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     dynamic parentWidth = MediaQuery.of(context).size.width;
-    return
-      Container(
-          width: parentWidth,
-          height: 130,
+    return Container(
+      width: parentWidth,
+      height: 130,
+      decoration: BoxDecoration(
+        color: kPrimaryColor.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        Container(
+          width: 60,
+          height: 60,
           decoration: BoxDecoration(
-            color: kPrimaryColor.withOpacity(0.8),
-            borderRadius: BorderRadius.circular(10),
+            image: DecorationImage(image: faceEmoji, fit: BoxFit.cover),
           ),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: faceEmoji, fit: BoxFit.cover),
-                  ),
-                ),
-                SizedBox(
-                  width: parentWidth * 0.6,
-                  height: 80,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(date,
-                          textAlign: TextAlign.end,
-                          style: whiteTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: light,
-                          )),
-                      SizedBox(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                title,
-                                style: whiteTextStyle.copyWith(
-                                    fontSize: 16, fontWeight: extraBold),
-                              ),
-                              Text(
-                                text,
-                                style: whiteTextStyle.copyWith(
-                                    fontSize: 14, fontWeight: regular),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
-                            ]),
-                      ),
-                    ],
-                  ),
-                )
-              ]),
+        ),
+        Container(
+          width: parentWidth * 0.6,
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(""),
+                  Text(
+                    date,
+                    style: whiteTextStyle.copyWith(
+                        fontSize: 12, fontWeight: light),
+                  )
+                ],
+              ),
+              Text(
+                title,
+                style: whiteTextStyle.copyWith(fontSize: 16, fontWeight: bold),
+              ),
+              Text(
+                text,
+                maxLines: 2,
+                style:
+                    whiteTextStyle.copyWith(fontSize: 14, fontWeight: regular),
+              )
+            ],
+          ),
+        )
+      ]),
     );
   }
 }

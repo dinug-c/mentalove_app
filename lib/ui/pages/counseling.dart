@@ -8,6 +8,8 @@ import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
 import 'package:mentalove_app/ui/widgets/toast.dart';
 
+import '../../controllers/storage_controller.dart';
+
 class Counseling extends StatefulWidget {
   const Counseling({super.key});
 
@@ -114,6 +116,7 @@ class _CounselingState extends State<Counseling> {
                               'Membantumu dalam melakukan penanganan lebih lanjut dan memberikan terapi pengobatan.',
                           image: const AssetImage('assets/icon_psiki.png'),
                           onTap: () {
+                            fetchData();
                             Navigator.pushNamed(context, '/psikiater-page');
                           },
                         )
