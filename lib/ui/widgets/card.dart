@@ -449,7 +449,7 @@ class TellUsCard extends StatelessWidget {
                 Expanded(
                   child: Container(
                       width: 110,
-                      height: 40,
+                      height: 50,
                       margin: EdgeInsets.symmetric(horizontal: 10),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
