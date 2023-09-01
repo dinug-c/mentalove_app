@@ -234,6 +234,7 @@ class _DetailState extends State<Detail> {
                               gapH(8),
                               Wrap(
                                 spacing: 8,
+                                runSpacing: 10,
                                 children: List.generate(6, (index) {
                                   return InkWell(
                                     onTap: () {
