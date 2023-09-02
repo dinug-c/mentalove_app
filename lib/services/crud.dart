@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 
@@ -27,10 +25,9 @@ Future<List<Document>> listDocuments(String collectionID) async {
       databaseId: '64e7ea9ee9e2a25b8303',
       collectionId: collectionID,
     );
-    return response.documents; // Mengambil daftar dokumen dari respons
+    return response.documents;
   } catch (e) {
-    print('Error listing documents: $e');
-    return []; // Mengembalikan daftar kosong jika terjadi kesalahan
+    return [];
   }
 }
 
