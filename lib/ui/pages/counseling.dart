@@ -7,6 +7,7 @@ import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
 import 'package:mentalove_app/ui/widgets/toast.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Counseling extends StatefulWidget {
   const Counseling({super.key});
@@ -67,15 +68,11 @@ class _CounselingState extends State<Counseling> {
                             CardKonseling(
                               title: 'Chat',
                               image: const AssetImage('assets/kons-chat.png'),
-                              onTap: () {
-                                Navigator.pushNamed(context, '/chat-page');
-                                Map<String, dynamic> datacontoh = {
-                                  "nama": "Contoh",
-                                };
-                                final res =
-                                    createData(datacontoh, counselingId);
-                                res.then((value) =>
-                                    showToast(context, value.toString()));
+                              onTap: () async {
+                                // Navigator.pushNamed(context, '/chat-page');
+                                await Supabase.instance.client
+                                    .from('test')
+                                    .insert({'body': 'test'});
                               },
                             ),
                             CardKonseling(

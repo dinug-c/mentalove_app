@@ -83,9 +83,9 @@ class _LoginPage extends State<LoginPage> {
                               startColor: kPrimaryColor,
                               endColor: kPrimary2Color,
                               onPressed: () {
-                                login(emailController, passwordController,
-                                    context);
-                                // Navigator.pushNamed(context, '/main-page');
+                                // login(emailController, passwordController,
+                                //     context);
+                                Navigator.pushNamed(context, '/main-page');
                               })
                         ],
                       ),

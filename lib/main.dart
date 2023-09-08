@@ -16,8 +16,17 @@ import 'package:mentalove_app/ui/pages/pembayaran.dart';
 
 import 'cubit/page_cubit.dart';
 import 'ui/pages/splash_screen.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://bggdwohgbcrkzkwnmsoa.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJnZ2R3b2hnYmNya3prd25tc29hIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTM4MzM3MjAsImV4cCI6MjAwOTQwOTcyMH0.VHxvpnB9WhYIvvZTCoivBdCXt1t9LXsj3XLVvfIoyOA',
+  );
+
   runApp(const MainApp());
 }
 

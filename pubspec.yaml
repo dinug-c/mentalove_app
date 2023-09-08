@@ -19,7 +19,8 @@ dependencies:
   appwrite: ^9.0.1
   get: ^4.6.1
   get_storage: ^2.0.3
-
+  supabase_flutter: ^1.10.16
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
