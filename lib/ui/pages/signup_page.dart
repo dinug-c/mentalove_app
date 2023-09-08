@@ -6,6 +6,9 @@ import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/textfield.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../main.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -15,9 +18,9 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPage extends State<SignupPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController passwordConfirmationController =
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _passwordConfirmationController =
       TextEditingController();
 
   @override
@@ -57,7 +60,7 @@ class _SignupPage extends State<SignupPage> {
                     //TextField Email
                     NewForm(
                         nama: "Email",
-                        controller: emailController,
+                        controller: _emailController,
                         hintText: "Masukkan Email",
                         obscureText: false,
                         horizontalPadding: 25),
@@ -66,7 +69,7 @@ class _SignupPage extends State<SignupPage> {
                     //TextField Password,
                     NewForm(
                         nama: "Password",
-                        controller: passwordController,
+                        controller: _passwordController,
                         hintText: "Masukkan Password",
                         obscureText: true,
                         horizontalPadding: 25),
@@ -74,7 +77,7 @@ class _SignupPage extends State<SignupPage> {
 
                     NewForm(
                         nama: "Konfirmasi Password",
-                        controller: passwordConfirmationController,
+                        controller: _passwordConfirmationController,
                         hintText: "Masukkan Konfirmasi Password",
                         obscureText: true,
                         horizontalPadding: 25),
@@ -91,9 +94,41 @@ class _SignupPage extends State<SignupPage> {
                               textColor: kWhiteColor,
                               startColor: kPrimaryColor,
                               endColor: kPrimary2Color,
-                              onPressed: () {
-                                register(emailController, passwordController,
-                                    context);
+                              onPressed: () async {
+                                if (_passwordController.text.trim() !=
+                                    _passwordConfirmationController.text
+                                        .trim()) {
+                                  // Tampilkan pesan kesalahan jika password dan konfirmasi password tidak cocok.
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Password dan Konfirmasi Password harus cocok')),
+                                  );
+                                  return;
+                                }
+
+                                try {
+                                  final AuthResponse res =
+                                      await supabase.auth.signUp(
+                                    email: _emailController.text.trim(),
+                                    password: _passwordController.text.trim(),
+                                  );
+
+                                  // Lanjutkan dengan tindakan setelah pendaftaran berhasil.
+                                  if (res.user != null) {
+                                    Navigator.pushReplacementNamed(
+                                        context, 'main-page');
+                                  }
+                                } on AuthException catch (error) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(error.message)),
+                                  );
+                                } catch (error) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Error, please retry')),
+                                  );
+                                }
                               })
                         ],
                       ),

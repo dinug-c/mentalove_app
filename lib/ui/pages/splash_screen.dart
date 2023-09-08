@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,10 +22,25 @@ class _SplashScreenState extends State<SplashScreen> {
       //   context.read<AuthCubit>().getCurrentUser(user.uid);
       //   Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
       // }
-      Navigator.pushNamedAndRemoveUntil(
-          context, '/landing-page', (route) => false);
+      // Navigator.pushNamedAndRemoveUntil(
+      //     context, '/landing-page', (route) => false);
     });
     super.initState();
+    _redirect();
+  }
+
+  Future<void> _redirect() async {
+    await Future.delayed(Duration.zero);
+
+    if (!mounted) return;
+
+    final session = supabase.auth.currentSession;
+
+    if (session != null) {
+      Navigator.of(context).pushReplacementNamed('/main-page');
+    } else {
+      Navigator.of(context).pushReplacementNamed('/login-page');
+    }
   }
 
   @override

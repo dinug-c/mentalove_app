@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/services/collection.dart';
 import 'package:mentalove_app/services/crud.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
@@ -70,7 +71,7 @@ class _CounselingState extends State<Counseling> {
                               image: const AssetImage('assets/kons-chat.png'),
                               onTap: () async {
                                 // Navigator.pushNamed(context, '/chat-page');
-                                await Supabase.instance.client
+                                await supabase
                                     .from('test')
                                     .insert({'body': 'test'});
                               },
@@ -79,7 +80,11 @@ class _CounselingState extends State<Counseling> {
                               title: 'Video Call',
                               image:
                                   const AssetImage('assets/kons-vidcall.png'),
-                              onTap: () {},
+                              onTap: () async {
+                                await supabase.auth.signOut();
+                                Navigator.pushReplacementNamed(
+                                    context, '/login-page');
+                              },
                             ),
                             CardKonseling(
                               title: 'Tatap Muka',

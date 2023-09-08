@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,7 +7,9 @@ import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/textfield.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../main.dart';
 import '../../services/auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,8 +20,30 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  bool _isLoading = false;
+  bool _redirecting = false;
+  late final StreamSubscription<AuthState> _authStateSubscription;
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  // TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) {
+      final session = data.session;
+      if (session != null) {
+        Navigator.of(context).pushReplacementNamed('/main-page');
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +83,7 @@ class _LoginPage extends State<LoginPage> {
                     NewForm(
                         nama: "Email",
                         hintText: "Masukkan Email",
-                        controller: emailController,
+                        controller: _emailController,
                         obscureText: false,
                         horizontalPadding: 25),
                     gapH8,
@@ -66,7 +92,7 @@ class _LoginPage extends State<LoginPage> {
                     NewForm(
                         nama: "Password",
                         hintText: "Masukkan Password",
-                        controller: passwordController,
+                        controller: _passwordController,
                         obscureText: true,
                         horizontalPadding: 25),
                     gapH8,
@@ -82,10 +108,30 @@ class _LoginPage extends State<LoginPage> {
                               textColor: kWhiteColor,
                               startColor: kPrimaryColor,
                               endColor: kPrimary2Color,
-                              onPressed: () {
+                              onPressed: () async {
+                                try {
+                                  AuthResponse res = await supabase.auth
+                                      .signInWithPassword(
+                                          email: _emailController.text.trim(),
+                                          password:
+                                              _passwordController.text.trim());
+                                  if (res.user != null) {
+                                    Navigator.pushReplacementNamed(
+                                        context, 'main-page');
+                                  }
+                                } on AuthException catch (error) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text(error.message)));
+                                } catch (error) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content:
+                                              Text('Error, please retry')));
+                                }
+
                                 // login(emailController, passwordController,
                                 //     context);
-                                Navigator.pushNamed(context, '/main-page');
+                                // Navigator.pushNamed(context, '/main-page');
                               })
                         ],
                       ),
