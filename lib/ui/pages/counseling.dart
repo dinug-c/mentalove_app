@@ -40,8 +40,8 @@ class _CounselingState extends State<Counseling> {
             title: 'Counseling',
             startColor: kPrimaryColor,
             endColor: kPrimary2Color,
-            leftAction: () {},
-            leftIcon: Icons.menu,
+            // leftAction: () {},
+            // leftIcon: Icons.menu,
           ),
           SliverList(
             delegate: SliverChildListDelegate(

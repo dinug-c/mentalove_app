@@ -137,6 +137,7 @@ class PsikologCard extends StatelessWidget {
   final String price;
   final String workPeriod;
   final String rating;
+  final Function() onTap;
 
   const PsikologCard(
       {super.key,
@@ -146,7 +147,8 @@ class PsikologCard extends StatelessWidget {
       required this.expertise,
       required this.price,
       required this.workPeriod,
-      required this.rating});
+      required this.rating,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -169,6 +171,7 @@ class PsikologCard extends StatelessWidget {
               name,
               style:
                   blackTextStyle.copyWith(fontSize: 15, fontWeight: extraBold),
+              overflow: TextOverflow.ellipsis,
             ),
             Text(
               position,
@@ -192,7 +195,8 @@ class PsikologCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width / 2 - 30,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/detail');
+                          onTap();
+                          // Navigator.pushNamed(context, '/detail');
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: kPurpleColor,

@@ -51,7 +51,9 @@ class MainApp extends StatelessWidget {
         '/counseling': (context) => const Counseling(),
         '/login-page': (context) => const LoginPage(),
         '/signup-page': (context) => const SignupPage(),
-        '/detail': (context) => const Detail(),
+        '/detail': (context) => const Detail(
+              psikiaterData: {},
+            ),
         '/history': (context) => const HistoryPage(),
         '/daily': (context) => const DailyContentPage(),
         '/tellus': (context) => const TellUsPage(),

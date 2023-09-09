@@ -10,7 +10,6 @@ import 'package:mentalove_app/ui/widgets/textfield.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../main.dart';
-import '../../services/auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,8 +19,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
-  bool _isLoading = false;
-  bool _redirecting = false;
+  // bool _isLoading = false;
+  // bool _redirecting = false;
   late final StreamSubscription<AuthState> _authStateSubscription;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();

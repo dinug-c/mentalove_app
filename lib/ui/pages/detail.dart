@@ -6,7 +6,8 @@ import 'package:mentalove_app/ui/widgets/card.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 
 class Detail extends StatefulWidget {
-  const Detail({super.key});
+  final Map<String, dynamic> psikiaterData;
+  const Detail({super.key, required this.psikiaterData});
 
   @override
   State<Detail> createState() => _DetailState();
@@ -29,6 +30,13 @@ class _DetailState extends State<Detail> {
 
   @override
   Widget build(BuildContext context) {
+    final psikiaterData = widget.psikiaterData;
+    final psikiaterName = psikiaterData['name'];
+
+    int tahun = psikiaterData['year']; // Tahun yang disimpan dalam variabel
+    int tahunSaatIni = DateTime.now().year;
+    int displayTahun = tahunSaatIni - tahun;
+
     return Scaffold(
       backgroundColor: kWhiteColor,
       body: CustomScrollView(
@@ -60,11 +68,11 @@ class _DetailState extends State<Detail> {
                           children: [
                             //Nama Psikolog
                             Text(
-                              'Aris Prabowo Wijayanto',
+                              psikiaterData['name'],
                               style: blackTextStyle.copyWith(
                                   fontSize: 20, fontWeight: extraBold),
                             ),
-                            Text('Psikologi Klinis',
+                            Text(psikiaterData['title'],
                                 style: blackTextStyle.copyWith(fontSize: 16)),
                             gapH12,
 
@@ -80,7 +88,7 @@ class _DetailState extends State<Detail> {
                                     ),
                                     gapW(4),
                                     Text(
-                                      '97%',
+                                      psikiaterData['rating'].toString(),
                                       style: purpleTextStyle.copyWith(
                                           fontSize: 16, fontWeight: bold),
                                     )
@@ -97,7 +105,7 @@ class _DetailState extends State<Detail> {
                                     ),
                                     gapW(4),
                                     Text(
-                                      '10 tahun',
+                                      '$displayTahun tahun',
                                       style: purpleTextStyle.copyWith(
                                           fontSize: 16, fontWeight: bold),
                                     )
@@ -114,13 +122,13 @@ class _DetailState extends State<Detail> {
                                   fontWeight: extraBold, fontSize: 14),
                             ),
                             gapH4,
-                            const Wrap(
+                            Wrap(
                               spacing: 20,
-                              children: [
-                                CategoryCard(text: 'Depresi'),
-                                CategoryCard(text: 'Trauma'),
-                                CategoryCard(text: 'Pekerjaan')
-                              ],
+                              children: List.generate(
+                                psikiaterData['tags'].length,
+                                (index) => CategoryCard(
+                                    text: psikiaterData['tags'][index]),
+                              ),
                             ),
                             gapH32,
 

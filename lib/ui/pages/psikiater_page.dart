@@ -1,11 +1,15 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../model/terapis_model.dart';
-import '../../services/crud.dart';
+import 'detail.dart';
 
 class PsikiaterPage extends StatefulWidget {
   const PsikiaterPage({super.key});
@@ -15,38 +19,28 @@ class PsikiaterPage extends StatefulWidget {
 }
 
 class _PsikiaterPageState extends State<PsikiaterPage> {
-  Terapis terapis = Terapis(
-    id: "a",
-    email: "",
-    harga: 0,
-    keahlian: [],
-    nama: "",
-    lamaPengalaman: "",
-    password: "",
-    rating: 0,
-  );
+  List? psikiaterList;
 
-  Future fetchData() async {
-    Map<String, dynamic> data =
-        await readData('64eddfc1b89ed14ca51f', '64eddca5a7aca6abc1f9');
-    setState(() {
-      terapis = Terapis(
-        id: "a",
-        email: data['email'],
-        harga: data['harga'],
-        keahlian: data['keahlian'],
-        nama: data['nama'],
-        lamaPengalaman: data['lama_pengalaman'],
-        password: data['password'],
-        rating: data['rating'],
-      );
-    });
-  }
+  final _future = Supabase.instance.client
+      .from('psikiater')
+      .select<List<Map<String, dynamic>>>();
 
   @override
   void initState() {
-    fetchData();
     super.initState();
+    readData();
+  }
+
+  Future<void> readData() async {
+    var response = await supabase
+        .from('psikiater')
+        .select()
+        .order('id', ascending: true)
+        .execute();
+
+    setState(() {
+      psikiaterList = response.data.toList();
+    });
   }
 
   @override
@@ -74,32 +68,57 @@ class _PsikiaterPageState extends State<PsikiaterPage> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                PsikologCard(
-                    image: AssetImage('assets/detail_pfp.png'),
-                    name: terapis.nama,
-                    position: 'Psikologi Klinis',
-                    expertise: 'Depresi, Trauma, Pekerjaan',
-                    price: 'Rp 40.000 - Rp 45.000',
-                    workPeriod: '2 tahun',
-                    rating: '97%'),
-                PsikologCard(
-                  image: AssetImage('assets/detail_pfp.png'),
-                  name: 'Aris Prabowo Wijayanto',
-                  position: 'Psikologi Klinis',
-                  expertise: 'Depresi, Trauma, Pekerjaan',
-                  price: 'Rp 40.000 - Rp 45.000',
-                  workPeriod: '2 tahun',
-                  rating: '97%',
+                FutureBuilder<List<Map<String, dynamic>>>(
+                  future: _future,
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    final psikiaters = snapshot.data!;
+                    return MediaQuery.removePadding(
+                      context: context,
+                      removeTop: true,
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: psikiaters.length,
+                        itemBuilder: ((context, index) {
+                          final psikiater = psikiaters[index];
+                          int harga = psikiater['harga'];
+                          String hargaRp = NumberFormat.currency(
+                            locale: 'id',
+                            symbol: 'Rp. ',
+                            decimalDigits: 0,
+                          ).format(harga);
+
+                          int tahun = psikiater[
+                              'year']; // Tahun yang disimpan dalam variabel
+                          int tahunSaatIni = DateTime.now().year;
+                          int displayTahun = tahunSaatIni - tahun;
+                          String tagsString = psikiater['tags'].join(', ');
+                          return PsikologCard(
+                            image: const AssetImage('assets/detail_pfp.png'),
+                            name: psikiater['name'],
+                            position: psikiater['title'],
+                            expertise: tagsString,
+                            price: hargaRp,
+                            workPeriod: '$displayTahun tahun',
+                            rating: psikiater['rating'].toString(),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      Detail(psikiaterData: psikiater),
+                                ),
+                              );
+                            },
+                          );
+                        }),
+                      ),
+                    );
+                  },
                 ),
-                const PsikologCard(
-                  image: AssetImage('assets/detail_pfp.png'),
-                  name: 'Aris Prabowo Wijayanto',
-                  position: 'Psikologi Klinis',
-                  expertise: 'Depresi, Trauma, Pekerjaan',
-                  price: 'Rp 40.000 - Rp 45.000',
-                  workPeriod: '2 tahun',
-                  rating: '97%',
-                )
               ],
             ),
           ),

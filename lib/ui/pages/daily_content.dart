@@ -21,7 +21,7 @@ class _DailyContentPageState extends State<DailyContentPage> {
           title: 'Daily Content',
           startColor: kPrimaryColor,
           endColor: kPrimary2Color,
-          leftIcon: Icons.menu,
+          // leftIcon: Icons.menu,
           rightIcon: Icons.search,
         ),
         SliverList(
