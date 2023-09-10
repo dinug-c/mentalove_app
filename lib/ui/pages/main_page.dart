@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentalove_app/ui/pages/chat_page.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/daily_content.dart';
 import 'package:mentalove_app/ui/pages/history.dart';
@@ -21,7 +22,7 @@ class MainPage extends StatelessWidget {
         case 1:
           return Counseling();
         case 2:
-          return TellUsPage();
+          return ChatPage();
         case 3:
           return DailyContentPage();
         case 4:

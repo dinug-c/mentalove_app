@@ -5,7 +5,6 @@ import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'detail.dart';
 
@@ -17,29 +16,26 @@ class PsikiaterPage extends StatefulWidget {
 }
 
 class _PsikiaterPageState extends State<PsikiaterPage> {
-  List? psikiaterList;
+  final _future =
+      supabase.from('psikiater').select<List<Map<String, dynamic>>>();
 
-  final _future = Supabase.instance.client
-      .from('psikiater')
-      .select<List<Map<String, dynamic>>>();
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   readData();
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-    readData();
-  }
+  // Future<void> readData() async {
+  //   var response = await supabase
+  //       .from('psikiater')
+  //       .select()
+  //       .order('id', ascending: true)
+  //       .execute();
 
-  Future<void> readData() async {
-    var response = await supabase
-        .from('psikiater')
-        .select()
-        .order('id', ascending: true)
-        .execute();
-
-    setState(() {
-      psikiaterList = response.data.toList();
-    });
-  }
+  //   setState(() {
+  //     psikiaterList = response.data.toList();
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +65,14 @@ class _PsikiaterPageState extends State<PsikiaterPage> {
                 FutureBuilder<List<Map<String, dynamic>>>(
                   future: _future,
                   builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return Center(child: Text('Tidak ada yang tersedia'));
                     }
+
                     final psikiaters = snapshot.data!;
                     return MediaQuery.removePadding(
                       context: context,
@@ -95,7 +96,7 @@ class _PsikiaterPageState extends State<PsikiaterPage> {
                           int displayTahun = tahunSaatIni - tahun;
                           String tagsString = psikiater['tags'].join(', ');
                           return PsikologCard(
-                            image: const AssetImage('assets/detail_pfp.png'),
+                            image: const AssetImage('assets/default_pfp.png'),
                             name: psikiater['name'],
                             position: psikiater['title'],
                             expertise: tagsString,
@@ -107,7 +108,7 @@ class _PsikiaterPageState extends State<PsikiaterPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      Detail(psikiaterData: psikiater),
+                                      Detail(terapisData: psikiater),
                                 ),
                               );
                             },
