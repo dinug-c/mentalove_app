@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -13,8 +14,15 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class Pembayaran extends StatefulWidget {
   final Map<String, dynamic> terapisData;
   final bool mode;
+  final int selectedTanggal;
+  final int selectedJam;
 
-  const Pembayaran({super.key, required this.terapisData, required this.mode});
+  const Pembayaran(
+      {super.key,
+      required this.terapisData,
+      required this.mode,
+      required this.selectedTanggal,
+      required this.selectedJam});
 
   @override
   State<Pembayaran> createState() => _PembayaranState();
@@ -25,6 +33,13 @@ class _PembayaranState extends State<Pembayaran> {
   Widget build(BuildContext context) {
     final terapisData = widget.terapisData;
     final mode = widget.mode;
+    final selectedJam = widget.selectedJam;
+    final selectedHari = widget.selectedTanggal;
+
+    Map<String, dynamic> waktuData = terapisData['waktu'];
+    String hari = waktuData.keys.elementAt(selectedHari);
+    dynamic jamList = waktuData[hari];
+    String jam = jamList[selectedJam];
 
     int harga = terapisData['harga'];
     String hargaStr = NumberFormat.currency(
@@ -123,17 +138,21 @@ class _PembayaranState extends State<Pembayaran> {
                                     fit: BoxFit.cover)),
                           ),
                           gapW12,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                terapisData['name'],
-                                style: blackTextStyle.copyWith(
-                                    fontSize: 18, fontWeight: extraBold),
-                              ),
-                              Text(terapisData['title'],
-                                  style: blackTextStyle.copyWith(fontSize: 14)),
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AutoSizeText(
+                                  terapisData['name'],
+                                  style: blackTextStyle.copyWith(
+                                      fontSize: 18, fontWeight: extraBold),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(terapisData['title'],
+                                    style:
+                                        blackTextStyle.copyWith(fontSize: 14)),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -189,7 +208,7 @@ class _PembayaranState extends State<Pembayaran> {
                                     ),
                                     gapW12,
                                     Text(
-                                      '03 Juli 2023',
+                                      '$hari, Jam $jam',
                                       style: purpleTextStyle.copyWith(
                                           fontWeight: bold),
                                     ),
@@ -309,7 +328,7 @@ class _PembayaranState extends State<Pembayaran> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Rp40.000',
+                  Text(hargaRp,
                       style: blackTextStyle.copyWith(fontWeight: extraBold))
                 ],
               ),

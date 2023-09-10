@@ -5,6 +5,7 @@ import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
+import 'package:mentalove_app/ui/widgets/toast.dart';
 
 class Detail extends StatefulWidget {
   final Map<String, dynamic> terapisData;
@@ -36,6 +37,8 @@ class _DetailState extends State<Detail> {
     int tahun = terapisData['year']; // Tahun yang disimpan dalam variabel
     int tahunSaatIni = DateTime.now().year;
     int displayTahun = tahunSaatIni - tahun;
+
+    Map<String, dynamic> waktuData = terapisData['waktu'];
 
     return Scaffold(
       backgroundColor: kWhiteColor,
@@ -184,17 +187,19 @@ class _DetailState extends State<Detail> {
                                 Expanded(
                                   child: OutlinedButton(
                                       onPressed: () {
-                                        setState(() {
-                                          mode = true;
-                                        });
+                                        showToast(context,
+                                            'Videocall belum tersedia');
+                                        // setState(() {
+                                        //   mode = true;
+                                        // });
                                       },
                                       style: OutlinedButton.styleFrom(
                                           side: BorderSide(
                                               width: 1.0, color: kPurpleColor),
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 13.0),
-                                          backgroundColor:
-                                              mode ? kPurpleColor : kWhiteColor,
+                                          backgroundColor: Colors.grey,
+                                          // mode ? kPurpleColor : kWhiteColor,
                                           shape: const RoundedRectangleBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10))),
@@ -204,15 +209,19 @@ class _DetailState extends State<Detail> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Icon(Icons.person_pin_rounded,
-                                              color: mode
-                                                  ? kWhiteColor
-                                                  : kPurpleColor),
+                                              color: kWhiteColor
+                                              // mode
+                                              //     ? kWhiteColor
+                                              //     : kPurpleColor
+                                              ),
                                           gapW12,
                                           Text('Video Call',
                                               style: blackTextStyle.copyWith(
-                                                  color: mode
-                                                      ? kWhiteColor
-                                                      : kPurpleColor,
+                                                  color: kWhiteColor
+                                                  // mode
+                                                  //     ? kWhiteColor
+                                                  //     : kPurpleColor
+                                                  ,
                                                   fontWeight: bold)),
                                         ],
                                       )),
@@ -240,65 +249,100 @@ class _DetailState extends State<Detail> {
                                   style: blackTextStyle.copyWith(
                                       fontWeight: extraBold, fontSize: 14)),
                               gapH(8),
-                              Wrap(
-                                spacing: 8,
-                                runSpacing: 10,
-                                children: List.generate(6, (index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        selectedTanggal = index;
-                                      });
+                              MediaQuery.removePadding(
+                                context: context,
+                                removeTop: true,
+                                child: SizedBox(
+                                  height: 65,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: waktuData.keys.length,
+                                    itemBuilder: (context, index) {
+                                      final hari =
+                                          waktuData.keys.elementAt(index);
+                                      return Padding(
+                                        padding: index == 0
+                                            ? const EdgeInsets.only(
+                                                left: 0.0, right: 3.5)
+                                            : const EdgeInsets.symmetric(
+                                                horizontal: 3.5),
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              selectedTanggal = index;
+                                            });
+                                          },
+                                          child: SelectionButton(
+                                            isIcon: false,
+                                            text: hari,
+                                            color: selectedTanggal == index
+                                                ? kWhiteColor
+                                                : kPurpleColor,
+                                            bgColor: selectedTanggal == index
+                                                ? kPurpleColor
+                                                : kWhiteColor,
+                                            onPressed: () {
+                                              setState(() {
+                                                selectedTanggal = index;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      );
                                     },
-                                    child: SelectionButton(
-                                      isIcon: index == 5 ? true : false,
-                                      text: tanggal[index],
-                                      color: selectedTanggal == index
-                                          ? kWhiteColor
-                                          : kPurpleColor,
-                                      bgColor: selectedTanggal == index
-                                          ? kPurpleColor
-                                          : kWhiteColor,
-                                      onPressed: () {
-                                        setState(() {
-                                          selectedTanggal = index;
-                                        });
-                                      },
-                                    ),
-                                  );
-                                }),
+                                  ),
+                                ),
                               ),
                               gapH12,
                               Text('Pilih Waktu',
                                   style: blackTextStyle.copyWith(
                                       fontWeight: extraBold, fontSize: 14)),
                               gapH(8),
-                              Wrap(
-                                spacing: 8,
-                                children: List.generate(5, (index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        selectedJam = index;
-                                      });
+                              MediaQuery.removePadding(
+                                context: context,
+                                removeTop: true,
+                                child: SizedBox(
+                                  height: 65,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: waktuData.keys.length,
+                                    itemBuilder: (context, index) {
+                                      final hari = waktuData.keys
+                                          .elementAt(selectedTanggal);
+                                      final jamList = waktuData[hari];
+                                      return Padding(
+                                        padding: index == 0
+                                            ? const EdgeInsets.only(
+                                                left: 0.0, right: 3.5)
+                                            : const EdgeInsets.symmetric(
+                                                horizontal: 3.5),
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              selectedJam = index;
+                                            });
+                                          },
+                                          child: SelectionButton(
+                                            isIcon: false,
+                                            text: jamList[index],
+                                            color: selectedJam == index
+                                                ? kWhiteColor
+                                                : kPurpleColor,
+                                            bgColor: selectedJam == index
+                                                ? kPurpleColor
+                                                : kWhiteColor,
+                                            onPressed: () {
+                                              setState(() {
+                                                selectedJam = index;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      );
                                     },
-                                    child: SelectionButton(
-                                      isIcon: false,
-                                      text: jam[index],
-                                      color: selectedJam == index
-                                          ? kWhiteColor
-                                          : kPurpleColor,
-                                      bgColor: selectedJam == index
-                                          ? kPurpleColor
-                                          : kWhiteColor,
-                                      onPressed: () {
-                                        setState(() {
-                                          selectedJam = index;
-                                        });
-                                      },
-                                    ),
-                                  );
-                                }),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -339,6 +383,8 @@ class _DetailState extends State<Detail> {
                                 builder: (context) => Pembayaran(
                                   terapisData: terapisData,
                                   mode: mode,
+                                  selectedTanggal: selectedTanggal,
+                                  selectedJam: selectedJam,
                                 ),
                               ),
                             );

@@ -161,91 +161,120 @@ class PsikologCard extends StatelessWidget {
             width: 100,
             height: 150,
             decoration: BoxDecoration(
-                color: kPrimary2Color,
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                image: DecorationImage(image: image, fit: BoxFit.cover)),
+              color: kPrimary2Color,
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              image: DecorationImage(image: image, fit: BoxFit.cover),
+            ),
           ),
           gapW12,
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              name,
-              style:
-                  blackTextStyle.copyWith(fontSize: 15, fontWeight: extraBold),
-              overflow: TextOverflow.ellipsis,
-            ),
-            Text(
-              position,
-              style:
-                  blackTextStyle.copyWith(fontSize: 12, fontWeight: extraBold),
-            ),
-            Text(
-              expertise,
-              style: blackTextStyle.copyWith(fontSize: 12),
-            ),
-            gapH24,
-            Row(
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Text(
+                  name,
+                  maxLines: 2,
+                  style: blackTextStyle.copyWith(
+                    fontSize: 15,
+                    fontWeight: extraBold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  position,
+                  style: blackTextStyle.copyWith(
+                    fontSize: 12,
+                    fontWeight: extraBold,
+                  ),
+                ),
+                Text(
+                  expertise,
+                  style: blackTextStyle.copyWith(fontSize: 12),
+                ),
+                gapH24,
+                Row(
                   children: [
-                    Text(price,
-                        style: blackTextStyle.copyWith(
-                            fontSize: 12, fontWeight: extraBold)),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2 - 30,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          onTap();
-                          // Navigator.pushNamed(context, '/detail');
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: kPurpleColor,
-                            elevation: 0.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0))),
-                        child: Text('Jadwalkan',
-                            style: whiteTextStyle.copyWith(
-                                fontSize: 12, fontWeight: extraBold)),
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          price,
+                          style: blackTextStyle.copyWith(
+                            fontSize: 12,
+                            fontWeight: extraBold,
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width / 2 - 30,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              onTap();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: kPurpleColor,
+                              elevation: 0.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                            ),
+                            child: Text(
+                              'Jadwalkan',
+                              style: whiteTextStyle.copyWith(
+                                fontSize: 12,
+                                fontWeight: extraBold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    gapW8,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          workPeriod,
+                          style: blackTextStyle.copyWith(
+                            fontSize: 12,
+                            fontWeight: extraBold,
+                          ),
+                        ),
+                        gapH4,
+                        Container(
+                          width: 60,
+                          height: 35,
+                          decoration: BoxDecoration(
+                            color: kPrimaryLightColor,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.thumb_up,
+                                size: 15,
+                                color: kPurpleColor,
+                              ),
+                              gapW(2),
+                              Text(
+                                rating,
+                                style: purpleTextStyle.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: extraBold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                gapW8,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(workPeriod,
-                        style: blackTextStyle.copyWith(
-                            fontSize: 12, fontWeight: extraBold)),
-                    gapH4,
-                    Container(
-                      width: 60,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        color: kPrimaryLightColor,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.thumb_up,
-                            size: 15,
-                            color: kPurpleColor,
-                          ),
-                          gapW(2),
-                          Text(rating,
-                              style: purpleTextStyle.copyWith(
-                                  fontSize: 12, fontWeight: extraBold)),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
               ],
-            )
-          ]),
+            ),
+          ),
         ],
       ),
     );

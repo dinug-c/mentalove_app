@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mentalove_app/main.dart';
+import 'package:mentalove_app/ui/pages/chat_psikolog_page.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
@@ -77,7 +77,17 @@ class _CounselingState extends State<Counseling> {
                           onTap: () {
                             Navigator.pushNamed(context, '/psikiater-page');
                           },
-                        )
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChatPsikologPage(
+                                        psikologId: "", duration: 3600)));
+                          },
+                          icon: const Icon(Icons.chat),
+                        ),
                       ]),
                 )
               ],

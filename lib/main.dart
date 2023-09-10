@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mentalove_app/ui/pages/chat_page.dart';
-import 'package:mentalove_app/ui/pages/chat_psikolog_page.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/daily_content.dart';
 import 'package:mentalove_app/ui/pages/detail.dart';
@@ -10,16 +9,16 @@ import 'package:mentalove_app/ui/pages/history.dart';
 import 'package:mentalove_app/ui/pages/landing_page.dart';
 import 'package:mentalove_app/ui/pages/login_page.dart';
 import 'package:mentalove_app/ui/pages/main_page.dart';
+import 'package:mentalove_app/ui/pages/pembayaran.dart';
 import 'package:mentalove_app/ui/pages/psikiater_page.dart';
 import 'package:mentalove_app/ui/pages/psikolog_page.dart';
 import 'package:mentalove_app/ui/pages/signup_page.dart';
 import 'package:mentalove_app/ui/pages/tell_us.dart';
-import 'package:mentalove_app/ui/pages/pembayaran.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:midtrans_sdk/midtrans_sdk.dart';
 
 import 'cubit/page_cubit.dart';
 import 'ui/pages/splash_screen.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -107,11 +106,14 @@ class MainApp extends StatelessWidget {
         '/daily': (context) => const DailyContentPage(),
         '/tellus': (context) => const TellUsPage(),
         '/psikolog-page': (context) => const PsikologPage(),
-        '/pembayaran': (context) =>
-            const Pembayaran(terapisData: {}, mode: true),
+        '/pembayaran': (context) => const Pembayaran(
+              terapisData: {},
+              mode: true,
+              selectedJam: 0,
+              selectedTanggal: 0,
+            ),
         '/psikiater-page': (context) => const PsikiaterPage(),
         '/chat-page': (context) => const ChatPage(),
-        '/chat-psikologi': (context) => const ChatPsikologPage(),
       }),
     );
   }

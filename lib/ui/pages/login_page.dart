@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mentalove_app/services/auth.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
@@ -19,13 +20,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
-  // bool _isLoading = false;
-  // bool _redirecting = false;
+  // ignore: unused_field
   late final StreamSubscription<AuthState> _authStateSubscription;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-
-  // TextEditingController passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -107,30 +105,9 @@ class _LoginPage extends State<LoginPage> {
                               textColor: kWhiteColor,
                               startColor: kPrimaryColor,
                               endColor: kPrimary2Color,
-                              onPressed: () async {
-                                try {
-                                  AuthResponse res = await supabase.auth
-                                      .signInWithPassword(
-                                          email: _emailController.text.trim(),
-                                          password:
-                                              _passwordController.text.trim());
-                                  if (res.user != null) {
-                                    Navigator.pushReplacementNamed(
-                                        context, 'main-page');
-                                  }
-                                } on AuthException catch (error) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(error.message)));
-                                } catch (error) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content:
-                                              Text('Error, please retry')));
-                                }
-
-                                // login(emailController, passwordController,
-                                //     context);
-                                // Navigator.pushNamed(context, '/main-page');
+                              onPressed: () {
+                                authLogin(context, _emailController.text.trim(),
+                                    _passwordController.text.trim());
                               })
                         ],
                       ),

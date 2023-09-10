@@ -5,6 +5,7 @@ import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/ui/pages/detail.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
+import 'package:mentalove_app/ui/widgets/card.dart';
 
 import '../widgets/card.dart';
 
@@ -95,33 +96,6 @@ class _PsikologPageState extends State<PsikologPage> {
                     );
                   },
                 ),
-                // const PsikologCard(
-                //   image: AssetImage('assets/detail_pfp.png'),
-                //   name: 'Aris Prabowo Wijayanto',
-                //   position: 'Psikologi Klinis',
-                //   expertise: 'Depresi, Trauma, Pekerjaan',
-                //   price: 'Rp 40.000 - Rp 45.000',
-                //   workPeriod: '2 tahun',
-                //   rating: '97%',
-                // ),
-                // const PsikologCard(
-                //   image: AssetImage('assets/detail_pfp.png'),
-                //   name: 'Aris Prabowo Wijayanto',
-                //   position: 'Psikologi Klinis',
-                //   expertise: 'Depresi, Trauma, Pekerjaan',
-                //   price: 'Rp 40.000 - Rp 45.000',
-                //   workPeriod: '2 tahun',
-                //   rating: '97%',
-                // ),
-                // const PsikologCard(
-                //   image: AssetImage('assets/detail_pfp.png'),
-                //   name: 'Aris Prabowo Wijayanto',
-                //   position: 'Psikologi Klinis',
-                //   expertise: 'Depresi, Trauma, Pekerjaan',
-                //   price: 'Rp 40.000 - Rp 45.000',
-                //   workPeriod: '2 tahun',
-                //   rating: '97%',
-                // )
               ],
             ),
           ),
