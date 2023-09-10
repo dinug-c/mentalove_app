@@ -1,43 +1,37 @@
-// import 'package:appwrite/appwrite.dart';
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:mentalove_app/ui/widgets/toast.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-// import '../ui/shared/theme.dart';
-// import '../ui/widgets/toast.dart';
-// import 'appwrite_client.dart';
+import '../main.dart';
 
-// register(TextEditingController emailController,
-//     TextEditingController passwordController, BuildContext context) async {
-//   try {
-//     final user = await account.create(
-//       userId: ID.unique(),
-//       email: emailController.text,
-//       password: passwordController.text,
-//     );
-//     user.status
-//         ? Navigator.pushReplacementNamed(context, '/main-page')
-//         : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-//             content: const Text('Terjadi kesalahan, silahkan coba lagi'),
-//             backgroundColor: kPrimaryColor,
-//           ));
-//   } catch (e) {
-//     showToast(context, e.toString());
-//   }
-// }
+void authLogin(BuildContext context, email, String password) async {
+  try {
+    AuthResponse res = await supabase.auth
+        .signInWithPassword(email: email, password: password);
+    if (res.user != null) {
+      Navigator.pushReplacementNamed(context, '/main-page');
+    }
+  } catch (e) {
+    showToast(context, e.toString());
+  }
+}
 
-// login(TextEditingController emailController,
-//     TextEditingController passwordController, BuildContext context) async {
-//   try {
-//     final user = await account.createEmailSession(
-//       email: emailController.text,
-//       password: passwordController.text,
-//     );
-//     user.current
-//         ? Navigator.pushReplacementNamed(context, '/main-page')
-//         : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-//             content: const Text('Terjadi kesalahan, silahkan coba lagi'),
-//             backgroundColor: kPrimaryColor,
-//           ));
-//   } catch (e) {
-//     showToast(context, e.toString());
-//   }
-// }
+void authRegister(BuildContext context, String email, String password,
+    String confirmPassword) async {
+  if (password == confirmPassword) {
+    try {
+      List<String> parts = email.split('@');
+      String username = parts[0];
+      AuthResponse res = await supabase.auth.signUp(
+          email: email, password: password, data: {'username': username});
+      if (res.user != null) {
+        Navigator.pushReplacementNamed(context, '/login');
+        showToast(context, "Registrasi Berhasil, Email Konfirmai Terkirim");
+      }
+    } catch (e) {
+      showToast(context, e.toString());
+    }
+  } else {
+    showToast(context, "Password dan Konfirmasi Password Tidak Sama");
+  }
+}

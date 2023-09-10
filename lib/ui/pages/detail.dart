@@ -30,11 +30,7 @@ class _DetailState extends State<Detail> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    final psikiaterData = widget.psikiaterData;
-=======
     final terapisData = widget.terapisData;
->>>>>>> 1d12e09fdaaa43f1b049b1286c68a7f5d2aceee1
 
     int tahun = terapisData['year']; // Tahun yang disimpan dalam variabel
     int tahunSaatIni = DateTime.now().year;

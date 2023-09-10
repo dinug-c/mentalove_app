@@ -19,24 +19,6 @@ class _PsikiaterPageState extends State<PsikiaterPage> {
   final _future =
       supabase.from('psikiater').select<List<Map<String, dynamic>>>();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   readData();
-  // }
-
-  // Future<void> readData() async {
-  //   var response = await supabase
-  //       .from('psikiater')
-  //       .select()
-  //       .order('id', ascending: true)
-  //       .execute();
-
-  //   setState(() {
-  //     psikiaterList = response.data.toList();
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     const SystemUiOverlayStyle(
@@ -70,7 +52,8 @@ class _PsikiaterPageState extends State<PsikiaterPage> {
                     } else if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Center(child: Text('Tidak ada yang tersedia'));
+                      return const Center(
+                          child: Text('Tidak ada yang tersedia'));
                     }
 
                     final psikiaters = snapshot.data!;

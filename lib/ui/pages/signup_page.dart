@@ -1,13 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mentalove_app/services/auth.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/textfield.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-
-import '../../main.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -17,9 +15,9 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPage extends State<SignupPage> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _passwordConfirmationController =
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordConfirmationController =
       TextEditingController();
 
   @override
@@ -93,41 +91,13 @@ class _SignupPage extends State<SignupPage> {
                               textColor: kWhiteColor,
                               startColor: kPrimaryColor,
                               endColor: kPrimary2Color,
-                              onPressed: () async {
-                                if (_passwordController.text.trim() !=
+                              onPressed: () {
+                                authRegister(
+                                    context,
+                                    _emailController.text.trim(),
+                                    _passwordController.text.trim(),
                                     _passwordConfirmationController.text
-                                        .trim()) {
-                                  // Tampilkan pesan kesalahan jika password dan konfirmasi password tidak cocok.
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text(
-                                            'Password dan Konfirmasi Password harus cocok')),
-                                  );
-                                  return;
-                                }
-
-                                try {
-                                  final AuthResponse res =
-                                      await supabase.auth.signUp(
-                                    email: _emailController.text.trim(),
-                                    password: _passwordController.text.trim(),
-                                  );
-
-                                  // Lanjutkan dengan tindakan setelah pendaftaran berhasil.
-                                  if (res.user != null) {
-                                    Navigator.pushReplacementNamed(
-                                        context, 'main-page');
-                                  }
-                                } on AuthException catch (error) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(error.message)),
-                                  );
-                                } catch (error) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Error, please retry')),
-                                  );
-                                }
+                                        .trim());
                               })
                         ],
                       ),
