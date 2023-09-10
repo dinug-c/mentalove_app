@@ -74,17 +74,17 @@ class MainApp extends StatelessWidget {
       });
     }
 
-    @override 
-    void initState() {
-      super.initState();
-      initSDK();
-    }
+    // @override
+    // void initState() {
+    //   super.initState();
+    //   initSDK();
+    // }
 
-    @override
-    void dispose() {
-      _midtrans?.removeTransactionFinishedCallback();
-      super.dispose();
-    }
+    // @override
+    // void dispose() {
+    //   _midtrans?.removeTransactionFinishedCallback();
+    //   super.dispose();
+    // }
 
     return MultiBlocProvider(
       providers: [
