@@ -5,6 +5,7 @@ import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
+import 'package:mentalove_app/ui/widgets/toast.dart';
 
 class Detail extends StatefulWidget {
   final Map<String, dynamic> terapisData;
@@ -184,17 +185,19 @@ class _DetailState extends State<Detail> {
                                 Expanded(
                                   child: OutlinedButton(
                                       onPressed: () {
-                                        setState(() {
-                                          mode = true;
-                                        });
+                                        showToast(context,
+                                            'Videocall belum tersedia');
+                                        // setState(() {
+                                        //   mode = true;
+                                        // });
                                       },
                                       style: OutlinedButton.styleFrom(
                                           side: BorderSide(
                                               width: 1.0, color: kPurpleColor),
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 13.0),
-                                          backgroundColor:
-                                              mode ? kPurpleColor : kWhiteColor,
+                                          backgroundColor: Colors.grey,
+                                          // mode ? kPurpleColor : kWhiteColor,
                                           shape: const RoundedRectangleBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10))),
@@ -204,15 +207,19 @@ class _DetailState extends State<Detail> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Icon(Icons.person_pin_rounded,
-                                              color: mode
-                                                  ? kWhiteColor
-                                                  : kPurpleColor),
+                                              color: kWhiteColor
+                                              // mode
+                                              //     ? kWhiteColor
+                                              //     : kPurpleColor
+                                              ),
                                           gapW12,
                                           Text('Video Call',
                                               style: blackTextStyle.copyWith(
-                                                  color: mode
-                                                      ? kWhiteColor
-                                                      : kPurpleColor,
+                                                  color: kWhiteColor
+                                                  // mode
+                                                  //     ? kWhiteColor
+                                                  //     : kPurpleColor
+                                                  ,
                                                   fontWeight: bold)),
                                         ],
                                       )),

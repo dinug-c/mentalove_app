@@ -271,7 +271,7 @@ class _PembayaranState extends State<Pembayaran> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Rp40.000',
+                  Text(hargaRp,
                       style: blackTextStyle.copyWith(fontWeight: extraBold))
                 ],
               ),
