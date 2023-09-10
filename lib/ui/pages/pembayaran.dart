@@ -345,7 +345,7 @@ class _PembayaranState extends State<Pembayaran> {
                               'payment_time': null,
                               'payment_method': 'QRIS'
                             });
-                            showToast(context, 'berhasil');
+                            // showToast(context, 'berhasil');
                             //Navigator.pushNamed(context, '/pembayaran');
                           })
                     ],
