@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
-import 'package:mentalove_app/ui/widgets/card.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});

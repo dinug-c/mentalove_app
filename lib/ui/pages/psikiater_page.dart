@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -7,7 +5,6 @@ import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'detail.dart';
 
@@ -19,9 +16,8 @@ class PsikiaterPage extends StatefulWidget {
 }
 
 class _PsikiaterPageState extends State<PsikiaterPage> {
-  final _future = Supabase.instance.client
-      .from('psikiater')
-      .select<List<Map<String, dynamic>>>();
+  final _future =
+      supabase.from('psikiater').select<List<Map<String, dynamic>>>();
 
   // @override
   // void initState() {
@@ -100,7 +96,7 @@ class _PsikiaterPageState extends State<PsikiaterPage> {
                           int displayTahun = tahunSaatIni - tahun;
                           String tagsString = psikiater['tags'].join(', ');
                           return PsikologCard(
-                            image: const AssetImage('assets/detail_pfp.png'),
+                            image: const AssetImage('assets/default_pfp.png'),
                             name: psikiater['name'],
                             position: psikiater['title'],
                             expertise: tagsString,
