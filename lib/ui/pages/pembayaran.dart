@@ -10,8 +10,15 @@ import 'package:mentalove_app/ui/widgets/button.dart';
 class Pembayaran extends StatefulWidget {
   final Map<String, dynamic> terapisData;
   final bool mode;
+  final int selectedTanggal;
+  final int selectedJam;
 
-  const Pembayaran({super.key, required this.terapisData, required this.mode});
+  const Pembayaran(
+      {super.key,
+      required this.terapisData,
+      required this.mode,
+      required this.selectedTanggal,
+      required this.selectedJam});
 
   @override
   State<Pembayaran> createState() => _PembayaranState();
@@ -22,6 +29,13 @@ class _PembayaranState extends State<Pembayaran> {
   Widget build(BuildContext context) {
     final terapisData = widget.terapisData;
     final mode = widget.mode;
+    final selectedJam = widget.selectedJam;
+    final selectedHari = widget.selectedTanggal;
+
+    Map<String, dynamic> waktuData = terapisData['waktu'];
+    String hari = waktuData.keys.elementAt(selectedHari);
+    dynamic jamList = waktuData[hari];
+    String jam = jamList[selectedJam];
 
     int harga = terapisData['harga'];
     String hargaStr = NumberFormat.currency(
@@ -156,7 +170,7 @@ class _PembayaranState extends State<Pembayaran> {
                                     ),
                                     gapW12,
                                     Text(
-                                      '03 Juli 2023',
+                                      '$hari, Jam $jam',
                                       style: purpleTextStyle.copyWith(
                                           fontWeight: bold),
                                     ),
