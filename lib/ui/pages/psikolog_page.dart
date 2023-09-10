@@ -96,33 +96,6 @@ class _PsikologPageState extends State<PsikologPage> {
                     );
                   },
                 ),
-                // const PsikologCard(
-                //   image: AssetImage('assets/detail_pfp.png'),
-                //   name: 'Aris Prabowo Wijayanto',
-                //   position: 'Psikologi Klinis',
-                //   expertise: 'Depresi, Trauma, Pekerjaan',
-                //   price: 'Rp 40.000 - Rp 45.000',
-                //   workPeriod: '2 tahun',
-                //   rating: '97%',
-                // ),
-                // const PsikologCard(
-                //   image: AssetImage('assets/detail_pfp.png'),
-                //   name: 'Aris Prabowo Wijayanto',
-                //   position: 'Psikologi Klinis',
-                //   expertise: 'Depresi, Trauma, Pekerjaan',
-                //   price: 'Rp 40.000 - Rp 45.000',
-                //   workPeriod: '2 tahun',
-                //   rating: '97%',
-                // ),
-                // const PsikologCard(
-                //   image: AssetImage('assets/detail_pfp.png'),
-                //   name: 'Aris Prabowo Wijayanto',
-                //   position: 'Psikologi Klinis',
-                //   expertise: 'Depresi, Trauma, Pekerjaan',
-                //   price: 'Rp 40.000 - Rp 45.000',
-                //   workPeriod: '2 tahun',
-                //   rating: '97%',
-                // )
               ],
             ),
           ),
