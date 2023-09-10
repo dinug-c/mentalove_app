@@ -5,6 +5,10 @@ import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
+import 'package:midtrans_sdk/midtrans_sdk.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+
 
 class Pembayaran extends StatefulWidget {
   final Map<String, dynamic> terapisData;
@@ -40,6 +44,40 @@ class _PembayaranState extends State<Pembayaran> {
       symbol: 'Rp. ',
       decimalDigits: 0,
     ).format(totalPembayaran);
+
+    MidtransSDK? _midtrans;
+
+  @override
+  void initState() {
+    super.initState();
+    initSDK();
+  }
+
+  void initSDK() async {
+    _midtrans = await MidtransSDK.init(
+      config: MidtransConfig(
+        clientKey: dotenv.env['SB-Mid-client-8N4d_4Ss4vSRG6WX'] ?? "",
+        merchantBaseUrl: dotenv.env['G553050654'] ?? "",
+        colorTheme: ColorTheme(
+          colorPrimary: Theme.of(context).colorScheme.secondary,
+          colorPrimaryDark: Theme.of(context).colorScheme.secondary,
+          colorSecondary: Theme.of(context).colorScheme.secondary,
+        ),
+      ),
+    );
+    _midtrans?.setUIKitCustomSetting(
+      skipCustomerDetailsPages: true,
+    );
+    _midtrans!.setTransactionFinishedCallback((result) {
+      print(result.toJson());
+    });
+  }
+
+  @override
+  void dispose() {
+    _midtrans?.removeTransactionFinishedCallback();
+    super.dispose();
+  }
 
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
