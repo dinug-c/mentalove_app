@@ -80,40 +80,7 @@ class _PembayaranState extends State<Pembayaran> {
       decimalDigits: 0,
     ).format(totalPembayaran);
 
-    MidtransSDK? _midtrans;
-
-  @override
-  void initState() {
-    super.initState();
-    initSDK();
-  }
-
-  void initSDK() async {
-    _midtrans = await MidtransSDK.init(
-      config: MidtransConfig(
-        clientKey: dotenv.env['SB-Mid-client-8N4d_4Ss4vSRG6WX'] ?? "",
-        merchantBaseUrl: dotenv.env['G553050654'] ?? "",
-        colorTheme: ColorTheme(
-          colorPrimary: Theme.of(context).colorScheme.secondary,
-          colorPrimaryDark: Theme.of(context).colorScheme.secondary,
-          colorSecondary: Theme.of(context).colorScheme.secondary,
-        ),
-      ),
-    );
-    _midtrans?.setUIKitCustomSetting(
-      skipCustomerDetailsPages: true,
-    );
-    _midtrans!.setTransactionFinishedCallback((result) {
-      print(result.toJson());
-    });
-  }
-
-  @override
-  void dispose() {
-    _midtrans?.removeTransactionFinishedCallback();
-    super.dispose();
-  }
-
+    
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       systemNavigationBarColor: Colors.white,
