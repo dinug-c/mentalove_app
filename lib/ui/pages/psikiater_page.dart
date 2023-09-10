@@ -19,29 +19,27 @@ class PsikiaterPage extends StatefulWidget {
 }
 
 class _PsikiaterPageState extends State<PsikiaterPage> {
-  List? psikiaterList;
-
   final _future = Supabase.instance.client
       .from('psikiater')
       .select<List<Map<String, dynamic>>>();
 
-  @override
-  void initState() {
-    super.initState();
-    readData();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   readData();
+  // }
 
-  Future<void> readData() async {
-    var response = await supabase
-        .from('psikiater')
-        .select()
-        .order('id', ascending: true)
-        .execute();
+  // Future<void> readData() async {
+  //   var response = await supabase
+  //       .from('psikiater')
+  //       .select()
+  //       .order('id', ascending: true)
+  //       .execute();
 
-    setState(() {
-      psikiaterList = response.data.toList();
-    });
-  }
+  //   setState(() {
+  //     psikiaterList = response.data.toList();
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +69,14 @@ class _PsikiaterPageState extends State<PsikiaterPage> {
                 FutureBuilder<List<Map<String, dynamic>>>(
                   future: _future,
                   builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return Center(child: Text('Tidak ada yang tersedia'));
                     }
+
                     final psikiaters = snapshot.data!;
                     return MediaQuery.removePadding(
                       context: context,
@@ -109,7 +112,7 @@ class _PsikiaterPageState extends State<PsikiaterPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      Detail(psikiaterData: psikiater),
+                                      Detail(terapisData: psikiater),
                                 ),
                               );
                             },

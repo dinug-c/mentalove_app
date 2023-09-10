@@ -22,48 +22,33 @@ class _ChatPageState extends State<ChatPage> {
     );
 
     return Scaffold(
-      backgroundColor: kWhiteColor,
+      backgroundColor: kBlackColor.withOpacity(0.5),
       body: CustomScrollView(
         slivers: <Widget>[
           AppBarCustom(
-            title: 'Psikolog',
+            title: 'Together Strong',
             startColor: kPrimaryColor,
             endColor: kPrimary2Color,
             leftAction: () {
               Navigator.pop(context);
             },
-            leftIcon: Icons.arrow_back,
+            // leftIcon: Icons.arrow_back,
           ),
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                // const PsikologCard(
-                //   image: AssetImage('assets/detail_pfp.png'),
-                //   name: 'Aris Prabowo Wijayanto',
-                //   position: 'Psikologi Klinis',
-                //   expertise: 'Depresi, Trauma, Pekerjaan',
-                //   price: 'Rp 40.000 - Rp 45.000',
-                //   workPeriod: '2 tahun',
-                //   rating: '97%',
-                // ),
-                // const PsikologCard(
-                //   image: AssetImage('assets/detail_pfp.png'),
-                //   name: 'Aris Prabowo Wijayanto',
-                //   position: 'Psikologi Klinis',
-                //   expertise: 'Depresi, Trauma, Pekerjaan',
-                //   price: 'Rp 40.000 - Rp 45.000',
-                //   workPeriod: '2 tahun',
-                //   rating: '97%',
-                // ),
-                // const PsikologCard(
-                //   image: AssetImage('assets/detail_pfp.png'),
-                //   name: 'Aris Prabowo Wijayanto',
-                //   position: 'Psikologi Klinis',
-                //   expertise: 'Depresi, Trauma, Pekerjaan',
-                //   price: 'Rp 40.000 - Rp 45.000',
-                //   workPeriod: '2 tahun',
-                //   rating: '97%',
-                // )
+                Center(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height - 120,
+                    child: Center(
+                      child: Text(
+                        'Coming Soon',
+                        style: whiteTextStyle.copyWith(
+                            fontSize: 20, fontWeight: extraBold),
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
