@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -85,17 +86,21 @@ class _PembayaranState extends State<Pembayaran> {
                                     fit: BoxFit.cover)),
                           ),
                           gapW12,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                terapisData['name'],
-                                style: blackTextStyle.copyWith(
-                                    fontSize: 18, fontWeight: extraBold),
-                              ),
-                              Text(terapisData['title'],
-                                  style: blackTextStyle.copyWith(fontSize: 14)),
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AutoSizeText(
+                                  terapisData['name'],
+                                  style: blackTextStyle.copyWith(
+                                      fontSize: 18, fontWeight: extraBold),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(terapisData['title'],
+                                    style:
+                                        blackTextStyle.copyWith(fontSize: 14)),
+                              ],
+                            ),
                           ),
                         ],
                       ),
