@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
-import 'package:mentalove_app/ui/widgets/card.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
+import 'package:mentalove_app/ui/widgets/card.dart';
 
 class Detail extends StatefulWidget {
   final Map<String, dynamic> psikiaterData;
@@ -31,7 +31,6 @@ class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
     final psikiaterData = widget.psikiaterData;
-    final psikiaterName = psikiaterData['name'];
 
     int tahun = psikiaterData['year']; // Tahun yang disimpan dalam variabel
     int tahunSaatIni = DateTime.now().year;

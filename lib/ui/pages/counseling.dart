@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mentalove_app/main.dart';
-import 'package:mentalove_app/services/collection.dart';
-import 'package:mentalove_app/services/crud.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
-import 'package:mentalove_app/ui/widgets/toast.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Counseling extends StatefulWidget {
   const Counseling({super.key});
@@ -70,10 +66,10 @@ class _CounselingState extends State<Counseling> {
                               title: 'Chat',
                               image: const AssetImage('assets/kons-chat.png'),
                               onTap: () async {
-                                // Navigator.pushNamed(context, '/chat-page');
-                                await supabase
-                                    .from('test')
-                                    .insert({'body': 'test'});
+                                Navigator.pushNamed(context, '/chat-psikologi');
+                                // await supabase
+                                //     .from('test')
+                                //     .insert({'body': 'test'});
                               },
                             ),
                             CardKonseling(

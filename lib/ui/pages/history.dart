@@ -1,14 +1,8 @@
-import 'dart:io';
-
-import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
-import 'package:mentalove_app/ui/widgets/card.dart';
-import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
-import 'package:mentalove_app/model/history_model.dart';
-
-import '../../services/crud.dart';
+import 'package:mentalove_app/ui/widgets/appbar.dart';
+import 'package:mentalove_app/ui/widgets/card.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -18,34 +12,6 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  // late History history;
-
-  // void setData(History data) {
-  //   setState(() {
-  //     history = data;
-  //   });
-  // }
-
-  // @override
-  // void initState() {
-  //   Future fetchData() async {
-  //     Map<String, dynamic> data =
-  //         await readData('64f1de1a8d2fdd9c3e22', '64f1dc2f04b181f52184');
-  //     List<Document> data2 = await listDocuments('64f1dc2f04b181f52184');
-  //     stderr.writeln(data2);
-  //     setData(History(
-  //       // faceEmoji: data['\$faceemoji'],
-  //       title: data['title'],
-  //       date: data['date'],
-  //       text: data['text']
-  //     )
-  //     );
-  //   }
-
-  //   fetchData();
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
