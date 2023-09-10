@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mentalove_app/ui/pages/chat_psikolog_page.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
-import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
 
 class Counseling extends StatefulWidget {
@@ -80,7 +80,11 @@ class _CounselingState extends State<Counseling> {
                         ),
                         IconButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/chat-psikologi');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChatPsikologPage(
+                                        psikologId: "", duration: 3600)));
                           },
                           icon: const Icon(Icons.chat),
                         ),

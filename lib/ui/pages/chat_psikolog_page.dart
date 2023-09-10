@@ -1,7 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:mentalove_app/ui/widgets/toast.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timeago/timeago.dart';
+import 'package:timer_count_down/timer_controller.dart';
+import 'package:timer_count_down/timer_count_down.dart';
+
+import 'package:mentalove_app/ui/widgets/toast.dart';
 
 import '../../main.dart';
 import '../../model/message_model.dart';
@@ -9,11 +15,18 @@ import '../../model/profile_model.dart';
 import '../shared/theme.dart';
 
 class ChatPsikologPage extends StatefulWidget {
-  const ChatPsikologPage({Key? key}) : super(key: key);
+  final String psikologId;
+  final int duration;
+  const ChatPsikologPage({
+    Key? key,
+    required this.psikologId,
+    required this.duration,
+  }) : super(key: key);
 
-  static Route<void> route() {
+  Route<void> route() {
     return MaterialPageRoute(
-      builder: (context) => const ChatPsikologPage(),
+      builder: (context) =>
+          ChatPsikologPage(duration: duration, psikologId: psikologId),
     );
   }
 
@@ -23,6 +36,7 @@ class ChatPsikologPage extends StatefulWidget {
 
 class _ChatPsikologPageState extends State<ChatPsikologPage> {
   late final Stream<List<Message>> _messagesStream;
+  final CountdownController _controller = CountdownController(autoStart: true);
   final Map<String, Profile> _profileCache = {};
 
   @override
@@ -35,6 +49,7 @@ class _ChatPsikologPageState extends State<ChatPsikologPage> {
         .map((maps) => maps
             .map((map) => Message.fromMap(map: map, myUserId: myUserId))
             .toList());
+
     super.initState();
   }
 
@@ -61,10 +76,34 @@ class _ChatPsikologPageState extends State<ChatPsikologPage> {
             final messages = snapshot.data!;
             return Column(
               children: [
+                Container(
+                  width: double.infinity,
+                  height: 50,
+                  color: kPrimaryColor,
+                  child: Center(
+                    child: Countdown(
+                      controller: _controller,
+                      seconds: 3600,
+                      build: (_, double time) {
+                        final int minutes = (time / 60).floor();
+                        final int seconds = (time % 60).floor();
+                        return Text(
+                          '$minutes:${seconds.toString().padLeft(2, '0')}',
+                          style: whiteTextStyle.copyWith(
+                              fontSize: 14, fontWeight: bold),
+                        );
+                      },
+                      interval: Duration(milliseconds: 100),
+                      onFinished: () {
+                        showToast(context, "Waktu konseling telah habis");
+                      },
+                    ),
+                  ),
+                ),
                 Expanded(
                   child: messages.isEmpty
                       ? const Center(
-                          child: Text('Start your conversation now :)'),
+                          child: Text('Mulai perjalanan konseling kamu :D'),
                         )
                       : ListView.builder(
                           reverse: true,
