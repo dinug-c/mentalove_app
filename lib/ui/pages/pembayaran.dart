@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
@@ -25,6 +26,28 @@ class Pembayaran extends StatefulWidget {
 }
 
 class _PembayaranState extends State<Pembayaran> {
+  final userId = supabase.auth.currentUser?.id;
+  String uProfile = '';
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserProfile();
+  }
+
+  Future<void> fetchUserProfile() async {
+    final response = await supabase
+        .from('profiles')
+        .select('username')
+        .eq('id', userId) // Menggunakan userId yang sudah Anda dapatkan
+        .execute();
+
+    final data = response.data;
+    setState(() {
+      uProfile = data[0]['username']; // Simpan username dalam variabel
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final terapisData = widget.terapisData;
@@ -36,6 +59,7 @@ class _PembayaranState extends State<Pembayaran> {
     String hari = waktuData.keys.elementAt(selectedHari);
     dynamic jamList = waktuData[hari];
     String jam = jamList[selectedJam];
+    String uPsikolog = terapisData['username'];
 
     int harga = terapisData['harga'];
     String hargaStr = NumberFormat.currency(
@@ -55,6 +79,40 @@ class _PembayaranState extends State<Pembayaran> {
       symbol: 'Rp. ',
       decimalDigits: 0,
     ).format(totalPembayaran);
+
+    MidtransSDK? _midtrans;
+
+  @override
+  void initState() {
+    super.initState();
+    initSDK();
+  }
+
+  void initSDK() async {
+    _midtrans = await MidtransSDK.init(
+      config: MidtransConfig(
+        clientKey: dotenv.env['SB-Mid-client-8N4d_4Ss4vSRG6WX'] ?? "",
+        merchantBaseUrl: dotenv.env['G553050654'] ?? "",
+        colorTheme: ColorTheme(
+          colorPrimary: Theme.of(context).colorScheme.secondary,
+          colorPrimaryDark: Theme.of(context).colorScheme.secondary,
+          colorSecondary: Theme.of(context).colorScheme.secondary,
+        ),
+      ),
+    );
+    _midtrans?.setUIKitCustomSetting(
+      skipCustomerDetailsPages: true,
+    );
+    _midtrans!.setTransactionFinishedCallback((result) {
+      print(result.toJson());
+    });
+  }
+
+  @override
+  void dispose() {
+    _midtrans?.removeTransactionFinishedCallback();
+    super.dispose();
+  }
 
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -96,7 +154,7 @@ class _PembayaranState extends State<Pembayaran> {
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(10)),
                                 image: const DecorationImage(
-                                    image: AssetImage('assets/default_pfp.png'),
+                                    image: AssetImage('assets/pfp_jessica.jpg'),
                                     fit: BoxFit.cover)),
                           ),
                           gapW12,
@@ -309,7 +367,18 @@ class _PembayaranState extends State<Pembayaran> {
                           textColor: kPurpleColor,
                           startColor: kPrimaryLightColor,
                           endColor: kPrimaryLightColor,
-                          onPressed: () {
+                          onPressed: () async {
+                            await supabase.from('order').insert({
+                              'total_harga': totalPembayaran,
+                              'tanggal': null,
+                              'jam': null,
+                              'harga': harga,
+                              'upsikolog': uPsikolog,
+                              'uprofile': uProfile,
+                              'payment_time': null,
+                              'payment_method': 'QRIS'
+                            });
+                            showToast(context, 'berhasil');
                             //Navigator.pushNamed(context, '/pembayaran');
                           })
                     ],
