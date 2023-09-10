@@ -43,7 +43,7 @@ class _DetailState extends State<Detail> {
         slivers: <Widget>[
           //AppBar
           AppBarTransparent(
-            img: 'assets/detail_pfp.png',
+            img: 'assets/default_pfp.png',
             leftAction: () {
               Navigator.pop(context);
             },

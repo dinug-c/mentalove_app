@@ -48,7 +48,6 @@ class _CounselingState extends State<Counseling> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        gapH24,
                         Text(
                           'Setiap Ahli Punya Keunggulan Masing-Masing',
                           style: blackTextStyle.copyWith(

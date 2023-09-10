@@ -81,7 +81,7 @@ class _PembayaranState extends State<Pembayaran> {
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(10)),
                                 image: const DecorationImage(
-                                    image: AssetImage('assets/detail_pfp.png'),
+                                    image: AssetImage('assets/default_pfp.png'),
                                     fit: BoxFit.cover)),
                           ),
                           gapW12,
