@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
@@ -22,7 +23,11 @@ class _DailyContentPageState extends State<DailyContentPage> {
           startColor: kPrimaryColor,
           endColor: kPrimary2Color,
           // leftIcon: Icons.menu,
-          rightIcon: Icons.search,
+          rightIcon: Icons.logout,
+          rightAction: () async {
+            await supabase.auth.signOut();
+            Navigator.pushReplacementNamed(context, 'login-page');
+          },
         ),
         SliverList(
             delegate: SliverChildListDelegate([

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 
 class Pembayaran extends StatefulWidget {
-  const Pembayaran({super.key});
+  final Map<String, dynamic> terapisData;
+  final bool mode;
+
+  const Pembayaran({super.key, required this.terapisData, required this.mode});
 
   @override
   State<Pembayaran> createState() => _PembayaranState();
@@ -15,6 +19,28 @@ class Pembayaran extends StatefulWidget {
 class _PembayaranState extends State<Pembayaran> {
   @override
   Widget build(BuildContext context) {
+    final terapisData = widget.terapisData;
+    final mode = widget.mode;
+
+    int harga = terapisData['harga'];
+    String hargaStr = NumberFormat.currency(
+      locale: 'id',
+      symbol: 'Rp. ',
+      decimalDigits: 0,
+    ).format(harga);
+    int hargaAdmin = 1000;
+    String hargaAdminStr = NumberFormat.currency(
+      locale: 'id',
+      symbol: 'Rp. ',
+      decimalDigits: 0,
+    ).format(hargaAdmin);
+    int totalPembayaran = harga + hargaAdmin;
+    String hargaRp = NumberFormat.currency(
+      locale: 'id',
+      symbol: 'Rp. ',
+      decimalDigits: 0,
+    ).format(totalPembayaran);
+
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       systemNavigationBarColor: Colors.white,
@@ -55,7 +81,7 @@ class _PembayaranState extends State<Pembayaran> {
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(10)),
                                 image: const DecorationImage(
-                                    image: AssetImage('assets/detail_pfp.png'),
+                                    image: AssetImage('assets/default_pfp.png'),
                                     fit: BoxFit.cover)),
                           ),
                           gapW12,
@@ -63,11 +89,11 @@ class _PembayaranState extends State<Pembayaran> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Aris Prabowo Wijayanto',
+                                terapisData['name'],
                                 style: blackTextStyle.copyWith(
                                     fontSize: 18, fontWeight: extraBold),
                               ),
-                              Text('Psikologi Klinis',
+                              Text(terapisData['title'],
                                   style: blackTextStyle.copyWith(fontSize: 14)),
                             ],
                           ),
@@ -92,12 +118,14 @@ class _PembayaranState extends State<Pembayaran> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(
-                                      Icons.chat,
+                                      mode
+                                          ? Icons.person_pin_rounded
+                                          : Icons.chat,
                                       color: kWhiteColor,
                                     ),
                                     gapW12,
                                     Text(
-                                      'Chat',
+                                      mode ? 'Video Call' : 'Chat',
                                       style: blackTextStyle.copyWith(
                                           color: kWhiteColor, fontWeight: bold),
                                     ),
@@ -141,7 +169,7 @@ class _PembayaranState extends State<Pembayaran> {
                             style: blackTextStyle.copyWith(fontWeight: medium),
                           ),
                           Text(
-                            'Rp40.000',
+                            hargaStr,
                             style: blackTextStyle.copyWith(fontWeight: medium),
                           ),
                         ],
@@ -154,7 +182,7 @@ class _PembayaranState extends State<Pembayaran> {
                             style: blackTextStyle.copyWith(fontWeight: medium),
                           ),
                           Text(
-                            'Rp1.000',
+                            hargaAdminStr,
                             style: blackTextStyle.copyWith(fontWeight: medium),
                           ),
                         ],
@@ -167,7 +195,7 @@ class _PembayaranState extends State<Pembayaran> {
                             style: blackTextStyle.copyWith(fontWeight: medium),
                           ),
                           Text(
-                            '-Rp1.000,00',
+                            '-',
                             style: blackTextStyle.copyWith(fontWeight: medium),
                           ),
                         ],
@@ -180,7 +208,7 @@ class _PembayaranState extends State<Pembayaran> {
                             style: blackTextStyle.copyWith(fontWeight: bold),
                           ),
                           Text(
-                            'Rp40.000,00',
+                            hargaRp,
                             style: blackTextStyle.copyWith(fontWeight: bold),
                           ),
                         ],

@@ -59,7 +59,8 @@ class MainApp extends StatelessWidget {
         '/daily': (context) => const DailyContentPage(),
         '/tellus': (context) => const TellUsPage(),
         '/psikolog-page': (context) => const PsikologPage(),
-        '/pembayaran': (context) => const Pembayaran(),
+        '/pembayaran': (context) =>
+            const Pembayaran(terapisData: {}, mode: true),
         '/psikiater-page': (context) => const PsikiaterPage(),
         '/chat-page': (context) => const ChatPage(),
         '/chat-psikologi': (context) => const ChatPsikologPage(),

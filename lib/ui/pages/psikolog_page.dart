@@ -7,6 +7,8 @@ import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
 
+import '../widgets/card.dart';
+
 class PsikologPage extends StatefulWidget {
   const PsikologPage({super.key});
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentalove_app/ui/pages/pembayaran.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
@@ -42,7 +43,7 @@ class _DetailState extends State<Detail> {
         slivers: <Widget>[
           //AppBar
           AppBarTransparent(
-            img: 'assets/detail_pfp.png',
+            img: 'assets/default_pfp.png',
             leftAction: () {
               Navigator.pop(context);
             },
@@ -332,7 +333,15 @@ class _DetailState extends State<Detail> {
                           startColor: kPurpleColor,
                           endColor: kPurpleColor,
                           onPressed: () {
-                            Navigator.pushNamed(context, '/pembayaran');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Pembayaran(
+                                  terapisData: terapisData,
+                                  mode: mode,
+                                ),
+                              ),
+                            );
                           })
                     ],
                   ),
