@@ -7,6 +7,7 @@ import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
+import 'package:mentalove_app/ui/widgets/toast.dart';
 
 class Pembayaran extends StatefulWidget {
   final Map<String, dynamic> terapisData;
@@ -80,7 +81,6 @@ class _PembayaranState extends State<Pembayaran> {
       decimalDigits: 0,
     ).format(totalPembayaran);
 
-    
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       systemNavigationBarColor: Colors.white,
@@ -345,7 +345,8 @@ class _PembayaranState extends State<Pembayaran> {
                               'payment_time': null,
                               'payment_method': 'QRIS'
                             });
-                            // showToast(context, 'berhasil');
+                            showToast(context, 'berhasil');
+
                             //Navigator.pushNamed(context, '/pembayaran');
                           })
                     ],
