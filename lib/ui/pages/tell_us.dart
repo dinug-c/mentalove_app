@@ -31,7 +31,7 @@ class _TellUsPageState extends State<TellUsPage> {
               date: '28 Juni 2023',
               desc:
                   'Tadi pacarku marah sama aku gara-gara aku ga beliin cilok, mau tanya dong guys solusinya aku harus gimana ya, soalnya',
-              profil: const AssetImage('assets/detail_pfp.png'),
+              profil: const AssetImage('assets/default_pfp.png'),
               onTap: () {},
             ),
             gapH12,
@@ -40,7 +40,7 @@ class _TellUsPageState extends State<TellUsPage> {
               date: '28 Juni 2023',
               desc:
                   'Akhirnya  setelah 5 taun berjuang sendirian cari duit buat lunasin utang suami, aku bisa lunasin utangnyaa hari iniii. Jadi',
-              profil: const AssetImage('assets/detail_pfp.png'),
+              profil: const AssetImage('assets/default_pfp.png'),
               onTap: () {},
               image: const AssetImage('assets/kons-tapmuk.png'),
             ),
@@ -50,7 +50,7 @@ class _TellUsPageState extends State<TellUsPage> {
               date: '28 Juni 2023',
               desc:
                   'doiku ga peka, padal udah kukodein berkali kali tapi masih aja tarik ulur gimana ya caranya',
-              profil: const AssetImage('assets/detail_pfp.png'),
+              profil: const AssetImage('assets/default_pfp.png'),
               onTap: () {},
             )
           ]))

@@ -190,6 +190,8 @@ class PsikologCard extends StatelessWidget {
                 Text(
                   expertise,
                   style: blackTextStyle.copyWith(fontSize: 12),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 gapH24,
                 Row(

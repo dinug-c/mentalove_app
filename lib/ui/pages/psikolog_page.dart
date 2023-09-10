@@ -73,8 +73,10 @@ class _PsikologPageState extends State<PsikologPage> {
                           int tahunSaatIni = DateTime.now().year;
                           int displayTahun = tahunSaatIni - tahun;
                           String tagsString = psikolog['tags'].join(', ');
+                          AssetImage pfpImg =
+                              const AssetImage('assets/pfp_jessica.jpg');
                           return PsikologCard(
-                            image: const AssetImage('assets/default_pfp.png'),
+                            image: pfpImg,
                             name: psikolog['name'],
                             position: psikolog['title'],
                             expertise: tagsString,
@@ -85,8 +87,9 @@ class _PsikologPageState extends State<PsikologPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      Detail(terapisData: psikolog),
+                                  builder: (context) => Detail(
+                                    terapisData: psikolog,
+                                  ),
                                 ),
                               );
                             },
