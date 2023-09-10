@@ -26,7 +26,6 @@ class _DailyContentPageState extends State<DailyContentPage> {
           rightIcon: Icons.logout,
           rightAction: () async {
             await supabase.auth.signOut();
-            Navigator.pushReplacementNamed(context, 'login-page');
           },
         ),
         SliverList(
