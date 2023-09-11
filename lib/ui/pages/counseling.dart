@@ -88,6 +88,12 @@ class _CounselingState extends State<Counseling> {
                           },
                           icon: const Icon(Icons.chat),
                         ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/history-order');
+                          },
+                          icon: const Icon(Icons.list),
+                        ),
                       ]),
                 )
               ],

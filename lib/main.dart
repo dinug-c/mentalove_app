@@ -5,6 +5,7 @@ import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/daily_content.dart';
 import 'package:mentalove_app/ui/pages/detail.dart';
 import 'package:mentalove_app/ui/pages/history.dart';
+import 'package:mentalove_app/ui/pages/history_order.dart';
 import 'package:mentalove_app/ui/pages/landing_page.dart';
 import 'package:mentalove_app/ui/pages/login_page.dart';
 import 'package:mentalove_app/ui/pages/main_page.dart';
@@ -71,6 +72,7 @@ class _MainAppState extends State<MainApp> {
             ),
         '/psikiater-page': (context) => const PsikiaterPage(),
         '/chat-page': (context) => const ChatPage(),
+        '/history-order': (context) => const HistoryOrder()
       }),
     );
   }
