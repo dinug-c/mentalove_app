@@ -195,7 +195,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
