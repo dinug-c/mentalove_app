@@ -11,14 +11,14 @@ import 'package:mentalove_app/ui/widgets/card.dart';
 import '../widgets/card.dart';
 import '../widgets/toast.dart';
 
-class HistoryOrder extends StatefulWidget {
-  const HistoryOrder({super.key});
+class TerapisHistory extends StatefulWidget {
+  const TerapisHistory({super.key});
 
   @override
-  State<HistoryOrder> createState() => _HistoryOrderState();
+  State<TerapisHistory> createState() => _TerapisHistoryState();
 }
 
-class _HistoryOrderState extends State<HistoryOrder> {
+class _TerapisHistoryState extends State<TerapisHistory> {
   final _future =
       supabase.from('psikolog').select<List<Map<String, dynamic>>>();
   bool verification = true;
@@ -37,34 +37,32 @@ class _HistoryOrderState extends State<HistoryOrder> {
       body: CustomScrollView(
         slivers: <Widget>[
           AppBarCustom(
-            title: 'History Order',
+            title: 'Chat dan History',
             startColor: kPrimaryColor,
             endColor: kPrimary2Color,
             leftAction: () {
               Navigator.pop(context);
             },
             leftIcon: Icons.arrow_back,
-            rightIcon: Icons.radio_button_checked,
-            rightAction: () {
-              setState(() {
-                if (verification) {
-                  verification = false;
-                } else {
-                  verification = true;
-                }
-              });
-            },
           ),
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                OrderCard(
-                  verif: verification,
-                  kodeUnik: 'b23f5',
-                  nama: 'Aris PW',
-                  title: 'Psikolog Klinis',
+                CustomerCard(
+                  kodeUnik: 'b234as',
+                  username: 'akunsekolahdika',
                   jadwal: 'Senin, 12 September 2023 - Jam 12.00',
-                  harga: 'Rp 150.000',
+                  harga: 'Rp 150.000,00',
+                  onTapChat: () {},
+                  onTapDetail: () {},
+                ),
+                CustomerCard(
+                  kodeUnik: 'b234as',
+                  username: 'akunsekolahdika',
+                  jadwal: 'Senin, 12 September 2023 - Jam 12.00',
+                  harga: 'Rp 150.000,00',
+                  onTapChat: () {},
+                  onTapDetail: () {},
                 )
               ],
             ),

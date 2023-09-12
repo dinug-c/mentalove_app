@@ -14,6 +14,8 @@ import 'package:mentalove_app/ui/pages/psikiater_page.dart';
 import 'package:mentalove_app/ui/pages/psikolog_page.dart';
 import 'package:mentalove_app/ui/pages/signup_page.dart';
 import 'package:mentalove_app/ui/pages/tell_us.dart';
+import 'package:mentalove_app/ui/pages/terapis_history.dart';
+import 'package:mentalove_app/ui/pages/terapis_main.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'cubit/page_cubit.dart';
@@ -72,7 +74,9 @@ class _MainAppState extends State<MainApp> {
             ),
         '/psikiater-page': (context) => const PsikiaterPage(),
         '/chat-page': (context) => const ChatPage(),
-        '/history-order': (context) => const HistoryOrder()
+        '/history-order': (context) => const HistoryOrder(),
+        '/terapis-main': (context) => const TerapisMainPage(),
+        '/terapis-history': (context) => const TerapisHistory(),
       }),
     );
   }

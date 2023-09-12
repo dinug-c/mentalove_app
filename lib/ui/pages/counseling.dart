@@ -94,6 +94,12 @@ class _CounselingState extends State<Counseling> {
                           },
                           icon: const Icon(Icons.list),
                         ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/terapis-main');
+                          },
+                          icon: const Icon(Icons.menu_book),
+                        ),
                       ]),
                 )
               ],

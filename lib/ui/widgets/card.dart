@@ -283,6 +283,300 @@ class PsikologCard extends StatelessWidget {
   }
 }
 
+class OrderCard extends StatelessWidget {
+  final bool verif;
+  final String kodeUnik;
+  final String nama;
+  final String title;
+  final String jadwal;
+  final String harga;
+
+  const OrderCard(
+      {super.key,
+      required this.verif,
+      required this.kodeUnik,
+      required this.nama,
+      required this.title,
+      required this.jadwal,
+      required this.harga});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            width: 100,
+            height: 160,
+            decoration: BoxDecoration(
+              color: kPrimary2Color,
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              image: const DecorationImage(
+                  image: AssetImage('assets/detail_pfp.png'),
+                  fit: BoxFit.cover),
+            ),
+          ),
+          gapW12,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '#$kodeUnik',
+                  maxLines: 2,
+                  style: blackTextStyle.copyWith(
+                    fontSize: 15,
+                    fontWeight: extraBold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  nama,
+                  style: blackTextStyle.copyWith(
+                    fontSize: 12,
+                    fontWeight: extraBold,
+                  ),
+                ),
+                Text(
+                  title,
+                  style: blackTextStyle.copyWith(fontSize: 12),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                gapH24,
+                Text(
+                  jadwal,
+                  style: blackTextStyle.copyWith(fontSize: 12),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      harga,
+                      style: blackTextStyle.copyWith(
+                        fontSize: 12,
+                        fontWeight: extraBold,
+                      ),
+                    ),
+                    gapW4,
+                    Text(
+                      verif ? '- Sudah terverifikasi' : '- Belum terverifikasi',
+                      style: blackTextStyle.copyWith(
+                          color: verif ? kGreenColor : kRedColor,
+                          fontSize: 12,
+                          fontWeight: bold),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kPurpleColor,
+                          elevation: 0.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.chat,
+                              color: kWhiteColor,
+                            ),
+                            gapW4,
+                            Text(
+                              'Chat',
+                              style: whiteTextStyle.copyWith(
+                                fontSize: 12,
+                                fontWeight: extraBold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    gapW4,
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kPrimaryLightColor,
+                          elevation: 0.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                        ),
+                        child: Text(
+                          'Detail...',
+                          style: purpleTextStyle.copyWith(
+                            fontSize: 12,
+                            fontWeight: extraBold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomerCard extends StatelessWidget {
+  final String kodeUnik;
+  final String username;
+  final String jadwal;
+  final String harga;
+  final Function onTapChat;
+  final Function onTapDetail;
+  const CustomerCard(
+      {super.key,
+      required this.kodeUnik,
+      required this.username,
+      required this.jadwal,
+      required this.harga,
+      required this.onTapChat,
+      required this.onTapDetail});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+
+      decoration: BoxDecoration(
+        border: Border(
+          // top: BorderSide(width: 1.0, color: kPurpleColor.withOpacity(0.5)),
+          bottom: BorderSide(width: 1.5, color: kPurpleColor.withOpacity(0.8)),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.chat,
+            size: 70,
+            color: kPurpleColor,
+          ),
+          gapW24,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '#$kodeUnik',
+                  maxLines: 2,
+                  style: blackTextStyle.copyWith(
+                    fontSize: 15,
+                    fontWeight: extraBold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  username,
+                  style: blackTextStyle.copyWith(
+                    fontSize: 12,
+                    fontWeight: extraBold,
+                  ),
+                ),
+                gapH24,
+                Text(
+                  jadwal,
+                  style: blackTextStyle.copyWith(fontSize: 12),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      harga,
+                      style: blackTextStyle.copyWith(
+                        fontSize: 12,
+                        fontWeight: extraBold,
+                      ),
+                    ),
+                    gapW4,
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          onTapChat;
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kPurpleColor,
+                          elevation: 0.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.chat,
+                              color: kWhiteColor,
+                            ),
+                            gapW4,
+                            Text(
+                              'Chat',
+                              style: whiteTextStyle.copyWith(
+                                fontSize: 12,
+                                fontWeight: extraBold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    gapW4,
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          onTapDetail;
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kPrimaryLightColor,
+                          elevation: 0.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                        ),
+                        child: Text(
+                          'Detail...',
+                          style: purpleTextStyle.copyWith(
+                            fontSize: 12,
+                            fontWeight: extraBold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class CategoryCard extends StatelessWidget {
   final String text;
 
