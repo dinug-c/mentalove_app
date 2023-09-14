@@ -129,6 +129,14 @@ class _LoginPage extends State<LoginPage> {
                                       context, '/signup-page');
                                 })
                         ])),
+                    gapH12,
+                    TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Masuk sebagai Psikolog",
+                          style: greyTextStyle.copyWith(
+                              fontSize: 14, fontWeight: regular),
+                        ))
                   ]),
             ),
           ),

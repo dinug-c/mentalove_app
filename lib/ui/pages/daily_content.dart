@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentalove_app/main.dart';
-import 'package:mentalove_app/ui/shared/gaps.dart';
-import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
-
-import '../widgets/card.dart';
+import 'package:mentalove_app/ui/widgets/appbar.dart';
 
 class DailyContentPage extends StatefulWidget {
   const DailyContentPage({super.key});
