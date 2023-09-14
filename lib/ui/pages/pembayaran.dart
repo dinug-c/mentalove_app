@@ -27,6 +27,8 @@ class Pembayaran extends StatefulWidget {
 }
 
 class _PembayaranState extends State<Pembayaran> {
+  bool orderMode =
+      false; //false = order belum dibuat, true = order sudah dibuat
   final userId = supabase.auth.currentUser?.id;
   String uProfile = '';
 
@@ -320,38 +322,79 @@ class _PembayaranState extends State<Pembayaran> {
                 ],
               ),
             ),
-            Expanded(
-                flex: 1,
-                child: Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-                  //padding: const EdgeInsets.only(top: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Button(
-                          text: "Bayar Sekarang",
-                          textColor: kPurpleColor,
-                          startColor: kPrimaryLightColor,
-                          endColor: kPrimaryLightColor,
-                          onPressed: () async {
-                            await supabase.from('order').insert({
-                              'total_harga': totalPembayaran,
-                              'tanggal': null,
-                              'jam': null,
-                              'harga': harga,
-                              'upsikolog': uPsikolog,
-                              'uprofile': uProfile,
-                              'payment_time': null,
-                              'payment_method': 'QRIS'
-                            });
-                            showToast(context, 'berhasil');
+            orderMode
+                ? Expanded(
+                    flex: 1,
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 10,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 5),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                            color: kWhiteColor,
+                            border: Border.all(color: kPurpleColor, width: 1.0),
+                            borderRadius: BorderRadius.circular(15)),
+                        //padding: const EdgeInsets.only(top: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '#dsfsdfsd',
+                                  style: blackTextStyle.copyWith(
+                                      fontSize: 17, fontWeight: bold),
+                                ),
+                                Text(
+                                  '12:59',
+                                  style: blackTextStyle.copyWith(
+                                      fontSize: 17, fontWeight: bold),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ))
+                : Expanded(
+                    flex: 1,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 5),
+                      //padding: const EdgeInsets.only(top: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Button(
+                              text: "Bayar Sekarang",
+                              textColor: kPurpleColor,
+                              startColor: kPrimaryLightColor,
+                              endColor: kPrimaryLightColor,
+                              onPressed: () async {
+                                setState(() {
+                                  orderMode = true;
+                                });
+                                // await supabase.from('order').insert({
+                                //   'total_harga': totalPembayaran,
+                                //   'tanggal': null,
+                                //   'jam': null,
+                                //   'harga': harga,
+                                //   'upsikolog': uPsikolog,
+                                //   'uprofile': uProfile,
+                                //   'payment_time': null,
+                                //   'payment_method': 'QRIS'
+                                // });
+                                showToast(context, 'berhasil');
 
-                            //Navigator.pushNamed(context, '/pembayaran');
-                          })
-                    ],
-                  ),
-                )),
+                                //Navigator.pushNamed(context, '/pembayaran');
+                              })
+                        ],
+                      ),
+                    ))
           ],
         ),
       ),
