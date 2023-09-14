@@ -5,6 +5,8 @@ import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 
+import '../widgets/card.dart';
+
 class HistoryOrder extends StatefulWidget {
   const HistoryOrder({super.key});
 

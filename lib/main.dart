@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentalove_app/ui/pages/bayar_disini.dart';
 import 'package:mentalove_app/ui/pages/chat_page.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/daily_content.dart';
@@ -77,6 +78,7 @@ class _MainAppState extends State<MainApp> {
         '/history-order': (context) => const HistoryOrder(),
         '/terapis-main': (context) => const TerapisMainPage(),
         '/terapis-history': (context) => const TerapisHistory(),
+        '/bayar-sekarang': (context) => const BayarDisini(),
       }),
     );
   }
