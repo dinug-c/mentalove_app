@@ -260,42 +260,6 @@ class _PembayaranState extends State<Pembayaran> {
                         ],
                       ),
                       gapH12,
-                      Row(
-                        children: [
-                          Expanded(
-                            child: OutlinedButton(
-                                onPressed: () {
-                                  setState(() {});
-                                },
-                                style: OutlinedButton.styleFrom(
-                                    side: BorderSide(
-                                        width: 1.0, color: kPurpleColor),
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 13.0),
-                                    backgroundColor: kWhiteColor,
-                                    shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    elevation: 0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    gapW24,
-                                    Icon(
-                                      Icons.shopping_cart,
-                                      color: kPurpleColor,
-                                    ),
-                                    gapW12,
-                                    Text(
-                                      'Pilih Metode Pembayaran',
-                                      style: purpleTextStyle.copyWith(
-                                          fontWeight: bold),
-                                    ),
-                                  ],
-                                )),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 )
@@ -326,7 +290,6 @@ class _PembayaranState extends State<Pembayaran> {
                 ? Expanded(
                     flex: 1,
                     child: InkWell(
-                      onTap: () {},
                       child: Container(
                         height: 10,
                         margin: const EdgeInsets.symmetric(
@@ -362,37 +325,38 @@ class _PembayaranState extends State<Pembayaran> {
                     ))
                 : Expanded(
                     flex: 1,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 5),
-                      //padding: const EdgeInsets.only(top: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Button(
-                              text: "Bayar Sekarang",
-                              textColor: kPurpleColor,
-                              startColor: kPrimaryLightColor,
-                              endColor: kPrimaryLightColor,
-                              onPressed: () async {
-                                setState(() {
-                                  orderMode = true;
-                                });
-                                // await supabase.from('order').insert({
-                                //   'total_harga': totalPembayaran,
-                                //   'tanggal': null,
-                                //   'jam': null,
-                                //   'harga': harga,
-                                //   'upsikolog': uPsikolog,
-                                //   'uprofile': uProfile,
-                                //   'payment_time': null,
-                                //   'payment_method': 'QRIS'
-                                // });
-                                showToast(context, 'berhasil');
+                    child: InkWell(
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 5),
+                        // padding: const EdgeInsets.only(top: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Button(
+                                text: "Bayar Sekarang",
+                                textColor: kPurpleColor,
+                                startColor: kPrimaryLightColor,
+                                endColor: kPrimaryLightColor,
+                                onPressed: () async {
+                                  // setState(() {
+                                  //   orderMode = true;
+                                  // });
 
-                                //Navigator.pushNamed(context, '/pembayaran');
-                              })
-                        ],
+                                  // await supabase.from('order').insert({
+                                  //   'total_harga': totalPembayaran,
+                                  //   'tanggal': null,
+                                  //   'jam': null,
+                                  //   'harga': harga,
+                                  //   'upsikolog': uPsikolog,
+                                  //   'uprofile': uProfile,
+                                  //   'payment_time': null,
+                                  //   'payment_method': 'QRIS'
+                                  // });
+                                  Navigator.pushNamed(context, '/bayar-sekarang');
+                                })
+                          ],
+                        ),
                       ),
                     ))
           ],

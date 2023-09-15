@@ -80,7 +80,7 @@ class _MainAppState extends State<MainApp> {
         '/chat-page': (context) => const ChatPage(),
         '/history-order': (context) => const HistoryOrder(),
         '/terapis-main': (context) => const TerapisMainPage(),
-        '/terapis-history': (context) => TerapisHistory(),
+        '/terapis-history': (context) => const TerapisHistory(),
         '/login-psikolog': (context) => const LoginPsikolog(),
         '/total-pendapatan': (context) => const TotalPendapatan()
       }),
