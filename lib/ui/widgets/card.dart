@@ -130,7 +130,7 @@ class CardAhli extends StatelessWidget {
 }
 
 class PsikologCard extends StatelessWidget {
-  final AssetImage image;
+  final String imgUrl;
   final String name;
   final String position;
   final String expertise;
@@ -141,14 +141,14 @@ class PsikologCard extends StatelessWidget {
 
   const PsikologCard(
       {super.key,
-      required this.image,
       required this.name,
       required this.position,
       required this.expertise,
       required this.price,
       required this.workPeriod,
       required this.rating,
-      required this.onTap});
+      required this.onTap,
+      required this.imgUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +163,8 @@ class PsikologCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: kPrimary2Color,
               borderRadius: const BorderRadius.all(Radius.circular(10)),
-              image: DecorationImage(image: image, fit: BoxFit.cover),
+              image: DecorationImage(
+                  image: NetworkImage(imgUrl), fit: BoxFit.cover),
             ),
           ),
           gapW12,
@@ -285,6 +286,7 @@ class PsikologCard extends StatelessWidget {
 
 class OrderCard extends StatelessWidget {
   final bool verif;
+  final String imgUrl;
   final String kodeUnik;
   final String nama;
   final String title;
@@ -302,7 +304,8 @@ class OrderCard extends StatelessWidget {
       required this.jadwal,
       required this.harga,
       required this.onTap,
-      required this.isFinished});
+      required this.isFinished,
+      required this.imgUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -317,9 +320,8 @@ class OrderCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: kPrimary2Color,
               borderRadius: const BorderRadius.all(Radius.circular(10)),
-              image: const DecorationImage(
-                  image: AssetImage('assets/detail_pfp.png'),
-                  fit: BoxFit.cover),
+              image: DecorationImage(
+                  image: NetworkImage(imgUrl), fit: BoxFit.cover),
             ),
           ),
           gapW12,
@@ -735,6 +737,7 @@ class TellUsCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+          margin: const EdgeInsets.only(bottom: 20),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(
             color: kWhiteColor,
@@ -780,15 +783,9 @@ class TellUsCard extends StatelessWidget {
             gapH8,
             RichText(
                 text: TextSpan(
-                    text: desc,
-                    style: blackTextStyle.copyWith(
-                        fontSize: 14, fontWeight: regular),
-                    children: <TextSpan>[
-                  TextSpan(
-                    text: ' Baca Selengkapnya',
-                    style: greyTextStyle.copyWith(fontSize: 14),
-                  ),
-                ])),
+              text: desc,
+              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: regular),
+            )),
             gapH8,
             Container(
               height: image != null ? 250 : 0,

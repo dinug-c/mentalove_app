@@ -11,6 +11,9 @@ void authLogin(BuildContext context, email, String password) async {
         .signInWithPassword(email: email, password: password);
     if (res.user != null) {
       Navigator.pushReplacementNamed(context, '/main-page');
+      List<String> parts = email.split('@');
+      String username = parts[0];
+      storageController.saveData('uid', username);
     }
   } catch (e) {
     showToast(context, e.toString());

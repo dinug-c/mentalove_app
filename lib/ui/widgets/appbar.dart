@@ -83,7 +83,7 @@ class AppBarTransparent extends StatelessWidget {
       backgroundColor: kPurpleColor,
       elevation: 0.0,
       flexibleSpace: FlexibleSpaceBar(
-        background: Image.asset(img,
+        background: Image.network(img,
             fit: BoxFit.cover,
             color: kBlackColor.withOpacity(0.4),
             colorBlendMode: BlendMode.darken),

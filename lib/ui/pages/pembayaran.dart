@@ -63,6 +63,7 @@ class _PembayaranState extends State<Pembayaran> {
     dynamic jamList = waktuData[hari];
     String jam = jamList[selectedJam];
     String uPsikolog = terapisData['username'];
+    String imgUrl = terapisData['image_url'];
 
     int harga = terapisData['harga'];
     String hargaStr = NumberFormat.currency(
@@ -313,7 +314,8 @@ class _PembayaranState extends State<Pembayaran> {
                                 'payment_method': 'Midtrans',
                                 'kode_unik': random.nextInt(1000),
                                 'is_verified': false,
-                                'is_finished': false
+                                'is_finished': false,
+                                'image_url': imgUrl,
                               });
                               Navigator.pushAndRemoveUntil(
                                   context,

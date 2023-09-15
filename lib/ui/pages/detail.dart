@@ -46,7 +46,7 @@ class _DetailState extends State<Detail> {
         slivers: <Widget>[
           //AppBar
           AppBarTransparent(
-            img: 'assets/pfp_jessica.jpg',
+            img: terapisData['image_url'],
             leftAction: () {
               Navigator.pop(context);
             },

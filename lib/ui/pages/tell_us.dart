@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mentalove_app/main.dart';
+import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
 
 import '../shared/theme.dart';
@@ -34,6 +35,22 @@ class _TellUsPageState extends State<TellUsPage> {
           ),
           SliverList(
               delegate: SliverChildListDelegate([
+            GestureDetector(
+              child: Container(
+                width: parentW(context),
+                margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                height: 50,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Center(
+                    child: Text(
+                  "Tambah Status",
+                  style:
+                      whiteTextStyle.copyWith(fontSize: 14, fontWeight: bold),
+                )),
+              ),
+            ),
             FutureBuilder(
                 future: _future,
                 builder: ((context, snapshot) {
@@ -46,7 +63,7 @@ class _TellUsPageState extends State<TellUsPage> {
                         shrinkWrap: true,
                         itemCount: data.length,
                         itemBuilder: ((context, index) {
-                          var dataTell = data[index];
+                          final dataTell = data[index];
                           return TellUsCard(
                             name: toBeginningOfSentenceCase(
                                     dataTell['pengirim']) ??

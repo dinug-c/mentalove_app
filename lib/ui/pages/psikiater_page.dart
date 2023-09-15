@@ -79,8 +79,8 @@ class _PsikiaterPageState extends State<PsikiaterPage> {
                           int displayTahun = tahunSaatIni - tahun;
                           String tagsString = psikiater['tags'].join(', ');
                           return PsikologCard(
-                            image: const AssetImage('assets/default_pfp.png'),
                             name: psikiater['name'],
+                            imgUrl: psikiater['image_url'],
                             position: psikiater['title'],
                             expertise: tagsString,
                             price: hargaRp,

@@ -71,11 +71,10 @@ class _PsikologPageState extends State<PsikologPage> {
                           int tahunSaatIni = DateTime.now().year;
                           int displayTahun = tahunSaatIni - tahun;
                           String tagsString = psikolog['tags'].join(', ');
-                          AssetImage pfpImg =
-                              const AssetImage('assets/pfp_jessica.jpg');
+
                           return PsikologCard(
-                            image: pfpImg,
                             name: psikolog['name'],
+                            imgUrl: psikolog['image_url'],
                             position: psikolog['title'],
                             expertise: tagsString,
                             price: hargaRp,

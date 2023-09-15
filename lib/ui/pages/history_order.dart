@@ -25,6 +25,11 @@ class _HistoryOrderState extends State<HistoryOrder> {
   bool verification = true;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -63,8 +68,10 @@ class _HistoryOrderState extends State<HistoryOrder> {
                             itemCount: datas.length,
                             itemBuilder: ((context, index) {
                               final data = datas[index];
+
                               return OrderCard(
                                 kodeUnik: data['kode_unik'],
+                                imgUrl: data['image_url'],
                                 verif: data['is_verified'] ?? false,
                                 nama: "Nama Psikolog: ${data['upsikolog']}",
                                 title: "Order",
