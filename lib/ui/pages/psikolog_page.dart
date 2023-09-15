@@ -46,8 +46,13 @@ class _PsikologPageState extends State<PsikologPage> {
                 FutureBuilder<List<Map<String, dynamic>>>(
                   future: _future,
                   builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Center(
+                          child: Text('Tidak ada yang tersedia'));
                     }
                     final psikologs = snapshot.data!;
                     return MediaQuery.removePadding(

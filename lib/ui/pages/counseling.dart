@@ -75,12 +75,23 @@ class _CounselingState extends State<Counseling> {
                             Navigator.pushNamed(context, '/psikiater-page');
                           },
                         ),
-                        gapH24,
+                        gapH12,
+                        Text(
+                          'History Order',
+                          style: blackTextStyle.copyWith(
+                              fontSize: 16, fontWeight: extraBold),
+                        ),
+                        Text(
+                          'Cek Pesananmu Disini',
+                          style: blackTextStyle.copyWith(
+                              fontSize: 14, fontWeight: regular),
+                        ),
+                        gapH12,
                         CardAhli(
                           title: 'Lihat History Order',
                           desc:
                               'Membantumu dalam melakukan penanganan lebih lanjut dan memberikan terapi pengobatan.',
-                          image: const AssetImage('assets/icon_psiko.png'),
+                          image: const AssetImage('assets/icon_schedule.png'),
                           onTap: () {
                             Navigator.pushNamed(context, '/history-order');
                           },

@@ -25,11 +25,6 @@ class _HistoryOrderState extends State<HistoryOrder> {
   bool verification = true;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -58,51 +53,54 @@ class _HistoryOrderState extends State<HistoryOrder> {
                 FutureBuilder(
                     future: _future,
                     builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
-                      } else {
-                        final datas = snapshot.data!;
-                        return ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: datas.length,
-                            itemBuilder: ((context, index) {
-                              final data = datas[index];
-                              return OrderCard(
-                                kodeUnik: data['kode_unik'],
-                                imgUrl: data['image_url'],
-                                verif: data['is_verified'] ?? false,
-                                nama: "Nama Psikolog: ${data['upsikolog']}",
-                                title: "Order",
-                                jadwal: "${data['tanggal']} ${data['jam']}",
-                                harga: 'Rp ${data['harga']}',
-                                isFinished: data['is_finished'],
-                                onTap: () {
-                                  var verif = data['is_verified'] ?? false;
-                                  var finish = data['is_finished'] ?? false;
-                                  if (!finish) {
-                                    if (verif) {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChatPsikologPage(
-                                                    psikologId:
-                                                        data['upsikolog'],
-                                                    userId: data['uprofile'],
-                                                    kodeUnik: data['kode_unik'],
-                                                  )));
-                                    } else {
-                                      showToast(
-                                          context, "Order belum diverifikasi");
-                                    }
-                                  } else {
-                                    showToast(context, "Order sudah selesai");
-                                  }
-                                },
-                              );
-                            }));
+                      } else if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return const Center(
+                            child: Text('Tidak ada yang tersedia'));
                       }
+                      final datas = snapshot.data!;
+                      return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: datas.length,
+                          itemBuilder: ((context, index) {
+                            final data = datas[index];
+                            return OrderCard(
+                              kodeUnik: data['kode_unik'],
+                              imgUrl: data['image_url'],
+                              verif: data['is_verified'] ?? false,
+                              nama: "Nama Psikolog: ${data['upsikolog']}",
+                              title: "Order",
+                              jadwal: "${data['tanggal']} ${data['jam']}",
+                              harga: 'Rp ${data['harga']}',
+                              isFinished: data['is_finished'],
+                              onTap: () {
+                                var verif = data['is_verified'] ?? false;
+                                var finish = data['is_finished'] ?? false;
+                                if (!finish) {
+                                  if (verif) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChatPsikologPage(
+                                                  psikologId: data['upsikolog'],
+                                                  userId: data['uprofile'],
+                                                  kodeUnik: data['kode_unik'],
+                                                )));
+                                  } else {
+                                    showToast(
+                                        context, "Order belum diverifikasi");
+                                  }
+                                } else {
+                                  showToast(context, "Order sudah selesai");
+                                }
+                              },
+                            );
+                          }));
                     }),
                 gapH(100)
               ],
