@@ -16,3 +16,11 @@ const gapH12 = SizedBox(height: 12);
 const gapH24 = SizedBox(height: 24);
 const gapH32 = SizedBox(height: 32);
 const gapH64 = SizedBox(height: 64);
+
+double parentW(BuildContext context) {
+  return MediaQuery.of(context).size.width;
+}
+
+double parentH(BuildContext context) {
+  return MediaQuery.of(context).size.height;
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:mentalove_app/ui/pages/chat_page.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/daily_content.dart';
@@ -8,7 +9,9 @@ import 'package:mentalove_app/ui/pages/history.dart';
 import 'package:mentalove_app/ui/pages/history_order.dart';
 import 'package:mentalove_app/ui/pages/landing_page.dart';
 import 'package:mentalove_app/ui/pages/login_page.dart';
+import 'package:mentalove_app/ui/pages/login_psikolog.dart';
 import 'package:mentalove_app/ui/pages/main_page.dart';
+
 import 'package:mentalove_app/ui/pages/pembayaran.dart';
 import 'package:mentalove_app/ui/pages/psikiater_page.dart';
 import 'package:mentalove_app/ui/pages/psikolog_page.dart';
@@ -16,6 +19,7 @@ import 'package:mentalove_app/ui/pages/signup_page.dart';
 import 'package:mentalove_app/ui/pages/tell_us.dart';
 import 'package:mentalove_app/ui/pages/terapis_history.dart';
 import 'package:mentalove_app/ui/pages/terapis_main.dart';
+import 'package:mentalove_app/ui/pages/total_pendapatan.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'cubit/page_cubit.dart';
@@ -23,7 +27,7 @@ import 'ui/pages/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await GetStorage.init();
   await Supabase.initialize(
     url: 'https://bggdwohgbcrkzkwnmsoa.supabase.co',
     anonKey:
@@ -76,7 +80,9 @@ class _MainAppState extends State<MainApp> {
         '/chat-page': (context) => const ChatPage(),
         '/history-order': (context) => const HistoryOrder(),
         '/terapis-main': (context) => const TerapisMainPage(),
-        '/terapis-history': (context) => const TerapisHistory(),
+        '/terapis-history': (context) => TerapisHistory(),
+        '/login-psikolog': (context) => const LoginPsikolog(),
+        '/total-pendapatan': (context) => const TotalPendapatan()
       }),
     );
   }

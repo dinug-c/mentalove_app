@@ -290,6 +290,7 @@ class OrderCard extends StatelessWidget {
   final String title;
   final String jadwal;
   final String harga;
+  final Function() onTap;
 
   const OrderCard(
       {super.key,
@@ -298,7 +299,8 @@ class OrderCard extends StatelessWidget {
       required this.nama,
       required this.title,
       required this.jadwal,
-      required this.harga});
+      required this.harga,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -376,7 +378,7 @@ class OrderCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: onTap,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: kPurpleColor,
                           elevation: 0.0,
@@ -439,8 +441,8 @@ class CustomerCard extends StatelessWidget {
   final String username;
   final String jadwal;
   final String harga;
-  final Function onTapChat;
-  final Function onTapDetail;
+  final Function() onTapChat;
+  final Function() onTapDetail;
   const CustomerCard(
       {super.key,
       required this.kodeUnik,
@@ -515,9 +517,7 @@ class CustomerCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {
-                          onTapChat;
-                        },
+                        onPressed: onTapChat,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: kPurpleColor,
                           elevation: 0.0,

@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
+
+import '../../controllers/storage_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,6 +16,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  StorageController storageController = Get.put(StorageController());
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () {
@@ -31,13 +36,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _redirect() async {
     await Future.delayed(Duration.zero);
-
     if (!mounted) return;
 
     final session = supabase.auth.currentSession;
-
+    dynamic isPsikolog = storageController.getData('temp2').toString();
+    stderr.writeln(isPsikolog.toString());
     if (session != null) {
-      Navigator.of(context).pushReplacementNamed('/main-page');
+      if (isPsikolog == "psiko") {
+        Navigator.of(context).pushReplacementNamed('/terapis-main');
+      } else {
+        Navigator.of(context).pushReplacementNamed('/main-page');
+      }
     } else {
       Navigator.of(context).pushReplacementNamed('/login-page');
     }

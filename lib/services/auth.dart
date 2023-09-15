@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mentalove_app/ui/widgets/toast.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../controllers/storage_controller.dart';
 import '../main.dart';
 
 void authLogin(BuildContext context, email, String password) async {
@@ -10,6 +11,20 @@ void authLogin(BuildContext context, email, String password) async {
         .signInWithPassword(email: email, password: password);
     if (res.user != null) {
       Navigator.pushReplacementNamed(context, '/main-page');
+    }
+  } catch (e) {
+    showToast(context, e.toString());
+  }
+}
+
+void psikologLogin(BuildContext context, email, String password) async {
+  try {
+    AuthResponse res = await supabase.auth
+        .signInWithPassword(email: email, password: password);
+    if (res.user != null) {
+      storageController.saveData('temp2', "psiko");
+
+      Navigator.pushReplacementNamed(context, '/terapis-main');
     }
   } catch (e) {
     showToast(context, e.toString());

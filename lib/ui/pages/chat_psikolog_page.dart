@@ -16,19 +16,12 @@ import '../shared/theme.dart';
 
 class ChatPsikologPage extends StatefulWidget {
   final String psikologId;
-  final int duration;
+  final String userId;
   const ChatPsikologPage({
     Key? key,
     required this.psikologId,
-    required this.duration,
+    required this.userId,
   }) : super(key: key);
-
-  Route<void> route() {
-    return MaterialPageRoute(
-      builder: (context) =>
-          ChatPsikologPage(duration: duration, psikologId: psikologId),
-    );
-  }
 
   @override
   State<ChatPsikologPage> createState() => _ChatPsikologPageState();
@@ -39,12 +32,38 @@ class _ChatPsikologPageState extends State<ChatPsikologPage> {
   final CountdownController _controller = CountdownController(autoStart: true);
   final Map<String, Profile> _profileCache = {};
 
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Peringatan!'),
+            content: new Text(
+                'Apakah kamu yakin ingin mengakhiri sesi konseling ini?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text('No'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/history-order', (route) => false);
+                },
+                child: new Text('Yes'),
+              ),
+            ],
+          ),
+        )) ??
+        false;
+  }
+
   @override
   void initState() {
     final myUserId = supabase.auth.currentUser!.id;
     _messagesStream = supabase
         .from('messages')
         .stream(primaryKey: ['id'])
+        .eq('msg_identifier', "${widget.userId}${widget.psikologId}")
         .order('created_at')
         .map((maps) => maps
             .map((map) => Message.fromMap(map: map, myUserId: myUserId))
@@ -111,9 +130,6 @@ class _ChatPsikologPageState extends State<ChatPsikologPage> {
                           itemBuilder: (context, index) {
                             final message = messages[index];
 
-                            /// I know it's not good to include code that is not related
-                            /// to rendering the widget inside build method, but for
-                            /// creating an app quick and dirty, it's fine 😂
                             _loadProfileCache(message.profileId);
 
                             return _ChatBubble(
@@ -123,7 +139,10 @@ class _ChatPsikologPageState extends State<ChatPsikologPage> {
                           },
                         ),
                 ),
-                const _MessageBar(),
+                _MessageBar(
+                  psikologId: widget.psikologId,
+                  userId: widget.userId,
+                ),
               ],
             );
           } else {
@@ -135,10 +154,13 @@ class _ChatPsikologPageState extends State<ChatPsikologPage> {
   }
 }
 
-/// Set of widget that contains TextField and Button to submit message
 class _MessageBar extends StatefulWidget {
+  final String psikologId;
+  final String userId;
   const _MessageBar({
     Key? key,
+    required this.psikologId,
+    required this.userId,
   }) : super(key: key);
 
   @override
@@ -205,6 +227,7 @@ class _MessageBarState extends State<_MessageBar> {
       await supabase.from('messages').insert({
         'profile_id': myUserId,
         'content': text,
+        'msg_identifier': "${widget.userId}${widget.psikologId}"
       });
     } on PostgrestException catch (error) {
       showToast(context, error.message);
