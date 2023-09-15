@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:mentalove_app/main.dart';
+import 'package:mentalove_app/ui/pages/bayar_disini.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
@@ -44,7 +45,6 @@ class _PembayaranState extends State<Pembayaran> {
         .select('username')
         .eq('id', userId) // Menggunakan userId yang sudah Anda dapatkan
         .execute();
-
     final data = response.data;
     setState(() {
       uProfile = data[0]['username']; // Simpan username dalam variabel
@@ -315,8 +315,13 @@ class _PembayaranState extends State<Pembayaran> {
                                 'is_verified': false,
                                 'is_finished': false
                               });
-                              Navigator.pushNamedAndRemoveUntil(context,
-                                  '/bayar-sekarang', (context) => false);
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => BayarDisini(
+                                          paymentLink:
+                                              terapisData['payment_link'])),
+                                  (context) => false);
                             })
                       ],
                     ),

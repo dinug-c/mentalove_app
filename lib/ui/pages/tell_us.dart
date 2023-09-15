@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mentalove_app/ui/shared/gaps.dart';
+import 'package:intl/intl.dart';
+import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
 
 import '../shared/theme.dart';
@@ -13,6 +14,13 @@ class TellUsPage extends StatefulWidget {
 }
 
 class _TellUsPageState extends State<TellUsPage> {
+  final _future = supabase.from('tell_us').select<List<Map<String, dynamic>>>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,33 +34,31 @@ class _TellUsPageState extends State<TellUsPage> {
           ),
           SliverList(
               delegate: SliverChildListDelegate([
-            TellUsCard(
-              name: 'Susanto',
-              date: '28 Juni 2023',
-              desc:
-                  'Tadi pacarku marah sama aku gara-gara aku ga beliin cilok, mau tanya dong guys solusinya aku harus gimana ya, soalnya',
-              profil: const AssetImage('assets/default_pfp.png'),
-              onTap: () {},
-            ),
-            gapH12,
-            TellUsCard(
-              name: 'Susanti',
-              date: '28 Juni 2023',
-              desc:
-                  'Akhirnya  setelah 5 taun berjuang sendirian cari duit buat lunasin utang suami, aku bisa lunasin utangnyaa hari iniii. Jadi',
-              profil: const AssetImage('assets/default_pfp.png'),
-              onTap: () {},
-              image: const AssetImage('assets/kons-tapmuk.png'),
-            ),
-            gapH12,
-            TellUsCard(
-              name: 'Evelyn',
-              date: '28 Juni 2023',
-              desc:
-                  'doiku ga peka, padal udah kukodein berkali kali tapi masih aja tarik ulur gimana ya caranya',
-              profil: const AssetImage('assets/default_pfp.png'),
-              onTap: () {},
-            )
+            FutureBuilder(
+                future: _future,
+                builder: ((context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    final data = snapshot.data!;
+                    return ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: data.length,
+                        itemBuilder: ((context, index) {
+                          var dataTell = data[index];
+                          return TellUsCard(
+                            name: toBeginningOfSentenceCase(
+                                    dataTell['pengirim']) ??
+                                "Loading",
+                            date: dataTell['tanggal'],
+                            desc: dataTell['konten'],
+                            profil: const AssetImage('assets/default_pfp.png'),
+                            onTap: () {},
+                          );
+                        }));
+                  }
+                }))
           ]))
         ]));
   }

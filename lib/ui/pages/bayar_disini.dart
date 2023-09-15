@@ -1,12 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../shared/gaps.dart';
 import '../shared/theme.dart';
 import '../widgets/appbar.dart';
-import 'package:url_launcher/url_launcher.dart';
-// import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 
 class BayarDisini extends StatefulWidget {
-  const BayarDisini({super.key});
+  final String paymentLink;
+  const BayarDisini({
+    Key? key,
+    required this.paymentLink,
+  }) : super(key: key);
 
   @override
   State<BayarDisini> createState() => _BayarDisiniState();
@@ -31,10 +36,6 @@ class _BayarDisiniState extends State<BayarDisini> {
             title: 'Bayar Sekarang',
             startColor: kPrimaryColor,
             endColor: kPrimary2Color,
-            leftAction: () {
-              Navigator.pop(context);
-            },
-            leftIcon: Icons.arrow_back,
           ),
           SliverList(
             delegate: SliverChildListDelegate([
@@ -71,11 +72,30 @@ class _BayarDisiniState extends State<BayarDisini> {
                     ),
                   ),
                   onPressed: () {
-                    _openBrowser(
-                        'https://app.sandbox.midtrans.com/payment-links/1694709868325'); // Replace with your URL
+                    _openBrowser(widget.paymentLink); // Replace with your URL
                   },
                   child: Text(
                     'Bayar Disini',
+                    style:
+                        whiteTextStyle.copyWith(fontSize: 18, fontWeight: bold),
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(20),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kPurpleColor,
+                    elevation: 0.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/main-page');
+                  },
+                  child: Text(
+                    'Kembali Beranda',
                     style:
                         whiteTextStyle.copyWith(fontSize: 18, fontWeight: bold),
                   ),

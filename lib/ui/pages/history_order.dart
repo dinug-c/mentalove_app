@@ -6,10 +6,9 @@ import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/toast.dart';
 
+import '../shared/gaps.dart';
 import '../widgets/card.dart';
 import 'chat_psikolog_page.dart';
-
-import '../widgets/card.dart';
 
 class HistoryOrder extends StatefulWidget {
   const HistoryOrder({super.key});
@@ -37,6 +36,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
     return Scaffold(
       backgroundColor: kWhiteColor,
       body: CustomScrollView(
+        scrollDirection: Axis.vertical,
         slivers: <Widget>[
           AppBarCustom(
             title: 'History Order',
@@ -57,49 +57,48 @@ class _HistoryOrderState extends State<HistoryOrder> {
                         return const Center(child: CircularProgressIndicator());
                       } else {
                         final datas = snapshot.data!;
-                        return SingleChildScrollView(
-                          child: ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: datas.length,
-                              itemBuilder: ((context, index) {
-                                final data = datas[index];
-                                return OrderCard(
-                                  kodeUnik: data['kode_unik'],
-                                  verif: data['is_verified'] ?? false,
-                                  nama: "Nama Psikolog: ${data['upsikolog']}",
-                                  title: "Order",
-                                  jadwal: "${data['tanggal']} ${data['jam']}",
-                                  harga: 'Rp ${data['harga']}',
-                                  onTap: () {
-                                    var verif = data['is_verified'] ?? false;
-                                    var finish = data['is_finished'] ?? false;
-                                    if (!finish) {
-                                      if (verif) {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ChatPsikologPage(
-                                                      psikologId:
-                                                          data['upsikolog'],
-                                                      userId: data['uprofile'],
-                                                      kodeUnik:
-                                                          data['kode_unik'],
-                                                    )));
-                                      } else {
-                                        showToast(context,
-                                            "Order belum diverifikasi");
-                                      }
+                        return ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: datas.length,
+                            itemBuilder: ((context, index) {
+                              final data = datas[index];
+                              return OrderCard(
+                                kodeUnik: data['kode_unik'],
+                                verif: data['is_verified'] ?? false,
+                                nama: "Nama Psikolog: ${data['upsikolog']}",
+                                title: "Order",
+                                jadwal: "${data['tanggal']} ${data['jam']}",
+                                harga: 'Rp ${data['harga']}',
+                                isFinished: data['is_finished'],
+                                onTap: () {
+                                  var verif = data['is_verified'] ?? false;
+                                  var finish = data['is_finished'] ?? false;
+                                  if (!finish) {
+                                    if (verif) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ChatPsikologPage(
+                                                    psikologId:
+                                                        data['upsikolog'],
+                                                    userId: data['uprofile'],
+                                                    kodeUnik: data['kode_unik'],
+                                                  )));
                                     } else {
-                                      showToast(context, "Order sudah selesai");
+                                      showToast(
+                                          context, "Order belum diverifikasi");
                                     }
-                                  },
-                                );
-                              })),
-                        );
+                                  } else {
+                                    showToast(context, "Order sudah selesai");
+                                  }
+                                },
+                              );
+                            }));
                       }
-                    })
+                    }),
+                gapH(100)
               ],
             ),
           ),

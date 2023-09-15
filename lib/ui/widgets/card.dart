@@ -291,6 +291,7 @@ class OrderCard extends StatelessWidget {
   final String jadwal;
   final String harga;
   final Function() onTap;
+  final bool isFinished;
 
   const OrderCard(
       {super.key,
@@ -300,12 +301,13 @@ class OrderCard extends StatelessWidget {
       required this.title,
       required this.jadwal,
       required this.harga,
-      required this.onTap});
+      required this.onTap,
+      required this.isFinished});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      margin: const EdgeInsets.only(bottom: 10, left: 20, right: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -380,7 +382,8 @@ class OrderCard extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: onTap,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: kPurpleColor,
+                          backgroundColor:
+                              (isFinished) ? kGreyColor : kPurpleColor,
                           elevation: 0.0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
@@ -395,7 +398,7 @@ class OrderCard extends StatelessWidget {
                             ),
                             gapW4,
                             Text(
-                              'Chat',
+                              (isFinished) ? 'Order Selesai' : 'Chat',
                               style: whiteTextStyle.copyWith(
                                 fontSize: 12,
                                 fontWeight: extraBold,
@@ -406,25 +409,6 @@ class OrderCard extends StatelessWidget {
                       ),
                     ),
                     gapW4,
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: kPrimaryLightColor,
-                          elevation: 0.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                        ),
-                        child: Text(
-                          'Detail...',
-                          style: purpleTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: extraBold,
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 )
               ],
