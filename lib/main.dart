@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:mentalove_app/ui/pages/add_status.dart';
 import 'package:mentalove_app/ui/pages/chat_page.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/daily_content.dart';
@@ -23,6 +24,14 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'cubit/page_cubit.dart';
 import 'ui/pages/splash_screen.dart';
+
+import 'package:intl/intl.dart';
+
+String getFormattedDate() {
+  var now = DateTime.now();
+  var formatter = DateFormat('dd MMMM yyyy');
+  return formatter.format(now);
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -82,6 +91,7 @@ class _MainAppState extends State<MainApp> {
         '/terapis-history': (context) => const TerapisHistory(),
         '/login-psikolog': (context) => const LoginPsikolog(),
         '/total-pendapatan': (context) => const TotalPendapatan(),
+        '/add-status': (context) => const AddStatus()
       }),
     );
   }

@@ -68,7 +68,6 @@ class _HistoryOrderState extends State<HistoryOrder> {
                             itemCount: datas.length,
                             itemBuilder: ((context, index) {
                               final data = datas[index];
-
                               return OrderCard(
                                 kodeUnik: data['kode_unik'],
                                 imgUrl: data['image_url'],
