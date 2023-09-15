@@ -73,19 +73,26 @@ class _HistoryOrderState extends State<HistoryOrder> {
                                   harga: 'Rp ${data['harga']}',
                                   onTap: () {
                                     var verif = data['is_verified'] ?? false;
-                                    if (verif) {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChatPsikologPage(
+                                    var finish = data['is_finished'] ?? false;
+                                    if (!finish) {
+                                      if (verif) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ChatPsikologPage(
                                                       psikologId:
                                                           data['upsikolog'],
-                                                      userId:
-                                                          data['uprofile'])));
+                                                      userId: data['uprofile'],
+                                                      kodeUnik:
+                                                          data['kode_unik'],
+                                                    )));
+                                      } else {
+                                        showToast(context,
+                                            "Order belum diverifikasi");
+                                      }
                                     } else {
-                                      showToast(
-                                          context, "Order belum diverifikasi");
+                                      showToast(context, "Order sudah selesai");
                                     }
                                   },
                                 );

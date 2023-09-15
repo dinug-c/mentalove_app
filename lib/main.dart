@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:mentalove_app/ui/pages/bayar_disini.dart';
 import 'package:mentalove_app/ui/pages/chat_page.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/daily_content.dart';
@@ -82,7 +83,8 @@ class _MainAppState extends State<MainApp> {
         '/terapis-main': (context) => const TerapisMainPage(),
         '/terapis-history': (context) => const TerapisHistory(),
         '/login-psikolog': (context) => const LoginPsikolog(),
-        '/total-pendapatan': (context) => const TotalPendapatan()
+        '/total-pendapatan': (context) => const TotalPendapatan(),
+        '/bayar-sekarang': (context) => const BayarDisini(),
       }),
     );
   }

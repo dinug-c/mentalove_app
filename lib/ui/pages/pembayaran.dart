@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +9,6 @@ import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
-import 'package:mentalove_app/ui/widgets/toast.dart';
 
 class Pembayaran extends StatefulWidget {
   final Map<String, dynamic> terapisData;
@@ -27,10 +28,9 @@ class Pembayaran extends StatefulWidget {
 }
 
 class _PembayaranState extends State<Pembayaran> {
-  bool orderMode =
-      false; //false = order belum dibuat, true = order sudah dibuat
   final userId = supabase.auth.currentUser?.id;
   String uProfile = '';
+  Random random = Random();
 
   @override
   void initState() {
@@ -286,79 +286,42 @@ class _PembayaranState extends State<Pembayaran> {
                 ],
               ),
             ),
-            orderMode
-                ? Expanded(
-                    flex: 1,
-                    child: InkWell(
-                      child: Container(
-                        height: 10,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 5),
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(
-                            color: kWhiteColor,
-                            border: Border.all(color: kPurpleColor, width: 1.0),
-                            borderRadius: BorderRadius.circular(15)),
-                        //padding: const EdgeInsets.only(top: 20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '#dsfsdfsd',
-                                  style: blackTextStyle.copyWith(
-                                      fontSize: 17, fontWeight: bold),
-                                ),
-                                Text(
-                                  '12:59',
-                                  style: blackTextStyle.copyWith(
-                                      fontSize: 17, fontWeight: bold),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ))
-                : Expanded(
-                    flex: 1,
-                    child: InkWell(
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 5),
-                        // padding: const EdgeInsets.only(top: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Button(
-                                text: "Bayar Sekarang",
-                                textColor: kPurpleColor,
-                                startColor: kPrimaryLightColor,
-                                endColor: kPrimaryLightColor,
-                                onPressed: () async {
-                                  // setState(() {
-                                  //   orderMode = true;
-                                  // });
-
-                                  // await supabase.from('order').insert({
-                                  //   'total_harga': totalPembayaran,
-                                  //   'tanggal': null,
-                                  //   'jam': null,
-                                  //   'harga': harga,
-                                  //   'upsikolog': uPsikolog,
-                                  //   'uprofile': uProfile,
-                                  //   'payment_time': null,
-                                  //   'payment_method': 'QRIS'
-                                  // });
-                                  Navigator.pushNamed(context, '/bayar-sekarang');
-                                })
-                          ],
-                        ),
-                      ),
-                    ))
+            Expanded(
+                flex: 1,
+                child: InkWell(
+                  child: Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                    // padding: const EdgeInsets.only(top: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Button(
+                            text: "Bayar Sekarang",
+                            textColor: kPurpleColor,
+                            startColor: kPrimaryLightColor,
+                            endColor: kPrimaryLightColor,
+                            onPressed: () async {
+                              await supabase.from('order').insert({
+                                'total_harga': totalPembayaran,
+                                'tanggal': hari,
+                                'jam': jam,
+                                'harga': harga,
+                                'upsikolog': uPsikolog,
+                                'uprofile': uProfile,
+                                'payment_time': null,
+                                'payment_method': 'Midtrans',
+                                'kode_unik': random.nextInt(1000),
+                                'is_verified': false,
+                                'is_finished': false
+                              });
+                              Navigator.pushNamedAndRemoveUntil(context,
+                                  '/bayar-sekarang', (context) => false);
+                            })
+                      ],
+                    ),
+                  ),
+                ))
           ],
         ),
       ),

@@ -7,6 +7,7 @@ import 'package:timeago/timeago.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
+import 'package:mentalove_app/controllers/storage_controller.dart';
 import 'package:mentalove_app/ui/widgets/toast.dart';
 
 import '../../main.dart';
@@ -17,10 +18,12 @@ import '../shared/theme.dart';
 class ChatPsikologPage extends StatefulWidget {
   final String psikologId;
   final String userId;
+  final String kodeUnik;
   const ChatPsikologPage({
     Key? key,
     required this.psikologId,
     required this.userId,
+    required this.kodeUnik,
   }) : super(key: key);
 
   @override
@@ -45,7 +48,9 @@ class _ChatPsikologPageState extends State<ChatPsikologPage> {
                 child: new Text('No'),
               ),
               TextButton(
-                onPressed: () {
+                onPressed: () async {
+                  await supabase.from('order').update({'is_finished': true}).eq(
+                      'kode_unik', widget.kodeUnik);
                   Navigator.pushNamedAndRemoveUntil(
                       context, '/history-order', (route) => false);
                 },
@@ -86,69 +91,72 @@ class _ChatPsikologPageState extends State<ChatPsikologPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Chat')),
-      body: StreamBuilder<List<Message>>(
-        stream: _messagesStream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final messages = snapshot.data!;
-            return Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  color: kPrimaryColor,
-                  child: Center(
-                    child: Countdown(
-                      controller: _controller,
-                      seconds: 3600,
-                      build: (_, double time) {
-                        final int minutes = (time / 60).floor();
-                        final int seconds = (time % 60).floor();
-                        return Text(
-                          '$minutes:${seconds.toString().padLeft(2, '0')}',
-                          style: whiteTextStyle.copyWith(
-                              fontSize: 14, fontWeight: bold),
-                        );
-                      },
-                      interval: Duration(milliseconds: 100),
-                      onFinished: () {
-                        showToast(context, "Waktu konseling telah habis");
-                      },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Chat')),
+        body: StreamBuilder<List<Message>>(
+          stream: _messagesStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final messages = snapshot.data!;
+              return Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 50,
+                    color: kPrimaryColor,
+                    child: Center(
+                      child: Countdown(
+                        controller: _controller,
+                        seconds: 3600,
+                        build: (_, double time) {
+                          final int minutes = (time / 60).floor();
+                          final int seconds = (time % 60).floor();
+                          return Text(
+                            '$minutes:${seconds.toString().padLeft(2, '0')}',
+                            style: whiteTextStyle.copyWith(
+                                fontSize: 14, fontWeight: bold),
+                          );
+                        },
+                        interval: Duration(milliseconds: 100),
+                        onFinished: () {
+                          showToast(context, "Waktu konseling telah habis");
+                        },
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: messages.isEmpty
-                      ? const Center(
-                          child: Text('Mulai perjalanan konseling kamu :D'),
-                        )
-                      : ListView.builder(
-                          reverse: true,
-                          itemCount: messages.length,
-                          itemBuilder: (context, index) {
-                            final message = messages[index];
+                  Expanded(
+                    child: messages.isEmpty
+                        ? const Center(
+                            child: Text('Mulai perjalanan konseling kamu :D'),
+                          )
+                        : ListView.builder(
+                            reverse: true,
+                            itemCount: messages.length,
+                            itemBuilder: (context, index) {
+                              final message = messages[index];
 
-                            _loadProfileCache(message.profileId);
+                              _loadProfileCache(message.profileId);
 
-                            return _ChatBubble(
-                              message: message,
-                              profile: _profileCache[message.profileId],
-                            );
-                          },
-                        ),
-                ),
-                _MessageBar(
-                  psikologId: widget.psikologId,
-                  userId: widget.userId,
-                ),
-              ],
-            );
-          } else {
-            return preloader;
-          }
-        },
+                              return _ChatBubble(
+                                message: message,
+                                profile: _profileCache[message.profileId],
+                              );
+                            },
+                          ),
+                  ),
+                  _MessageBar(
+                    psikologId: widget.psikologId,
+                    userId: widget.userId,
+                  ),
+                ],
+              );
+            } else {
+              return preloader;
+            }
+          },
+        ),
       ),
     );
   }

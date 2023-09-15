@@ -80,6 +80,7 @@ class _TerapisHistoryState extends State<TerapisHistory> {
                                           builder: (context) =>
                                               ChatPsikologPage(
                                                   psikologId: data['upsikolog'],
+                                                  kodeUnik: data['kode_unik'],
                                                   userId: data['uprofile'])));
                                 },
                                 onTapDetail: () {},
