@@ -36,6 +36,9 @@ class _TellUsPageState extends State<TellUsPage> {
           SliverList(
               delegate: SliverChildListDelegate([
             GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/add-status');
+              },
               child: Container(
                 width: parentW(context),
                 margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
@@ -51,31 +54,34 @@ class _TellUsPageState extends State<TellUsPage> {
                 )),
               ),
             ),
+            gapH12,
             FutureBuilder(
-                future: _future,
-                builder: ((context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    final data = snapshot.data!;
-                    return ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: data.length,
-                        itemBuilder: ((context, index) {
-                          final dataTell = data[index];
-                          return TellUsCard(
-                            name: toBeginningOfSentenceCase(
-                                    dataTell['pengirim']) ??
-                                "Loading",
-                            date: dataTell['tanggal'],
-                            desc: dataTell['konten'],
-                            profil: const AssetImage('assets/default_pfp.png'),
-                            onTap: () {},
-                          );
-                        }));
-                  }
-                }))
+              future: _future,
+              builder: ((context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  final data = snapshot.data!;
+                  final items = List<Widget>.generate(data.length, (index) {
+                    final dataTell = data[index];
+                    return TellUsCard(
+                      name: toBeginningOfSentenceCase(dataTell['pengirim']) ??
+                          "Loading",
+                      date: dataTell['tanggal'],
+                      desc: dataTell['konten'],
+                      profil: const AssetImage('assets/default_pfp.png'),
+                      onTap: () {},
+                    );
+                  });
+
+                  return Column(
+                    // Menggunakan Column untuk menampilkan item
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: items,
+                  );
+                }
+              }),
+            )
           ]))
         ]));
   }
