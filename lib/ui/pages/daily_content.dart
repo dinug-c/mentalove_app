@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/ui/pages/content.dart';
-import 'package:mentalove_app/ui/pages/detail.dart';
-import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';

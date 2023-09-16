@@ -130,17 +130,17 @@ class CardAhli extends StatelessWidget {
 }
 
 class ProfileCard extends StatelessWidget {
-  final AssetImage image;
+  final IconData icon;
   final String title;
   final String desc;
   final Function() onTap;
 
   const ProfileCard({
     Key? key,
-    required this.image,
     required this.title,
     required this.desc,
     required this.onTap,
+    required this.icon,
   }) : super(key: key);
 
   @override
@@ -161,12 +161,10 @@ class ProfileCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                image: DecorationImage(image: image, fit: BoxFit.cover),
-              ),
+            Icon(
+              icon,
+              size: 70,
+              color: kPurpleColor,
             ),
             SizedBox(
               width: parentWidth * 0.6,
@@ -377,7 +375,7 @@ class OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10, left: 20, right: 20),
+      margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

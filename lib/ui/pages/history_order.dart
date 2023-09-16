@@ -62,45 +62,50 @@ class _HistoryOrderState extends State<HistoryOrder> {
                             child: Text('Tidak ada yang tersedia'));
                       }
                       final datas = snapshot.data!;
-                      return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: datas.length,
-                          itemBuilder: ((context, index) {
-                            final data = datas[index];
-                            return OrderCard(
-                              kodeUnik: data['kode_unik'],
-                              imgUrl: data['image_url'],
-                              verif: data['is_verified'] ?? false,
-                              nama: "Nama Psikolog: ${data['upsikolog']}",
-                              title: "Order",
-                              jadwal: "${data['tanggal']} ${data['jam']}",
-                              harga: 'Rp ${data['harga']}',
-                              isFinished: data['is_finished'],
-                              onTap: () {
-                                var verif = data['is_verified'] ?? false;
-                                var finish = data['is_finished'] ?? false;
-                                if (!finish) {
-                                  if (verif) {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ChatPsikologPage(
-                                                  psikologId: data['upsikolog'],
-                                                  userId: data['uprofile'],
-                                                  kodeUnik: data['kode_unik'],
-                                                )));
+                      return MediaQuery.removePadding(
+                        context: context,
+                        removeTop: true,
+                        child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: datas.length,
+                            itemBuilder: ((context, index) {
+                              final data = datas[index];
+                              return OrderCard(
+                                kodeUnik: data['kode_unik'],
+                                imgUrl: data['image_url'],
+                                verif: data['is_verified'] ?? false,
+                                nama: "Nama Psikolog: ${data['upsikolog']}",
+                                title: "Order",
+                                jadwal: "${data['tanggal']} ${data['jam']}",
+                                harga: 'Rp ${data['harga']}',
+                                isFinished: data['is_finished'],
+                                onTap: () {
+                                  var verif = data['is_verified'] ?? false;
+                                  var finish = data['is_finished'] ?? false;
+                                  if (!finish) {
+                                    if (verif) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ChatPsikologPage(
+                                                    psikologId:
+                                                        data['upsikolog'],
+                                                    userId: data['uprofile'],
+                                                    kodeUnik: data['kode_unik'],
+                                                  )));
+                                    } else {
+                                      showToast(
+                                          context, "Order belum diverifikasi");
+                                    }
                                   } else {
-                                    showToast(
-                                        context, "Order belum diverifikasi");
+                                    showToast(context, "Order sudah selesai");
                                   }
-                                } else {
-                                  showToast(context, "Order sudah selesai");
-                                }
-                              },
-                            );
-                          }));
+                                },
+                              );
+                            })),
+                      );
                     }),
                 gapH(100)
               ],

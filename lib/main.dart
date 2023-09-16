@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:mentalove_app/ui/pages/about_us.dart';
 import 'package:mentalove_app/ui/pages/add_status.dart';
 import 'package:mentalove_app/ui/pages/chat_page.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
@@ -93,7 +94,8 @@ class _MainAppState extends State<MainApp> {
         '/login-psikolog': (context) => const LoginPsikolog(),
         '/total-pendapatan': (context) => const TotalPendapatan(),
         '/add-status': (context) => const AddStatus(),
-        '/profile-page': (context) => const ProfilePage()
+        '/profile-page': (context) => const ProfilePage(),
+        '/about-us': (context) => const AboutUsPage()
       }),
     );
   }
