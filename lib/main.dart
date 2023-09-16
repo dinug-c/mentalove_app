@@ -13,6 +13,7 @@ import 'package:mentalove_app/ui/pages/login_page.dart';
 import 'package:mentalove_app/ui/pages/login_psikolog.dart';
 import 'package:mentalove_app/ui/pages/main_page.dart';
 import 'package:mentalove_app/ui/pages/pembayaran.dart';
+import 'package:mentalove_app/ui/pages/profile_page.dart';
 import 'package:mentalove_app/ui/pages/psikiater_page.dart';
 import 'package:mentalove_app/ui/pages/psikolog_page.dart';
 import 'package:mentalove_app/ui/pages/signup_page.dart';
@@ -91,7 +92,8 @@ class _MainAppState extends State<MainApp> {
         '/terapis-history': (context) => const TerapisHistory(),
         '/login-psikolog': (context) => const LoginPsikolog(),
         '/total-pendapatan': (context) => const TotalPendapatan(),
-        '/add-status': (context) => const AddStatus()
+        '/add-status': (context) => const AddStatus(),
+        '/profile-page': (context) => const ProfilePage()
       }),
     );
   }

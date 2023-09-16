@@ -129,6 +129,73 @@ class CardAhli extends StatelessWidget {
   }
 }
 
+class ProfileCard extends StatelessWidget {
+  final AssetImage image;
+  final String title;
+  final String desc;
+  final Function() onTap;
+
+  const ProfileCard({
+    Key? key,
+    required this.image,
+    required this.title,
+    required this.desc,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    dynamic parentWidth = MediaQuery.of(context).size.width;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 90,
+        decoration: BoxDecoration(
+            color: kPrimaryLightColor,
+            border: Border(
+                top: BorderSide(width: 0.5, color: kPurpleColor),
+                bottom: BorderSide(width: 0.5, color: kPurpleColor))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 70,
+              height: 70,
+              decoration: BoxDecoration(
+                image: DecorationImage(image: image, fit: BoxFit.cover),
+              ),
+            ),
+            SizedBox(
+              width: parentWidth * 0.6,
+              height: 70,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: blackTextStyle.copyWith(
+                        fontSize: 14, fontWeight: extraBold),
+                  ),
+                  Text(
+                    desc,
+                    style: blackTextStyle.copyWith(
+                        fontSize: 14, fontWeight: regular),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class PsikologCard extends StatelessWidget {
   final String imgUrl;
   final String name;
@@ -604,6 +671,7 @@ class HistoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     dynamic parentWidth = MediaQuery.of(context).size.width;
     return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       width: parentWidth,
       height: 130,
       decoration: BoxDecoration(
