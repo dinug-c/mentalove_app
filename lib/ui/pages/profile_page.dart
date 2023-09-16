@@ -75,9 +75,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Icon(
-                              Icons.circle,
+                            Icon(
+                              Icons.account_circle,
                               size: 100,
+                              color: kPurpleColor,
                             ),
                             gapW4,
                             Column(
