@@ -655,17 +655,17 @@ class HistoryCard extends StatelessWidget {
 }
 
 class DailyCard extends StatelessWidget {
-  final AssetImage? image;
+  final String imgUrl;
   final String title;
   final String desc;
   final Function() onTap;
 
   const DailyCard({
     Key? key,
-    this.image,
     required this.title,
     required this.desc,
     required this.onTap,
+    required this.imgUrl,
   }) : super(key: key);
 
   @override
@@ -681,8 +681,7 @@ class DailyCard extends StatelessWidget {
             height: 130,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: image ?? AssetImage('assets/detail_pfp.png'),
-                  fit: BoxFit.cover),
+                  image: NetworkImage(imgUrl), fit: BoxFit.cover),
               color: kGreyColor.withOpacity(0.3),
               borderRadius: BorderRadius.circular(10),
             ),
@@ -696,12 +695,14 @@ class DailyCard extends StatelessWidget {
                   Text(
                     title,
                     style: blackTextStyle.copyWith(
-                        fontSize: 16, fontWeight: semiBold),
+                        fontSize: 14, fontWeight: semiBold),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   Text(
                     desc,
                     style: blackTextStyle.copyWith(
-                        fontSize: 14, fontWeight: regular),
+                        fontSize: 12, fontWeight: regular),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   )
