@@ -37,36 +37,6 @@ class _ContentPageState extends State<ContentPage> {
           ),
           backgroundColor: kPurpleColor,
         ),
-        body: WebViewWidget(controller: controller)
-        // CustomScrollView(slivers: <Widget>[
-        //   AppBarCustom(
-        //     title: konten['judul'],
-        //     startColor: kPrimaryColor,
-        //     endColor: kPrimary2Color,
-        //     leftIcon: Icons.arrow_back,
-        //     leftAction: () {
-        //       Navigator.pop(context);
-        //     },
-        //   ),
-        //   SliverList(
-        //       delegate: SliverChildListDelegate([
-        //     Container(
-        //         height: MediaQuery.of(context).size.height,
-        //         width: MediaQuery.of(context).size.width,
-        //         child: )
-        //     // Container(
-        //     //     margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        //     //     child: Column(
-        //     //         crossAxisAlignment: CrossAxisAlignment.start,
-        //     //         children: [
-        //     //           Text(
-        //     //             'Cek Artikel Terbaru!!!',
-        //     //             style: blackTextStyle.copyWith(
-        //     //                 fontSize: 20, fontWeight: extraBold),
-        //     //           ),
-        //     //         ]))
-        //   ]))
-        // ]),
-        );
+        body: WebViewWidget(controller: controller));
   }
 }
