@@ -15,7 +15,10 @@ class TellUsPage extends StatefulWidget {
 }
 
 class _TellUsPageState extends State<TellUsPage> {
-  final _future = supabase.from('tell_us').select<List<Map<String, dynamic>>>();
+  final _future = supabase
+      .from('tell_us')
+      .select<List<Map<String, dynamic>>>()
+      .order('created_at', ascending: false);
 
   @override
   void initState() {
