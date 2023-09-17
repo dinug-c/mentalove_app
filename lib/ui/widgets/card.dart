@@ -129,6 +129,71 @@ class CardAhli extends StatelessWidget {
   }
 }
 
+class ProfileCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String desc;
+  final Function() onTap;
+
+  const ProfileCard({
+    Key? key,
+    required this.title,
+    required this.desc,
+    required this.onTap,
+    required this.icon,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    dynamic parentWidth = MediaQuery.of(context).size.width;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 90,
+        decoration: BoxDecoration(
+            color: kPrimaryLightColor,
+            border: Border(
+                top: BorderSide(width: 0.5, color: kPurpleColor),
+                bottom: BorderSide(width: 0.5, color: kPurpleColor))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 70,
+              color: kPurpleColor,
+            ),
+            SizedBox(
+              width: parentWidth * 0.6,
+              height: 70,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: blackTextStyle.copyWith(
+                        fontSize: 14, fontWeight: extraBold),
+                  ),
+                  Text(
+                    desc,
+                    style: blackTextStyle.copyWith(
+                        fontSize: 14, fontWeight: regular),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class PsikologCard extends StatelessWidget {
   final String imgUrl;
   final String name;
@@ -310,7 +375,7 @@ class OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10, left: 20, right: 20),
+      margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -604,6 +669,7 @@ class HistoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     dynamic parentWidth = MediaQuery.of(context).size.width;
     return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       width: parentWidth,
       height: 130,
       decoration: BoxDecoration(
@@ -655,17 +721,17 @@ class HistoryCard extends StatelessWidget {
 }
 
 class DailyCard extends StatelessWidget {
-  final AssetImage? image;
+  final String imgUrl;
   final String title;
   final String desc;
   final Function() onTap;
 
   const DailyCard({
     Key? key,
-    this.image,
     required this.title,
     required this.desc,
     required this.onTap,
+    required this.imgUrl,
   }) : super(key: key);
 
   @override
@@ -681,8 +747,7 @@ class DailyCard extends StatelessWidget {
             height: 130,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: image ?? AssetImage('assets/detail_pfp.png'),
-                  fit: BoxFit.cover),
+                  image: NetworkImage(imgUrl), fit: BoxFit.cover),
               color: kGreyColor.withOpacity(0.3),
               borderRadius: BorderRadius.circular(10),
             ),
@@ -696,12 +761,14 @@ class DailyCard extends StatelessWidget {
                   Text(
                     title,
                     style: blackTextStyle.copyWith(
-                        fontSize: 16, fontWeight: semiBold),
+                        fontSize: 14, fontWeight: semiBold),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   Text(
                     desc,
                     style: blackTextStyle.copyWith(
-                        fontSize: 14, fontWeight: regular),
+                        fontSize: 12, fontWeight: regular),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   )

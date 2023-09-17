@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:mentalove_app/ui/pages/about_us.dart';
 import 'package:mentalove_app/ui/pages/add_status.dart';
 import 'package:mentalove_app/ui/pages/chat_page.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
@@ -13,6 +14,7 @@ import 'package:mentalove_app/ui/pages/login_page.dart';
 import 'package:mentalove_app/ui/pages/login_psikolog.dart';
 import 'package:mentalove_app/ui/pages/main_page.dart';
 import 'package:mentalove_app/ui/pages/pembayaran.dart';
+import 'package:mentalove_app/ui/pages/profile_page.dart';
 import 'package:mentalove_app/ui/pages/psikiater_page.dart';
 import 'package:mentalove_app/ui/pages/psikolog_page.dart';
 import 'package:mentalove_app/ui/pages/signup_page.dart';
@@ -91,7 +93,9 @@ class _MainAppState extends State<MainApp> {
         '/terapis-history': (context) => const TerapisHistory(),
         '/login-psikolog': (context) => const LoginPsikolog(),
         '/total-pendapatan': (context) => const TotalPendapatan(),
-        '/add-status': (context) => const AddStatus()
+        '/add-status': (context) => const AddStatus(),
+        '/profile-page': (context) => const ProfilePage(),
+        '/about-us': (context) => const AboutUsPage()
       }),
     );
   }
