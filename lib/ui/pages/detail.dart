@@ -39,6 +39,12 @@ class _DetailState extends State<Detail> {
     int displayTahun = tahunSaatIni - tahun;
 
     Map<String, dynamic> waktuData = terapisData['waktu'];
+    Map<int, dynamic> hariKeIndeks = {};
+    int indeks = 0;
+    waktuData.forEach((hari, _) {
+      hariKeIndeks[indeks] = waktuData[hari];
+      indeks++;
+    });
 
     return Scaffold(
       backgroundColor: kWhiteColor,
@@ -306,7 +312,8 @@ class _DetailState extends State<Detail> {
                                   height: 65,
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: waktuData.keys.length,
+                                    itemCount:
+                                        hariKeIndeks[selectedTanggal].length,
                                     itemBuilder: (context, index) {
                                       final hari = waktuData.keys
                                           .elementAt(selectedTanggal);
