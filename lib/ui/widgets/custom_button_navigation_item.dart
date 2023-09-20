@@ -21,7 +21,7 @@ class CustomButtonNavigationItem extends StatelessWidget {
         context.read<PageCubit>().setPage(index);
       },
       child: Container(
-          width: MediaQuery.of(context).size.width / 5,
+          width: MediaQuery.of(context).size.width / 6,
           decoration: BoxDecoration(
             color: (context.read<PageCubit>().state == index)
                 ? kPrimaryLightColor

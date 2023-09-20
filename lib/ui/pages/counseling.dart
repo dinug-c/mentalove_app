@@ -96,11 +96,6 @@ class _CounselingState extends State<Counseling> {
                             Navigator.pushNamed(context, '/history-order');
                           },
                         ),
-                        IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/profile-page');
-                            },
-                            icon: Icon(Icons.abc))
                       ]),
                 )
               ],

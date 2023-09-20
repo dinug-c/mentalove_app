@@ -11,6 +11,7 @@ import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/cupertino.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -51,10 +52,6 @@ class _ProfilePageState extends State<ProfilePage> {
             title: 'Profile',
             startColor: kPrimaryColor,
             endColor: kPrimary2Color,
-            leftAction: () {
-              Navigator.pop(context);
-            },
-            leftIcon: Icons.arrow_back,
           ),
           SliverList(
             delegate: SliverChildListDelegate(
@@ -103,6 +100,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 gapH12,
                 ProfileCard(
+                  title: 'Tulis Perasaanmu disini!',
+                  desc: 'Deskripsi',
+                  icon: Icons.edit,
+                  onTap: () {
+                    _openBrowser('https://forms.gle/MHpA6LnHBdxdCsLM6');
+                  },
+                ),
+                ProfileCard(
                   title: 'Chat Admin',
                   desc: 'Kontak Admin via WhatsApp apabila terdapat problem',
                   icon: Icons.warning_rounded,
@@ -116,6 +121,15 @@ class _ProfilePageState extends State<ProfilePage> {
                   icon: Icons.info,
                   onTap: () {
                     Navigator.pushNamed(context, '/about-us');
+                  },
+                ),
+                ProfileCard(
+                  title: 'Log-Out',
+                  desc: 'Keluar dari akun',
+                  icon: Icons.logout,
+                  onTap: () async {
+                    await supabase.auth.signOut();
+                    Navigator.pushReplacementNamed(context, '/login-page');
                   },
                 ),
               ],

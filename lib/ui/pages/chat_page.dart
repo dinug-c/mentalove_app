@@ -53,7 +53,16 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Together Strong')),
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'Together Strong',
+            style: whiteTextStyle.copyWith(fontWeight: extraBold),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        backgroundColor: kPurpleColor,
+      ),
       body: StreamBuilder<List<Message>>(
         stream: _messagesStream,
         builder: (context, snapshot) {
@@ -130,7 +139,10 @@ class _MessageBarState extends State<_MessageBar> {
               ),
               TextButton(
                 onPressed: () => _submitMessage(),
-                child: const Text('Send'),
+                child: Text(
+                  'Send',
+                  style: TextStyle(color: kPrimary2Color),
+                ),
               ),
             ],
           ),
@@ -186,9 +198,11 @@ class _ChatBubble extends StatelessWidget {
     List<Widget> chatContents = [
       if (!message.isMine)
         CircleAvatar(
+          backgroundColor: kPurpleColor,
           child: profile == null
               ? preloader
-              : Text(profile!.username.substring(0, 2)),
+              : Text(profile!.username.substring(0, 2),
+                  style: TextStyle(color: kWhiteColor)),
         ),
       const SizedBox(width: 12),
       Flexible(
@@ -198,9 +212,7 @@ class _ChatBubble extends StatelessWidget {
             horizontal: 12,
           ),
           decoration: BoxDecoration(
-            color: message.isMine
-                ? Theme.of(context).primaryColor
-                : Colors.grey[300],
+            color: message.isMine ? kPrimaryLightColor : Colors.grey[300],
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(message.content),

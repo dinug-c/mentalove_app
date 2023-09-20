@@ -862,26 +862,26 @@ class TellUsCard extends StatelessWidget {
                       : null,
                   borderRadius: BorderRadius.circular(20)),
             ),
-            gapH8,
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(children: <Widget>[
-                  Icon(
-                    Icons.favorite_border,
-                    size: 24.0,
-                  ),
-                  gapW12,
-                  Icon(Icons.chat_bubble_outline, size: 24.0),
-                  gapW12,
-                  Icon(Icons.share_outlined, size: 24.0)
-                ]),
-                const Icon(
-                  Icons.bookmark_outline,
-                  size: 24.0,
-                )
-              ],
-            )
+            // gapH8,
+            // const Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Row(children: <Widget>[
+            //       Icon(
+            //         Icons.favorite_border,
+            //         size: 24.0,
+            //       ),
+            //       gapW12,
+            //       Icon(Icons.chat_bubble_outline, size: 24.0),
+            //       gapW12,
+            //       Icon(Icons.share_outlined, size: 24.0)
+            //     ]),
+            //     const Icon(
+            //       Icons.bookmark_outline,
+            //       size: 24.0,
+            //     )
+            //   ],
+            // )
           ])),
     );
   }

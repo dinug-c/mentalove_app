@@ -6,6 +6,7 @@ import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/textfield.dart';
+import 'package:mentalove_app/ui/widgets/toast.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -98,6 +99,8 @@ class _SignupPage extends State<SignupPage> {
                                     _passwordController.text.trim(),
                                     _passwordConfirmationController.text
                                         .trim());
+                                showToast(context,
+                                    'Akun sudah terdaftar! Silahkan cek email untuk verifikasi dan login kembali!');
                               })
                         ],
                       ),

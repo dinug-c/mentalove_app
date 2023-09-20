@@ -57,8 +57,6 @@ class _DetailState extends State<Detail> {
               Navigator.pop(context);
             },
             leftIcon: Icons.arrow_back_ios,
-            rightAction: () {},
-            rightIcon: Icons.share,
           ),
 
           //Body
@@ -193,19 +191,19 @@ class _DetailState extends State<Detail> {
                                 Expanded(
                                   child: OutlinedButton(
                                       onPressed: () {
-                                        showToast(context,
-                                            'Videocall belum tersedia');
-                                        // setState(() {
-                                        //   mode = true;
-                                        // });
+                                        // showToast(context,
+                                        //     'Videocall belum tersedia');
+                                        setState(() {
+                                          mode = true;
+                                        });
                                       },
                                       style: OutlinedButton.styleFrom(
                                           side: BorderSide(
                                               width: 1.0, color: kPurpleColor),
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 13.0),
-                                          backgroundColor: Colors.grey,
-                                          // mode ? kPurpleColor : kWhiteColor,
+                                          backgroundColor:
+                                              mode ? kPurpleColor : kWhiteColor,
                                           shape: const RoundedRectangleBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10))),
@@ -215,19 +213,15 @@ class _DetailState extends State<Detail> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Icon(Icons.person_pin_rounded,
-                                              color: kWhiteColor
-                                              // mode
-                                              //     ? kWhiteColor
-                                              //     : kPurpleColor
-                                              ),
+                                              color: mode
+                                                  ? kWhiteColor
+                                                  : kPurpleColor),
                                           gapW12,
                                           Text('Video Call',
                                               style: blackTextStyle.copyWith(
-                                                  color: kWhiteColor
-                                                  // mode
-                                                  //     ? kWhiteColor
-                                                  //     : kPurpleColor
-                                                  ,
+                                                  color: mode
+                                                      ? kWhiteColor
+                                                      : kPurpleColor,
                                                   fontWeight: bold)),
                                         ],
                                       )),

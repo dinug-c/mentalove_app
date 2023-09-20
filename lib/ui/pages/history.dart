@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/controllers/storage_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../main.dart';
 import '../widgets/card.dart';
@@ -11,6 +13,15 @@ class HistoryPage extends StatefulWidget {
 
   @override
   State<HistoryPage> createState() => _HistoryPageState();
+}
+
+@override
+Future<void> _openBrowser(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url, forceSafariVC: false, forceWebView: false);
+  } else {
+    throw 'Could not launch $url';
+  }
 }
 
 class _HistoryPageState extends State<HistoryPage> {
@@ -28,6 +39,10 @@ class _HistoryPageState extends State<HistoryPage> {
             title: 'History',
             startColor: kPrimaryColor,
             endColor: kPrimary2Color,
+            rightIcon: Icons.upload,
+            rightAction: () {
+              _openBrowser('https://forms.gle/MHpA6LnHBdxdCsLM6');
+            },
           ),
           SliverList(
             delegate: SliverChildListDelegate(

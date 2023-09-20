@@ -4,6 +4,7 @@ import 'package:mentalove_app/ui/pages/chat_page.dart';
 import 'package:mentalove_app/ui/pages/counseling.dart';
 import 'package:mentalove_app/ui/pages/daily_content.dart';
 import 'package:mentalove_app/ui/pages/history.dart';
+import 'package:mentalove_app/ui/pages/profile_page.dart';
 import 'package:mentalove_app/ui/pages/tell_us.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 
@@ -27,6 +28,8 @@ class MainPage extends StatelessWidget {
           return DailyContentPage();
         case 4:
           return HistoryPage();
+        case 5:
+          return ProfilePage();
         default:
           return TellUsPage();
       }
@@ -71,6 +74,10 @@ class MainPage extends StatelessWidget {
               CustomButtonNavigationItem(
                 index: 4,
                 imageUrl: 'assets/ic_history.png',
+              ),
+              CustomButtonNavigationItem(
+                index: 5,
+                imageUrl: 'assets/ic_profile.png',
               )
             ],
           ),
