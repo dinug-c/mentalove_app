@@ -84,6 +84,13 @@ class _PembayaranState extends State<Pembayaran> {
       decimalDigits: 0,
     ).format(totalPembayaran);
 
+    String med = '';
+    if (mode == false) {
+      med = 'Chat';
+    } else if (mode == true) {
+      med = 'Video Call';
+    }
+
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       systemNavigationBarColor: Colors.white,
@@ -313,6 +320,7 @@ class _PembayaranState extends State<Pembayaran> {
                                 'payment_time': null,
                                 'payment_method': 'Midtrans',
                                 'kode_unik': random.nextInt(1000),
+                                'media': med,
                                 'is_verified': false,
                                 'is_finished': false,
                                 'image_url': imgUrl,

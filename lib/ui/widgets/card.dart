@@ -354,23 +354,27 @@ class OrderCard extends StatelessWidget {
   final String imgUrl;
   final String kodeUnik;
   final String nama;
-  final String title;
+  final String media;
   final String jadwal;
   final String harga;
   final Function() onTap;
   final bool isFinished;
+  final String linkUrl;
+  final bool isVidcallReady;
 
   const OrderCard(
       {super.key,
       required this.verif,
       required this.kodeUnik,
       required this.nama,
-      required this.title,
+      required this.media,
       required this.jadwal,
       required this.harga,
       required this.onTap,
       required this.isFinished,
-      required this.imgUrl});
+      required this.imgUrl,
+      required this.linkUrl,
+      required this.isVidcallReady});
 
   @override
   Widget build(BuildContext context) {
@@ -410,12 +414,36 @@ class OrderCard extends StatelessWidget {
                     fontWeight: extraBold,
                   ),
                 ),
-                Text(
-                  title,
-                  style: blackTextStyle.copyWith(fontSize: 12),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                media == "Chat"
+                    ? Text(
+                        "via $media",
+                        style: blackTextStyle.copyWith(fontSize: 12),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    : Row(
+                        children: [
+                          Text(
+                            "via $media - ",
+                            style: blackTextStyle.copyWith(fontSize: 12),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            isVidcallReady == false
+                                ? "Link belum tersedia"
+                                : "Link tersedia",
+                            style: blackTextStyle.copyWith(
+                              fontSize: 12,
+                              color: isVidcallReady == false
+                                  ? kRedColor
+                                  : kGreenColor,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
                 gapH24,
                 Text(
                   jadwal,
@@ -449,30 +477,51 @@ class OrderCard extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: onTap,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              (isFinished) ? kGreyColor : kPurpleColor,
+                          backgroundColor: (!verif || !isVidcallReady)
+                              ? kGreyColor
+                              : kPurpleColor,
                           elevation: 0.0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.chat,
-                              color: kWhiteColor,
-                            ),
-                            gapW4,
-                            Text(
-                              (isFinished) ? 'Order Selesai' : 'Chat',
-                              style: whiteTextStyle.copyWith(
-                                fontSize: 12,
-                                fontWeight: extraBold,
+                        child: media == "Chat"
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.chat,
+                                    color: kWhiteColor,
+                                  ),
+                                  gapW4,
+                                  Text(
+                                    (isFinished) ? 'Order Selesai' : 'Chat',
+                                    style: whiteTextStyle.copyWith(
+                                      fontSize: 12,
+                                      fontWeight: extraBold,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.person_pin_rounded,
+                                    color: kWhiteColor,
+                                  ),
+                                  gapW4,
+                                  Text(
+                                    (isFinished)
+                                        ? 'Order Selesai'
+                                        : 'Video Call',
+                                    style: whiteTextStyle.copyWith(
+                                      fontSize: 12,
+                                      fontWeight: extraBold,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
                       ),
                     ),
                     gapW4,

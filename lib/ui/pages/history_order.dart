@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:mentalove_app/controllers/storage_controller.dart';
 import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/toast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../shared/gaps.dart';
 import '../widgets/card.dart';
@@ -15,6 +17,15 @@ class HistoryOrder extends StatefulWidget {
 
   @override
   State<HistoryOrder> createState() => _HistoryOrderState();
+}
+
+@override
+Future<void> _openBrowser(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url, forceSafariVC: false, forceWebView: false);
+  } else {
+    throw 'Could not launch $url';
+  }
 }
 
 class _HistoryOrderState extends State<HistoryOrder> {
@@ -74,33 +85,59 @@ class _HistoryOrderState extends State<HistoryOrder> {
                               return OrderCard(
                                 kodeUnik: data['kode_unik'],
                                 imgUrl: data['image_url'],
+                                isVidcallReady: data['isVidcallReady'] ?? false,
+                                linkUrl: data['link_vidcall'].toString(),
                                 verif: data['is_verified'] ?? false,
                                 nama: "Nama Psikolog: ${data['upsikolog']}",
-                                title: "Order",
+                                media: data['media'] ?? "Chat",
                                 jadwal: "${data['tanggal']} ${data['jam']}",
                                 harga: 'Rp ${data['harga']}',
                                 isFinished: data['is_finished'],
                                 onTap: () {
                                   var verif = data['is_verified'] ?? false;
                                   var finish = data['is_finished'] ?? false;
-                                  if (!finish) {
-                                    if (verif) {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChatPsikologPage(
-                                                    psikologId:
-                                                        data['upsikolog'],
-                                                    userId: data['uprofile'],
-                                                    kodeUnik: data['kode_unik'],
-                                                  )));
+                                  var media = data['media'] ?? "Chat";
+                                  var link_vidcall = data['link_vidcall'] ?? '';
+                                  var isVidcallReady =
+                                      data['isVidcallReady'] ?? false;
+
+                                  if (media == "Chat") {
+                                    if (!finish) {
+                                      if (verif) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ChatPsikologPage(
+                                                      psikologId:
+                                                          data['upsikolog'],
+                                                      userId: data['uprofile'],
+                                                      kodeUnik:
+                                                          data['kode_unik'],
+                                                    )));
+                                      } else {
+                                        showToast(context,
+                                            "Order belum diverifikasi");
+                                      }
                                     } else {
-                                      showToast(
-                                          context, "Order belum diverifikasi");
+                                      showToast(context, "Order sudah selesai");
                                     }
-                                  } else {
-                                    showToast(context, "Order sudah selesai");
+                                  } else if (media == "Video Call") {
+                                    if (!finish) {
+                                      if (verif) {
+                                        if (isVidcallReady) {
+                                          _openBrowser(link_vidcall);
+                                        } else {
+                                          showToast(
+                                              context, "Link belum ready");
+                                        }
+                                      } else {
+                                        showToast(context,
+                                            "Order belum diverifikasi");
+                                      }
+                                    } else {
+                                      showToast(context, "Order sudah selesai");
+                                    }
                                   }
                                 },
                               );
