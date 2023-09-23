@@ -100,7 +100,7 @@ class _SignupPage extends State<SignupPage> {
                                     _passwordConfirmationController.text
                                         .trim());
                                 showToast(context,
-                                    'Akun sudah terdaftar! Silahkan cek email untuk verifikasi dan login kembali!');
+                                    'Akun akan terdaftar! Silahkan cek email untuk verifikasi dan login kembali!');
                               })
                         ],
                       ),
