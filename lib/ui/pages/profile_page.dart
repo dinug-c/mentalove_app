@@ -100,16 +100,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 gapH12,
                 ProfileCard(
-                  title: 'Tulis Perasaanmu disini!',
-                  desc: 'Deskripsi',
-                  icon: Icons.edit,
-                  onTap: () {
-                    _openBrowser('https://forms.gle/MHpA6LnHBdxdCsLM6');
-                  },
-                ),
-                ProfileCard(
                   title: 'Chat Admin',
-                  desc: 'Kontak Admin via WhatsApp apabila terdapat problem',
+                  desc: 'Kontak Admin via WhatsApp apabila terdapat problem.',
                   icon: Icons.warning_rounded,
                   onTap: () {
                     _openBrowser('https://wa.link/skwxnl');

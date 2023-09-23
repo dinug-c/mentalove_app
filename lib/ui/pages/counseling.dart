@@ -82,7 +82,7 @@ class _CounselingState extends State<Counseling> {
                               fontSize: 16, fontWeight: extraBold),
                         ),
                         Text(
-                          'Cek Pesananmu Disini',
+                          'Cek pesananmu disini!',
                           style: blackTextStyle.copyWith(
                               fontSize: 14, fontWeight: regular),
                         ),
@@ -92,6 +92,27 @@ class _CounselingState extends State<Counseling> {
                           desc:
                               'Membantumu dalam melakukan penanganan lebih lanjut dan memberikan terapi pengobatan.',
                           image: const AssetImage('assets/icon_schedule.png'),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/history-order');
+                          },
+                        ),
+                        gapH12,
+                        Text(
+                          'Tuliskan Perasaanmu Disini',
+                          style: blackTextStyle.copyWith(
+                              fontSize: 16, fontWeight: extraBold),
+                        ),
+                        Text(
+                          'Kami siap mendengarkan kesahmu!',
+                          style: blackTextStyle.copyWith(
+                              fontSize: 14, fontWeight: regular),
+                        ),
+                        gapH12,
+                        CardAhli(
+                          title: 'Self Report Mentalove',
+                          desc:
+                              'Apa yang kamu rasakan saat ini? Tuangkan ceritamu disini.',
+                          image: const AssetImage('assets/ic_pencil.png'),
                           onTap: () {
                             Navigator.pushNamed(context, '/history-order');
                           },
