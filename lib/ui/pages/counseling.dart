@@ -103,7 +103,7 @@ class _CounselingState extends State<Counseling> {
                               fontSize: 16, fontWeight: extraBold),
                         ),
                         Text(
-                          'Kami siap mendengarkan kesahmu!',
+                          'Kami siap mendengarkan keluh kesahmu!',
                           style: blackTextStyle.copyWith(
                               fontSize: 14, fontWeight: regular),
                         ),
