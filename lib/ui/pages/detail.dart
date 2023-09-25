@@ -74,7 +74,7 @@ class _DetailState extends State<Detail> {
     int tahunSaatIni = DateTime.now().year;
     int displayTahun = tahunSaatIni - tahun;
 
-    Map<String, dynamic> waktuData = dateData;
+    Map<String, dynamic> waktuData = widget.terapisData['waktu'];
     Map<int, dynamic> hariKeIndeks = {};
     int indeks = 0;
     waktuData.forEach((hari, _) {
