@@ -6,6 +6,9 @@ import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/button.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
 import 'package:mentalove_app/ui/widgets/toast.dart';
+import 'dart:convert';
+
+import '../../main.dart';
 
 class Detail extends StatefulWidget {
   final Map<String, dynamic> terapisData;
@@ -19,26 +22,59 @@ class _DetailState extends State<Detail> {
   bool mode = false;
   int selectedTanggal = 0;
   int selectedJam = 0;
-  List tanggal = [
-    'Senin, 03/07',
-    'Selasa, 04/07',
-    'Rabu, 05/07',
-    'Kamis, 06/07',
-    'Jumat, 07/07',
-    'null'
-  ];
+  Map<String, dynamic> dateData = {};
 
-  List jam = ['09:00', '10:00', '11:00', '12:00', '13:00'];
+  void filterDateData(List<dynamic> res) {
+    // Buat set dari data res
+    Set<String> resSet = Set<String>.from(
+        res.map((item) => "${item['tanggal']}-${item['jam']}"));
+
+    // Buat dateData yang telah difilter
+    Map<String, dynamic> filteredDateData = {};
+
+    dateData.forEach((hari, jamList) {
+      // Buat list jam yang akan ditampilkan pada hari ini
+      List<String> filteredJamList =
+          jamList.where((jam) => !resSet.contains("$hari-$jam")).toList();
+
+      // Tambahkan data jika ada jam yang tersedia
+      if (filteredJamList.isNotEmpty) {
+        filteredDateData[hari] = filteredJamList;
+      }
+    });
+
+    // Simpan hasil filter ke dateData
+    setState(() {
+      dateData = filteredDateData;
+    });
+  }
+
+  void fetchData() async {
+    try {
+      var res = await supabase
+          .from('order')
+          .select('tanggal, jam')
+          .eq('is_verified', true)
+          .eq('is_finished', false);
+      dateData = widget.terapisData['waktu'];
+      filterDateData(res);
+    } catch (e) {}
+  }
+
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final terapisData = widget.terapisData;
-
     int tahun = terapisData['year']; // Tahun yang disimpan dalam variabel
     int tahunSaatIni = DateTime.now().year;
     int displayTahun = tahunSaatIni - tahun;
 
-    Map<String, dynamic> waktuData = terapisData['waktu'];
+    Map<String, dynamic> waktuData = dateData;
     Map<int, dynamic> hariKeIndeks = {};
     int indeks = 0;
     waktuData.forEach((hari, _) {
@@ -249,98 +285,58 @@ class _DetailState extends State<Detail> {
                                   style: blackTextStyle.copyWith(
                                       fontWeight: extraBold, fontSize: 14)),
                               gapH(8),
-                              MediaQuery.removePadding(
-                                context: context,
-                                removeTop: true,
-                                child: SizedBox(
-                                  height: 65,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: waktuData.keys.length,
-                                    itemBuilder: (context, index) {
-                                      final hari =
-                                          waktuData.keys.elementAt(index);
-                                      return Padding(
-                                        padding: index == 0
-                                            ? const EdgeInsets.only(
-                                                left: 0.0, right: 3.5)
-                                            : const EdgeInsets.symmetric(
-                                                horizontal: 3.5),
-                                        child: InkWell(
-                                          onTap: () {
+                              dateData.isEmpty
+                                  ? const Center(
+                                      child: Text('Tidak ada jadwal tersedia'))
+                                  : Wrap(
+                                      spacing: 10,
+                                      runSpacing: 10,
+                                      children: List.generate(
+                                        hariKeIndeks.length,
+                                        (index) => SelectionButton(
+                                          text: hariKeIndeks[index]
+                                              .keys
+                                              .toList()[0],
+                                          isIcon: false,
+                                          color: selectedTanggal == index
+                                              ? kWhiteColor
+                                              : kPurpleColor,
+                                          bgColor: selectedTanggal == index
+                                              ? kPurpleColor
+                                              : kWhiteColor,
+                                          onPressed: () {
                                             setState(() {
                                               selectedTanggal = index;
                                             });
                                           },
-                                          child: SelectionButton(
-                                            isIcon: false,
-                                            text: hari,
-                                            color: selectedTanggal == index
-                                                ? kWhiteColor
-                                                : kPurpleColor,
-                                            bgColor: selectedTanggal == index
-                                                ? kPurpleColor
-                                                : kWhiteColor,
-                                            onPressed: () {
-                                              setState(() {
-                                                selectedTanggal = index;
-                                              });
-                                            },
-                                          ),
                                         ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
+                                      ),
+                                    ),
                               gapH12,
                               Text('Pilih Waktu',
                                   style: blackTextStyle.copyWith(
                                       fontWeight: extraBold, fontSize: 14)),
                               gapH(8),
-                              MediaQuery.removePadding(
-                                context: context,
-                                removeTop: true,
-                                child: SizedBox(
-                                  height: 65,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        hariKeIndeks[selectedTanggal].length,
-                                    itemBuilder: (context, index) {
-                                      final hari = waktuData.keys
-                                          .elementAt(selectedTanggal);
-                                      final jamList = waktuData[hari];
-                                      return Padding(
-                                        padding: index == 0
-                                            ? const EdgeInsets.only(
-                                                left: 0.0, right: 3.5)
-                                            : const EdgeInsets.symmetric(
-                                                horizontal: 3.5),
-                                        child: InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              selectedJam = index;
-                                            });
-                                          },
-                                          child: SelectionButton(
-                                            isIcon: false,
-                                            text: jamList[index],
-                                            color: selectedJam == index
-                                                ? kWhiteColor
-                                                : kPurpleColor,
-                                            bgColor: selectedJam == index
-                                                ? kPurpleColor
-                                                : kWhiteColor,
-                                            onPressed: () {
-                                              setState(() {
-                                                selectedJam = index;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                      );
+                              Wrap(
+                                spacing: 10,
+                                runSpacing: 10,
+                                children: List.generate(
+                                  hariKeIndeks.length == 0
+                                      ? 0
+                                      : hariKeIndeks[selectedTanggal].length,
+                                  (index) => SelectionButton(
+                                    text: hariKeIndeks[selectedTanggal][index],
+                                    isIcon: false,
+                                    color: selectedJam == index
+                                        ? kWhiteColor
+                                        : kPurpleColor,
+                                    bgColor: selectedJam == index
+                                        ? kPurpleColor
+                                        : kWhiteColor,
+                                    onPressed: () {
+                                      setState(() {
+                                        selectedJam = index;
+                                      });
                                     },
                                   ),
                                 ),

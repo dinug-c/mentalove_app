@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mentalove_app/controllers/storage_controller.dart';
 import 'package:mentalove_app/ui/widgets/toast.dart';
 
-import '../../main.dart';
 import '../../services/auth.dart';
 import '../shared/gaps.dart';
 import '../shared/theme.dart';

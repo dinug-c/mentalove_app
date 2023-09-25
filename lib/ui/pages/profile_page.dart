@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:mentalove_app/controllers/storage_controller.dart';
 import 'package:mentalove_app/main.dart';
-import 'package:mentalove_app/model/profile_model.dart';
-import 'package:mentalove_app/ui/pages/detail.dart';
 import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/cupertino.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -26,7 +21,6 @@ class _ProfilePageState extends State<ProfilePage> {
       .select<List<Map<String, dynamic>>>()
       .eq('username', storageController.getData('uid'));
 
-  @override
   Future<void> _openBrowser(String url) async {
     if (await canLaunch(url)) {
       await launch(url, forceSafariVC: false, forceWebView: false);
