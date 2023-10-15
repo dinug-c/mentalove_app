@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:mentalove_app/controllers/storage_controller.dart';
 import 'package:mentalove_app/main.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
