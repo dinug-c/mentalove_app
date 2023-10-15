@@ -4,12 +4,22 @@ import 'package:mentalove_app/ui/shared/gaps.dart';
 import 'package:mentalove_app/ui/shared/theme.dart';
 import 'package:mentalove_app/ui/widgets/appbar.dart';
 import 'package:mentalove_app/ui/widgets/card.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Counseling extends StatefulWidget {
   const Counseling({super.key});
 
   @override
   State<Counseling> createState() => _CounselingState();
+}
+
+@override
+Future<void> _openBrowser(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url, forceSafariVC: false, forceWebView: false);
+  } else {
+    throw 'Could not launch $url';
+  }
 }
 
 class _CounselingState extends State<Counseling> {
@@ -114,7 +124,7 @@ class _CounselingState extends State<Counseling> {
                               'Apa yang kamu rasakan saat ini? Tuangkan ceritamu disini.',
                           image: const AssetImage('assets/ic_pencil.png'),
                           onTap: () {
-                            Navigator.pushNamed(context, '/history-order');
+                            _openBrowser('https://forms.gle/MHpA6LnHBdxdCsLM6');
                           },
                         ),
                       ]),
