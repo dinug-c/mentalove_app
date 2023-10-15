@@ -16,14 +16,14 @@ class BayarDisini extends StatefulWidget {
   State<BayarDisini> createState() => _BayarDisiniState();
 }
 
-@override
-Future<void> _openBrowser(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url, forceSafariVC: false, forceWebView: false);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
+// @override
+// Future<void> _openBrowser(String url) async {
+//   if (await canLaunch(url)) {
+//     await launch(url, forceSafariVC: false, forceWebView: false);
+//   } else {
+//     throw 'Could not launch $url';
+//   }
+// }
 
 class _BayarDisiniState extends State<BayarDisini> {
   @override
@@ -70,8 +70,16 @@ class _BayarDisiniState extends State<BayarDisini> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                   ),
-                  onPressed: () {
-                    _openBrowser(widget.paymentLink); // Replace with your URL
+                  onPressed: () async {
+                    Uri url = Uri.parse(widget.paymentLink);
+
+                    if (!await launchUrl(url)) {
+                      throw Exception('Could not launch $url');
+                    } else {
+                      launchUrl(url);
+                    }
+
+                    // _openBrowser(widget.paymentLink); // Replace with your URL
                   },
                   child: Text(
                     'Bayar Disini',

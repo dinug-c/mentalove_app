@@ -21,13 +21,13 @@ class _ProfilePageState extends State<ProfilePage> {
       .select<List<Map<String, dynamic>>>()
       .eq('username', storageController.getData('uid'));
 
-  Future<void> _openBrowser(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url, forceSafariVC: false, forceWebView: false);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+  // Future<void> _openBrowser(String url) async {
+  //   if (await canLaunch(url)) {
+  //     await launch(url, forceSafariVC: false, forceWebView: false);
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +97,15 @@ class _ProfilePageState extends State<ProfilePage> {
                   title: 'Chat Admin',
                   desc: 'Kontak Admin via WhatsApp apabila terdapat problem.',
                   icon: Icons.warning_rounded,
-                  onTap: () {
-                    _openBrowser('https://wa.link/skwxnl');
+                  onTap: () async {
+                    Uri url = Uri.parse("https://wa.link/skwxnl");
+
+                    if (!await launchUrl(url)) {
+                      throw Exception('Could not launch $url');
+                    } else {
+                      launchUrl(url);
+                    }
+                    // _openBrowser('');
                   },
                 ),
                 ProfileCard(

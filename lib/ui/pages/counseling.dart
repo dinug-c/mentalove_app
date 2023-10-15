@@ -13,14 +13,14 @@ class Counseling extends StatefulWidget {
   State<Counseling> createState() => _CounselingState();
 }
 
-@override
-Future<void> _openBrowser(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url, forceSafariVC: false, forceWebView: false);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
+// @override
+// Future<void> _openBrowser(String url) async {
+//   if (await canLaunch(url)) {
+//     await launch(url, forceSafariVC: true, forceWebView: true);
+//   } else {
+//     throw 'Could not launch $url';
+//   }
+// }
 
 class _CounselingState extends State<Counseling> {
   @override
@@ -123,8 +123,15 @@ class _CounselingState extends State<Counseling> {
                           desc:
                               'Apa yang kamu rasakan saat ini? Tuangkan ceritamu disini.',
                           image: const AssetImage('assets/ic_pencil.png'),
-                          onTap: () {
-                            _openBrowser('https://forms.gle/MHpA6LnHBdxdCsLM6');
+                          onTap: () async {
+                            Uri url = Uri.parse(
+                                "https://forms.gle/MHpA6LnHBdxdCsLM6");
+
+                            if (!await launchUrl(url)) {
+                              throw Exception('Could not launch $url');
+                            } else {
+                              launchUrl(url);
+                            }
                           },
                         ),
                       ]),

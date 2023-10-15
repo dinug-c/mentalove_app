@@ -14,14 +14,14 @@ class HistoryPage extends StatefulWidget {
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
-@override
-Future<void> _openBrowser(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url, forceSafariVC: false, forceWebView: false);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
+// @override
+// Future<void> _openBrowser(String url) async {
+//   if (await canLaunch(url)) {
+//     await launch(url, forceSafariVC: false, forceWebView: false);
+//   } else {
+//     throw 'Could not launch $url';
+//   }
+// }
 
 class _HistoryPageState extends State<HistoryPage> {
   final _future = supabase
@@ -39,8 +39,15 @@ class _HistoryPageState extends State<HistoryPage> {
             startColor: kPrimaryColor,
             endColor: kPrimary2Color,
             rightIcon: Icons.upload,
-            rightAction: () {
-              _openBrowser('https://forms.gle/MHpA6LnHBdxdCsLM6');
+            rightAction: () async {
+              Uri url = Uri.parse("https://forms.gle/MHpA6LnHBdxdCsLM6");
+
+              if (!await launchUrl(url)) {
+                throw Exception('Could not launch $url');
+              } else {
+                launchUrl(url);
+              }
+              // _openBrowser('https://forms.gle/MHpA6LnHBdxdCsLM6');
             },
           ),
           SliverList(
